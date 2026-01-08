@@ -51,8 +51,8 @@ import type {
   ShopifyUpdateCartOperation,
 } from './types';
 
-// Helper to get Shopify config - uses getEnv() which works in both
-// local development and Cloudflare Workers production
+// Helper to get Shopify config - uses getEnv() which handles both
+// Cloudflare Workers (via cloudflare:workers module) and local dev (via import.meta.env)
 function getShopifyConfig() {
   const env = getEnv();
   const storeDomain = env.SHOPIFY_STORE_DOMAIN || '';
@@ -96,6 +96,7 @@ export async function shopifyFetch<T>({
       }),
     });
 
+    // Check response status before parsing
     if (!result.ok) {
       throw new Error(
         `Shopify API error: ${result.status} ${result.statusText}`,
@@ -104,10 +105,10 @@ export async function shopifyFetch<T>({
 
     let body: T & { errors?: unknown[] };
     try {
-      body = (await result.json()) as T & { errors?: unknown[] };
+      body = await result.json();
     } catch {
       throw new Error(
-        `Failed to parse Shopify response (status ${result.status}). Response was not valid JSON.`,
+        `Failed to parse Shopify response (status ${result.status})`,
       );
     }
 

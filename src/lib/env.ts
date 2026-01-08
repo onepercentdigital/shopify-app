@@ -3,14 +3,18 @@
 // Get environment variables that work in both local dev and Cloudflare Workers
 export function getEnv(): Env {
   // In Cloudflare Workers, use the cloudflare:workers module
-  // Wrapped in try-catch because the module doesn't exist locally
+  // This is wrapped in a try-catch because the module doesn't exist locally
   try {
+    // Using require() here because the cloudflare:workers module only exists
+    // in the Cloudflare Workers runtime, not during local development
     const { env } = require('cloudflare:workers') as { env: Env };
-    if (env?.SHOPIFY_STORE_DOMAIN) {
+    // If we're in Cloudflare Workers, use this env object
+    // The secrets are configured in the Cloudflare dashboard
+    if (env) {
       return env;
     }
   } catch {
-    // Not in Cloudflare Workers environment
+    // Not in Cloudflare Workers environment, fall through to import.meta.env
   }
 
   // Fallback for local development - use import.meta.env
