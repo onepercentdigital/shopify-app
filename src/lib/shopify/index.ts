@@ -2,7 +2,6 @@ import {
   HIDDEN_PRODUCT_TAG,
   SHOPIFY_GRAPHQL_API_ENDPOINT,
 } from '@/lib/constants';
-import { getEnv } from '@/lib/env';
 import { isShopifyError } from '@/lib/type-guards';
 import { ensureStartsWith } from '@/lib/utils';
 import {
@@ -51,14 +50,13 @@ import type {
   ShopifyUpdateCartOperation,
 } from './types';
 
-// Helper to get Shopify config - uses getEnv() which works in both
-// local development and Cloudflare Workers production
+// Helper to get Shopify config from environment variables
+// Variables are baked in at build time via import.meta.env
 function getShopifyConfig() {
-  const env = getEnv();
-  const storeDomain = env.SHOPIFY_STORE_DOMAIN || '';
+  const storeDomain = import.meta.env.SHOPIFY_STORE_DOMAIN || '';
   const domain = storeDomain ? ensureStartsWith(storeDomain, 'https://') : '';
   const endpoint = `${domain}${SHOPIFY_GRAPHQL_API_ENDPOINT}`;
-  const key = env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || '';
+  const key = import.meta.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || '';
 
   if (!domain || !key) {
     throw new Error('Missing required Shopify configuration');
@@ -96,6 +94,7 @@ export async function shopifyFetch<T>({
       }),
     });
 
+    // Check response status before parsing
     if (!result.ok) {
       throw new Error(
         `Shopify API error: ${result.status} ${result.statusText}`,
@@ -104,10 +103,10 @@ export async function shopifyFetch<T>({
 
     let body: T & { errors?: unknown[] };
     try {
-      body = (await result.json()) as T & { errors?: unknown[] };
+      body = await result.json();
     } catch {
       throw new Error(
-        `Failed to parse Shopify response (status ${result.status}). Response was not valid JSON.`,
+        `Failed to parse Shopify response (status ${result.status})`,
       );
     }
 
