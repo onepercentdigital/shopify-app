@@ -55,6 +55,7 @@ export default function CartModal() {
   return (
     <>
       <button
+        type="button"
         aria-label="Open cart"
         onClick={openCart}
         className="cursor-pointer"
@@ -86,7 +87,11 @@ export default function CartModal() {
             <Dialog.Panel className="fixed top-0 right-0 bottom-0 flex h-full w-full flex-col border-neutral-200 border-l bg-white/80 p-6 text-black backdrop-blur-xl md:w-[390px] dark:border-neutral-700 dark:bg-black/80 dark:text-white">
               <div className="flex items-center justify-between">
                 <p className="font-semibold text-lg">My Cart</p>
-                <button aria-label="Close cart" onClick={closeCart}>
+                <button
+                  type="button"
+                  aria-label="Close cart"
+                  onClick={closeCart}
+                >
                   <CloseCart />
                 </button>
               </div>
@@ -131,7 +136,7 @@ export default function CartModal() {
                             className="flex w-full flex-col border-neutral-300 border-b dark:border-neutral-700"
                           >
                             <div className="relative flex w-full flex-row justify-between px-1 py-4">
-                              <div className="-mt-2 -ml-1 absolute z-40">
+                              <div className="absolute z-40 -mt-2 -ml-1">
                                 <DeleteItemButton
                                   item={item}
                                   optimisticUpdate={updateCartItem}
@@ -226,6 +231,7 @@ export default function CartModal() {
                     </div>
                   </div>
                   <button
+                    type="button"
                     onClick={handleCheckout}
                     disabled={isCheckingOut}
                     className="block w-full rounded-full bg-blue-600 p-3 text-center font-medium text-sm text-white opacity-90 hover:opacity-100 disabled:opacity-50"

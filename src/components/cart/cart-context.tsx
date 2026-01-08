@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type React from 'react';
-import { createContext, useContext, useMemo } from 'react';
+import { createContext, useCallback, useContext, useMemo } from 'react';
 import {
   addItem,
   createCartAndSetCookie,
@@ -234,37 +234,43 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     },
   });
 
-  const updateCartItem = (merchandiseId: string, updateType: UpdateType) => {
-    if (!cart) return;
+  const updateCartItem = useCallback(
+    (merchandiseId: string, updateType: UpdateType) => {
+      if (!cart) return;
 
-    const item = cart.lines.find((i) => i.merchandise.id === merchandiseId);
-    if (!item?.id) return;
+      const item = cart.lines.find((i) => i.merchandise.id === merchandiseId);
+      if (!item?.id) return;
 
-    if (updateType === 'delete') {
-      removeItemMutation.mutate(item.id);
-    } else {
-      const newQuantity =
-        updateType === 'plus' ? item.quantity + 1 : item.quantity - 1;
-      updateItemMutation.mutate({
-        lineId: item.id,
-        merchandiseId,
-        quantity: newQuantity,
-      });
-    }
-  };
+      if (updateType === 'delete') {
+        removeItemMutation.mutate(item.id);
+      } else {
+        const newQuantity =
+          updateType === 'plus' ? item.quantity + 1 : item.quantity - 1;
+        updateItemMutation.mutate({
+          lineId: item.id,
+          merchandiseId,
+          quantity: newQuantity,
+        });
+      }
+    },
+    [cart, removeItemMutation, updateItemMutation],
+  );
 
-  const addCartItem = (variant: ProductVariant, _product: Product) => {
-    if (!cart) {
-      // Create cart first, then add item
-      createCartMutation.mutate(undefined, {
-        onSuccess: () => {
-          addItemMutation.mutate(variant.id);
-        },
-      });
-    } else {
-      addItemMutation.mutate(variant.id);
-    }
-  };
+  const addCartItem = useCallback(
+    (variant: ProductVariant, _product: Product) => {
+      if (!cart) {
+        // Create cart first, then add item
+        createCartMutation.mutate(undefined, {
+          onSuccess: () => {
+            addItemMutation.mutate(variant.id);
+          },
+        });
+      } else {
+        addItemMutation.mutate(variant.id);
+      }
+    },
+    [cart, createCartMutation, addItemMutation],
+  );
 
   const isAddingItem =
     addItemMutation.isPending || createCartMutation.isPending;
@@ -277,7 +283,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       updateCartItem,
       addCartItem,
     }),
-    [cart, isLoading, isAddingItem],
+    [cart, isLoading, isAddingItem, addCartItem, updateCartItem],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

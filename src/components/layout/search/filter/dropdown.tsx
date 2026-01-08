@@ -19,6 +19,10 @@ export default function FilterItemDropdown({ list }: { list: ListItem[] }) {
   const [openSelect, setOpenSelect] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
 
+  // Track previous values to detect navigation
+  const prevPathRef = useRef(pathname);
+  const prevSortRef = useRef(sortParam);
+
   const activeTitle = useMemo(() => {
     const activeItem = list.find((listItem) => {
       if ('path' in listItem) {
@@ -46,7 +50,11 @@ export default function FilterItemDropdown({ list }: { list: ListItem[] }) {
 
   // Close dropdown when navigation state changes to avoid UI races
   useEffect(() => {
-    setOpenSelect(false);
+    if (prevPathRef.current !== pathname || prevSortRef.current !== sortParam) {
+      setOpenSelect(false);
+      prevPathRef.current = pathname;
+      prevSortRef.current = sortParam;
+    }
   }, [pathname, sortParam]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {

@@ -3,6 +3,28 @@
 import { useEffect } from 'react';
 import { toast } from 'sonner';
 
+function setWelcomeCookie() {
+  if ('cookieStore' in window) {
+    (window.cookieStore as CookieStore).set({
+      name: 'welcome-toast',
+      value: '2',
+      maxAge: 31536000,
+      path: '/',
+    });
+  } else {
+    document.cookie = 'welcome-toast=2; max-age=31536000; path=/';
+  }
+}
+
+interface CookieStore {
+  set(options: {
+    name: string;
+    value: string;
+    maxAge?: number;
+    path?: string;
+  }): Promise<void>;
+}
+
 export function WelcomeToast() {
   useEffect(() => {
     // ignore if screen height is too small
@@ -11,9 +33,7 @@ export function WelcomeToast() {
       toast('🛍️ Welcome to Next.js Commerce!', {
         id: 'welcome-toast',
         duration: Infinity,
-        onDismiss: () => {
-          document.cookie = 'welcome-toast=2; max-age=31536000; path=/';
-        },
+        onDismiss: setWelcomeCookie,
         description: (
           <>
             This is a high-performance, SSR storefront powered by Shopify,

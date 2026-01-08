@@ -27,17 +27,17 @@ export function VariantSelector({
     return null;
   }
 
-  const combinations: Combination[] = variants.map((variant) => ({
-    id: variant.id,
-    availableForSale: variant.availableForSale,
-    ...variant.selectedOptions.reduce(
-      (accumulator, option) => ({
-        ...accumulator,
-        [option.name.toLowerCase()]: option.value,
-      }),
-      {},
-    ),
-  }));
+  const combinations: Combination[] = variants.map((variant) => {
+    const options: Record<string, string> = {};
+    for (const option of variant.selectedOptions) {
+      options[option.name.toLowerCase()] = option.value;
+    }
+    return {
+      id: variant.id,
+      availableForSale: variant.availableForSale,
+      ...options,
+    };
+  });
 
   return options.map((option) => (
     <div key={option.id}>
@@ -84,7 +84,7 @@ export function VariantSelector({
                     'cursor-default ring-2 ring-blue-600': isActive,
                     'ring-1 ring-transparent transition duration-300 ease-in-out hover:ring-blue-600':
                       !isActive && isAvailableForSale,
-                    'before:-z-10 before:-rotate-45 relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:h-px before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 dark:before:bg-neutral-700':
+                    'relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 dark:before:bg-neutral-700':
                       !isAvailableForSale,
                   },
                 )}

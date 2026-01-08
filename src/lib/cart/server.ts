@@ -30,7 +30,7 @@ function parseCookies(
 export const getCartId = createServerFn().handler(async () => {
   const cookieHeader = getRequestHeader('Cookie');
   const cookies = parseCookies(cookieHeader);
-  return cookies['cartId'] ?? null;
+  return cookies.cartId ?? null;
 });
 
 // Get cart data
@@ -38,7 +38,7 @@ export const getCart = createServerFn().handler(
   async (): Promise<Cart | undefined> => {
     const cookieHeader = getRequestHeader('Cookie');
     const cookies = parseCookies(cookieHeader);
-    const cartId = cookies['cartId'] ?? null;
+    const cartId = cookies.cartId ?? null;
 
     if (!cartId) {
       return undefined;
@@ -68,12 +68,15 @@ export const addItem = createServerFn({ method: 'POST' })
   .handler(async ({ data }) => {
     const cookieHeader = getRequestHeader('Cookie');
     const cookies = parseCookies(cookieHeader);
-    let cartId: string | null = cookies['cartId'] ?? null;
+    let cartId: string | null = cookies.cartId ?? null;
 
     // Create cart if it doesn't exist
     if (!cartId) {
       const cart = await createCart();
-      cartId = cart.id!;
+      if (!cart.id) {
+        throw new Error('Failed to create cart');
+      }
+      cartId = cart.id;
       setResponseHeader(
         'Set-Cookie',
         `cartId=${cartId}; Path=/; HttpOnly; SameSite=Lax; Max-Age=2592000`,
@@ -91,7 +94,7 @@ export const removeItem = createServerFn({ method: 'POST' })
   .handler(async ({ data }) => {
     const cookieHeader = getRequestHeader('Cookie');
     const cookies = parseCookies(cookieHeader);
-    const cartId = cookies['cartId'] ?? null;
+    const cartId = cookies.cartId ?? null;
 
     if (!cartId) {
       throw new Error('No cart found');
@@ -112,7 +115,7 @@ export const updateItemQuantity = createServerFn({ method: 'POST' })
   .handler(async ({ data }) => {
     const cookieHeader = getRequestHeader('Cookie');
     const cookies = parseCookies(cookieHeader);
-    const cartId = cookies['cartId'] ?? null;
+    const cartId = cookies.cartId ?? null;
 
     if (!cartId) {
       throw new Error('No cart found');
@@ -135,7 +138,7 @@ export const updateItemQuantity = createServerFn({ method: 'POST' })
 export const getCheckoutUrl = createServerFn().handler(async () => {
   const cookieHeader = getRequestHeader('Cookie');
   const cookies = parseCookies(cookieHeader);
-  const cartId = cookies['cartId'] ?? null;
+  const cartId = cookies.cartId ?? null;
 
   if (!cartId) {
     return null;

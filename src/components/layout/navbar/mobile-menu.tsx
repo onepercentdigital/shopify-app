@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useLocation } from '@tanstack/react-router';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import type { Menu } from '@/lib/shopify/types';
 import Search from './search';
 
@@ -10,6 +10,9 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
   const [isOpen, setIsOpen] = useState(false);
   const openMobileMenu = () => setIsOpen(true);
   const closeMobileMenu = () => setIsOpen(false);
+
+  // Track previous pathname to detect navigation
+  const prevPathRef = useRef(location.pathname);
 
   useEffect(() => {
     const handleResize = () => {
@@ -21,13 +24,18 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Close menu on navigation
   useEffect(() => {
-    setIsOpen(false);
-  }, [location.pathname, location.search]);
+    if (prevPathRef.current !== location.pathname) {
+      setIsOpen(false);
+      prevPathRef.current = location.pathname;
+    }
+  }, [location.pathname]);
 
   return (
     <>
       <button
+        type="button"
         onClick={openMobileMenu}
         aria-label="Open mobile menu"
         className="flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors md:hidden dark:border-neutral-700 dark:text-white"
@@ -59,6 +67,7 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
             <Dialog.Panel className="fixed top-0 right-0 bottom-0 left-0 flex h-full w-full flex-col bg-white pb-6 dark:bg-black">
               <div className="p-4">
                 <button
+                  type="button"
                   className="mb-4 flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white"
                   onClick={closeMobileMenu}
                   aria-label="Close mobile menu"
