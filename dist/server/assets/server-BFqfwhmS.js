@@ -1,5 +1,5 @@
-import { A as createServerRpc, v as createServerFn, B as getRequestHeader, C as setResponseHeader } from "./worker-entry-Cv73MfJc.js";
-import { l as getCartById, m as createCart, o as objectType, s as stringType, p as addToCartWithId, r as removeFromCartWithId, n as numberType, u as updateCartWithId } from "./index-DrgtSF_4.js";
+import { A as createServerRpc, v as createServerFn, B as getRequestHeader, C as setResponseHeader } from "./worker-entry-C8G20BGl.js";
+import { l as getCartById, m as createCart, o as object, p as addToCartWithId, r as removeFromCartWithId, u as updateCartWithId, s as string, n as number } from "./index-DFLDpE0d.js";
 import "node:events";
 import "node:stream";
 import "node:async_hooks";
@@ -15,13 +15,13 @@ const getCartId_createServerFn_handler = createServerRpc("274cd802c5bd7003755661
 const getCartId = createServerFn().handler(getCartId_createServerFn_handler, async () => {
   const cookieHeader = getRequestHeader("Cookie");
   const cookies = parseCookies(cookieHeader);
-  return cookies["cartId"] ?? null;
+  return cookies.cartId ?? null;
 });
 const getCart_createServerFn_handler = createServerRpc("b8dd0f36e8a3d268b2086b2789c8b5c9393da68f6d37cb77c92e1a348ae259ed", (opts, signal) => getCart.__executeServer(opts, signal));
 const getCart = createServerFn().handler(getCart_createServerFn_handler, async () => {
   const cookieHeader = getRequestHeader("Cookie");
   const cookies = parseCookies(cookieHeader);
-  const cartId = cookies["cartId"] ?? null;
+  const cartId = cookies.cartId ?? null;
   if (!cartId) {
     return void 0;
   }
@@ -40,16 +40,19 @@ const createCartAndSetCookie = createServerFn({
 const addItem_createServerFn_handler = createServerRpc("5cf9c3a6a631874951b2b70c723ae768c656f9d25c13e75f7589ea7e78ecffec", (opts, signal) => addItem.__executeServer(opts, signal));
 const addItem = createServerFn({
   method: "POST"
-}).inputValidator(objectType({
-  variantId: stringType()
+}).inputValidator(object({
+  variantId: string()
 })).handler(addItem_createServerFn_handler, async ({
   data
 }) => {
   const cookieHeader = getRequestHeader("Cookie");
   const cookies = parseCookies(cookieHeader);
-  let cartId = cookies["cartId"] ?? null;
+  let cartId = cookies.cartId ?? null;
   if (!cartId) {
     const cart = await createCart();
+    if (!cart.id) {
+      throw new Error("Failed to create cart");
+    }
     cartId = cart.id;
     setResponseHeader("Set-Cookie", `cartId=${cartId}; Path=/; HttpOnly; SameSite=Lax; Max-Age=2592000`);
   }
@@ -61,14 +64,14 @@ const addItem = createServerFn({
 const removeItem_createServerFn_handler = createServerRpc("993dd7626a82e831b418163daa2c6f73b30e30efc29a74db84b6d8d61acb95c4", (opts, signal) => removeItem.__executeServer(opts, signal));
 const removeItem = createServerFn({
   method: "POST"
-}).inputValidator(objectType({
-  lineId: stringType()
+}).inputValidator(object({
+  lineId: string()
 })).handler(removeItem_createServerFn_handler, async ({
   data
 }) => {
   const cookieHeader = getRequestHeader("Cookie");
   const cookies = parseCookies(cookieHeader);
-  const cartId = cookies["cartId"] ?? null;
+  const cartId = cookies.cartId ?? null;
   if (!cartId) {
     throw new Error("No cart found");
   }
@@ -77,16 +80,16 @@ const removeItem = createServerFn({
 const updateItemQuantity_createServerFn_handler = createServerRpc("0b91da24cdb686267c68b4f84c7dbc7483835cfdf55189086846ab394a92959a", (opts, signal) => updateItemQuantity.__executeServer(opts, signal));
 const updateItemQuantity = createServerFn({
   method: "POST"
-}).inputValidator(objectType({
-  lineId: stringType(),
-  merchandiseId: stringType(),
-  quantity: numberType()
+}).inputValidator(object({
+  lineId: string(),
+  merchandiseId: string(),
+  quantity: number()
 })).handler(updateItemQuantity_createServerFn_handler, async ({
   data
 }) => {
   const cookieHeader = getRequestHeader("Cookie");
   const cookies = parseCookies(cookieHeader);
-  const cartId = cookies["cartId"] ?? null;
+  const cartId = cookies.cartId ?? null;
   if (!cartId) {
     throw new Error("No cart found");
   }
@@ -103,7 +106,7 @@ const getCheckoutUrl_createServerFn_handler = createServerRpc("5506db276d8244b0b
 const getCheckoutUrl = createServerFn().handler(getCheckoutUrl_createServerFn_handler, async () => {
   const cookieHeader = getRequestHeader("Cookie");
   const cookies = parseCookies(cookieHeader);
-  const cartId = cookies["cartId"] ?? null;
+  const cartId = cookies.cartId ?? null;
   if (!cartId) {
     return null;
   }

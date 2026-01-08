@@ -1,12 +1,12 @@
-import { o as jsxRuntimeExports } from "./worker-entry-Cv73MfJc.js";
-import { d as Route, b as useQuery } from "./router-C6qVLgSF.js";
-import { G as Grid, P as ProductGridItems } from "./product-grid-items-SbkREhi-.js";
-import { e as sorting, f as defaultSort, h as getProducts } from "./index-DrgtSF_4.js";
+import { o as jsxRuntimeExports } from "./worker-entry-C8G20BGl.js";
+import { d as Route, b as useQuery } from "./router-EOe-sXrB.js";
+import { G as Grid, P as ProductGridItems } from "./product-grid-items-BxZRDNC5.js";
+import { e as sorting, f as defaultSort, h as getProducts } from "./index-DFLDpE0d.js";
 import "node:events";
 import "node:stream";
 import "node:async_hooks";
 import "node:stream/web";
-import "./tile-BrLrGYX_.js";
+import "./tile-QsgnqOIg.js";
 function SearchPage() {
   const {
     q: searchValue,

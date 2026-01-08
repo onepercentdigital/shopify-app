@@ -83,7 +83,7 @@ export async function shopifyFetch<T>({
       }),
     });
 
-    const body = await result.json();
+    const body = (await result.json()) as T & { errors?: unknown[] };
 
     if (body.errors) {
       throw body.errors[0];
@@ -91,7 +91,7 @@ export async function shopifyFetch<T>({
 
     return {
       status: result.status,
-      body,
+      body: body as T,
     };
   } catch (e) {
     if (isShopifyError(e)) {

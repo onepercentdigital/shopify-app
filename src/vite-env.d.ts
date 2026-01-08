@@ -9,10 +9,6 @@ interface ImportMetaEnv {
   readonly SHOPIFY_REVALIDATION_SECRET: string;
 }
 
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
-}
-
 // CSS URL imports
 declare module '*.css?url' {
   const url: string;

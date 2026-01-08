@@ -43,13 +43,13 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-neutral-200 border-t py-6 text-sm dark:border-neutral-700">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
           <p>
             &copy; <CopyrightYear /> {copyrightName}
             {copyrightName.length && !copyrightName.endsWith('.') ? '.' : ''}{' '}
             All rights reserved.
           </p>
-          <hr className="mx-4 hidden h-4 w-[1px] border-neutral-400 border-l md:inline-block" />
+          <hr className="mx-4 hidden h-4 w-px border-neutral-400 border-l md:inline-block" />
           <p>
             <a href="https://github.com/vercel/commerce">View the source</a>
           </p>

@@ -1,5 +1,5 @@
-import { o as jsxRuntimeExports } from "./worker-entry-Cv73MfJc.js";
-import { c as clsx, P as Price, I as Image } from "./router-C6qVLgSF.js";
+import { o as jsxRuntimeExports } from "./worker-entry-C8G20BGl.js";
+import { c as clsx, P as Price, I as Image } from "./router-EOe-sXrB.js";
 const Label = ({
   title,
   amount,

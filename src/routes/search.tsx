@@ -22,10 +22,10 @@ function SearchLayout() {
       <div className="order-first w-full flex-none md:max-w-[125px]">
         <Collections />
       </div>
-      <div className="order-last min-h-screen w-full md:order-none">
+      <div className="order-last min-h-screen w-full md:order-0">
         <Outlet />
       </div>
-      <div className="order-none flex-none md:order-last md:w-[125px]">
+      <div className="order-0 flex-none md:order-last md:w-[125px]">
         <FilterList list={sorting} title="Sort by" />
       </div>
     </div>

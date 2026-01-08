@@ -1,6 +1,6 @@
-import { a as reactExports, o as jsxRuntimeExports, O as Outlet } from "./worker-entry-Cv73MfJc.js";
-import { u as useLocation, c as clsx, L as Link, a as useSearch, b as useQuery } from "./router-C6qVLgSF.js";
-import { c as createUrl, a as getCollections, e as sorting } from "./index-DrgtSF_4.js";
+import { a as reactExports, o as jsxRuntimeExports, O as Outlet } from "./worker-entry-C8G20BGl.js";
+import { u as useLocation, c as clsx, L as Link, a as useSearch, b as useQuery } from "./router-EOe-sXrB.js";
+import { c as createUrl, a as getCollections, e as sorting } from "./index-DFLDpE0d.js";
 import "node:events";
 import "node:stream";
 import "node:async_hooks";
@@ -82,6 +82,8 @@ function FilterItemDropdown({ list }) {
   const sortParam = searchParams?.sort ?? null;
   const [openSelect, setOpenSelect] = reactExports.useState(false);
   const ref = reactExports.useRef(null);
+  const prevPathRef = reactExports.useRef(pathname);
+  const prevSortRef = reactExports.useRef(sortParam);
   const activeTitle = reactExports.useMemo(() => {
     const activeItem = list.find((listItem) => {
       if ("path" in listItem) {
@@ -104,7 +106,11 @@ function FilterItemDropdown({ list }) {
     return () => window.removeEventListener("click", handleClickOutside);
   }, []);
   reactExports.useEffect(() => {
-    setOpenSelect(false);
+    if (prevPathRef.current !== pathname || prevSortRef.current !== sortParam) {
+      setOpenSelect(false);
+      prevPathRef.current = pathname;
+      prevSortRef.current = sortParam;
+    }
   }, [pathname, sortParam]);
   const handleKeyDown = (event) => {
     if (event.key === "Escape") setOpenSelect(false);
@@ -208,8 +214,8 @@ function Collections() {
 function SearchLayout() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto flex max-w-(--breakpoint-2xl) flex-col gap-8 px-4 pb-4 text-black md:flex-row dark:text-white", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "order-first w-full flex-none md:max-w-[125px]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Collections, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "order-last min-h-screen w-full md:order-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "order-none flex-none md:order-last md:w-[125px]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(FilterList, { list: sorting, title: "Sort by" }) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "order-last min-h-screen w-full md:order-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {}) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "order-0 flex-none md:order-last md:w-[125px]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(FilterList, { list: sorting, title: "Sort by" }) })
   ] });
 }
 export {

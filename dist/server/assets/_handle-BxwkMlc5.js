@@ -1,8 +1,8 @@
-import { a as reactExports, o as jsxRuntimeExports } from "./worker-entry-Cv73MfJc.js";
-import { a as useSearch, I as Image, c as clsx, f as useCart, F as ForwardRef$2, P as Price, g as Route, b as useQuery, L as Link } from "./router-C6qVLgSF.js";
-import { G as GridTileImage } from "./tile-BrLrGYX_.js";
-import { P as Prose } from "./prose-BIIxNP5b.js";
-import { j as getProduct, k as getProductRecommendations } from "./index-DrgtSF_4.js";
+import { a as reactExports, o as jsxRuntimeExports } from "./worker-entry-C8G20BGl.js";
+import { a as useSearch, I as Image, c as clsx, f as useCart, F as ForwardRef$2, P as Price, g as Route, b as useQuery, L as Link } from "./router-EOe-sXrB.js";
+import { G as GridTileImage } from "./tile-QsgnqOIg.js";
+import { P as Prose } from "./prose-Bp4a9W_Q.js";
+import { j as getProduct, k as getProductRecommendations } from "./index-DFLDpE0d.js";
 import "node:events";
 import "node:stream";
 import "node:async_hooks";
@@ -219,12 +219,21 @@ function SubmitButton({
   const buttonClasses = "relative flex w-full items-center justify-center rounded-full bg-blue-600 p-4 tracking-wide text-white";
   const disabledClasses = "cursor-not-allowed opacity-60 hover:opacity-60";
   if (!availableForSale) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("button", { disabled: true, className: clsx(buttonClasses, disabledClasses), children: "Out Of Stock" });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "button",
+      {
+        type: "button",
+        disabled: true,
+        className: clsx(buttonClasses, disabledClasses),
+        children: "Out Of Stock"
+      }
+    );
   }
   if (!selectedVariantId) {
     return /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "button",
       {
+        type: "button",
         "aria-label": "Please select an option",
         disabled: true,
         className: clsx(buttonClasses, disabledClasses),
@@ -291,17 +300,17 @@ function VariantSelector({
   if (hasNoOptionsOrJustOneOption) {
     return null;
   }
-  const combinations = variants.map((variant) => ({
-    id: variant.id,
-    availableForSale: variant.availableForSale,
-    ...variant.selectedOptions.reduce(
-      (accumulator, option) => ({
-        ...accumulator,
-        [option.name.toLowerCase()]: option.value
-      }),
-      {}
-    )
-  }));
+  const combinations = variants.map((variant) => {
+    const options2 = {};
+    for (const option of variant.selectedOptions) {
+      options2[option.name.toLowerCase()] = option.value;
+    }
+    return {
+      id: variant.id,
+      availableForSale: variant.availableForSale,
+      ...options2
+    };
+  });
   return options.map((option) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("dl", { className: "mb-8", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { className: "mb-4 text-sm uppercase tracking-wide", children: option.name }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "flex flex-wrap gap-3", children: option.values.map((value) => {
@@ -330,11 +339,11 @@ function VariantSelector({
           disabled: !isAvailableForSale,
           title: `${option.name} ${value}${!isAvailableForSale ? " (Out of Stock)" : ""}`,
           className: clsx(
-            "flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900",
+            "flex min-w-12 items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900",
             {
               "cursor-default ring-2 ring-blue-600": isActive,
               "ring-1 ring-transparent transition duration-300 ease-in-out hover:ring-blue-600": !isActive && isAvailableForSale,
-              "before:-z-10 before:-rotate-45 relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:h-px before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 dark:before:bg-neutral-700": !isAvailableForSale
+              "relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 dark:before:bg-neutral-700": !isAvailableForSale
             }
           ),
           children: value
@@ -363,7 +372,7 @@ function ProductDescription({ product }) {
     product.descriptionHtml ? /* @__PURE__ */ jsxRuntimeExports.jsx(
       Prose,
       {
-        className: "mb-6 text-sm leading-tight dark:text-white/[60%]",
+        className: "mb-6 text-sm leading-tight dark:text-white/60",
         html: product.descriptionHtml
       }
     ) : null,

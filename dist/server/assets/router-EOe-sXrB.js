@@ -1,5 +1,5 @@
-import { r as rootRouteId, i as invariant, t as trimPathLeft, j as joinPaths, a as reactExports, d as dummyMatchContext, m as matchContext, u as useRouterState, b as useRouter, g as getDefaultExportFromCjs, c as requireReactDom, e as useForwardedRef, f as useIntersectionObserver, h as functionalUpdate$1, k as exactPathTest, l as removeTrailingSlash, n as deepEqual, G as G$2, o as jsxRuntimeExports, w as warning, p as isModuleNotFoundError, R as RouterCore, q as isRedirect, T as TSS_SERVER_FUNCTION, s as getServerFnById, v as createServerFn, x as requireReact, y as React, O as Outlet, z as notFound } from "./worker-entry-Cv73MfJc.js";
-import { o as objectType, s as stringType, n as numberType, g as getMenu, D as DEFAULT_OPTION, c as createUrl, a as getCollections, b as getPage, d as getCollectionProducts, e as sorting, f as defaultSort, h as getProducts, i as getCollection, H as HIDDEN_PRODUCT_TAG, j as getProduct, k as getProductRecommendations } from "./index-DrgtSF_4.js";
+import { r as rootRouteId, i as invariant, t as trimPathLeft, j as joinPaths, a as reactExports, d as dummyMatchContext, m as matchContext, u as useRouterState, b as useRouter, g as getDefaultExportFromCjs, c as requireReactDom, e as useForwardedRef, f as useIntersectionObserver, h as functionalUpdate$1, k as exactPathTest, l as removeTrailingSlash, n as deepEqual, G as G$2, o as jsxRuntimeExports, w as warning, p as isModuleNotFoundError, R as RouterCore, q as isRedirect, T as TSS_SERVER_FUNCTION, s as getServerFnById, v as createServerFn, x as requireReact, y as React, O as Outlet, z as notFound } from "./worker-entry-C8G20BGl.js";
+import { o as object, s as string, n as number, g as getMenu, D as DEFAULT_OPTION, c as createUrl, a as getCollections, b as getPage, d as getCollectionProducts, e as sorting, f as defaultSort, h as getProducts, i as getCollection, H as HIDDEN_PRODUCT_TAG, j as getProduct, k as getProductRecommendations } from "./index-DFLDpE0d.js";
 const preloadWarning = "Error preloading route! ☝️";
 class BaseRoute {
   constructor(options) {
@@ -528,7 +528,7 @@ let Route$7 = class Route extends BaseRoute {
         return /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { ref, from: this.fullPath, ...props });
       }
     );
-    this.$$typeof = /* @__PURE__ */ Symbol.for("react.memo");
+    this.$$typeof = Symbol.for("react.memo");
   }
 };
 function createRoute(options) {
@@ -590,7 +590,7 @@ class RootRoute extends BaseRootRoute {
         return /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { ref, from: this.fullPath, ...props });
       }
     );
-    this.$$typeof = /* @__PURE__ */ Symbol.for("react.memo");
+    this.$$typeof = Symbol.for("react.memo");
   }
 }
 function createRootRoute(options) {
@@ -660,7 +660,7 @@ class LazyRoute {
       return useNavigate({ from: router2.routesById[this.options.id].fullPath });
     };
     this.options = opts;
-    this.$$typeof = /* @__PURE__ */ Symbol.for("react.memo");
+    this.$$typeof = Symbol.for("react.memo");
   }
 }
 function createLazyFileRoute(id) {
@@ -1318,7 +1318,7 @@ function addToStart(items, item, max = 0) {
   const newItems = [item, ...items];
   return max && newItems.length > max ? newItems.slice(0, -1) : newItems;
 }
-var skipToken = /* @__PURE__ */ Symbol();
+var skipToken = Symbol();
 function ensureQueryFn(options, fetchOptions) {
   if (!options.queryFn && fetchOptions?.initialPromise) {
     return () => fetchOptions.initialPromise;
@@ -1334,10 +1334,10 @@ function shouldThrowError(throwOnError, params) {
   }
   return !!throwOnError;
 }
-function addConsumeAwareSignal(object, getSignal, onCancelled) {
+function addConsumeAwareSignal(object2, getSignal, onCancelled) {
   let consumed = false;
   let signal;
-  Object.defineProperty(object, "signal", {
+  Object.defineProperty(object2, "signal", {
     enumerable: true,
     get: () => {
       signal ??= getSignal();
@@ -1353,7 +1353,7 @@ function addConsumeAwareSignal(object, getSignal, onCancelled) {
       return signal;
     }
   });
-  return object;
+  return object2;
 }
 var FocusManager = class extends Subscribable {
   #focused;
@@ -2033,8 +2033,8 @@ var Query = class extends Removable {
       }
     }
     const abortController = new AbortController();
-    const addSignalProperty = (object) => {
-      Object.defineProperty(object, "signal", {
+    const addSignalProperty = (object2) => {
+      Object.defineProperty(object2, "signal", {
         enumerable: true,
         get: () => {
           this.#abortSignalConsumed = true;
@@ -2724,9 +2724,9 @@ function infiniteQueryBehavior(pages) {
       let currentPage = 0;
       const fetchFn = async () => {
         let cancelled = false;
-        const addSignalProperty = (object) => {
+        const addSignalProperty = (object2) => {
           addConsumeAwareSignal(
-            object,
+            object2,
             () => context.signal,
             () => cancelled = true
           );
@@ -5142,20 +5142,20 @@ const createCartAndSetCookie = createServerFn({
 }).handler(createSsrRpc("e04972e716e4eaa7d3250c0ad2a4fe74dca313e6c2b7f5f1a4485a9477a34ab8"));
 const addItem = createServerFn({
   method: "POST"
-}).inputValidator(objectType({
-  variantId: stringType()
+}).inputValidator(object({
+  variantId: string()
 })).handler(createSsrRpc("5cf9c3a6a631874951b2b70c723ae768c656f9d25c13e75f7589ea7e78ecffec"));
 const removeItem = createServerFn({
   method: "POST"
-}).inputValidator(objectType({
-  lineId: stringType()
+}).inputValidator(object({
+  lineId: string()
 })).handler(createSsrRpc("993dd7626a82e831b418163daa2c6f73b30e30efc29a74db84b6d8d61acb95c4"));
 const updateItemQuantity = createServerFn({
   method: "POST"
-}).inputValidator(objectType({
-  lineId: stringType(),
-  merchandiseId: stringType(),
-  quantity: numberType()
+}).inputValidator(object({
+  lineId: string(),
+  merchandiseId: string(),
+  quantity: number()
 })).handler(createSsrRpc("0b91da24cdb686267c68b4f84c7dbc7483835cfdf55189086846ab394a92959a"));
 const getCheckoutUrl = createServerFn().handler(createSsrRpc("5506db276d8244b0b69096c53b351b028859ab190bb23fa1fc32a67afff26576"));
 const CartContext = reactExports.createContext(void 0);
@@ -5327,32 +5327,38 @@ function CartProvider({ children }) {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     }
   });
-  const updateCartItem = (merchandiseId, updateType) => {
-    if (!cart) return;
-    const item = cart.lines.find((i2) => i2.merchandise.id === merchandiseId);
-    if (!item?.id) return;
-    if (updateType === "delete") {
-      removeItemMutation.mutate(item.id);
-    } else {
-      const newQuantity = updateType === "plus" ? item.quantity + 1 : item.quantity - 1;
-      updateItemMutation.mutate({
-        lineId: item.id,
-        merchandiseId,
-        quantity: newQuantity
-      });
-    }
-  };
-  const addCartItem = (variant, _product) => {
-    if (!cart) {
-      createCartMutation.mutate(void 0, {
-        onSuccess: () => {
-          addItemMutation.mutate(variant.id);
-        }
-      });
-    } else {
-      addItemMutation.mutate(variant.id);
-    }
-  };
+  const updateCartItem = reactExports.useCallback(
+    (merchandiseId, updateType) => {
+      if (!cart) return;
+      const item = cart.lines.find((i2) => i2.merchandise.id === merchandiseId);
+      if (!item?.id) return;
+      if (updateType === "delete") {
+        removeItemMutation.mutate(item.id);
+      } else {
+        const newQuantity = updateType === "plus" ? item.quantity + 1 : item.quantity - 1;
+        updateItemMutation.mutate({
+          lineId: item.id,
+          merchandiseId,
+          quantity: newQuantity
+        });
+      }
+    },
+    [cart, removeItemMutation, updateItemMutation]
+  );
+  const addCartItem = reactExports.useCallback(
+    (variant, _product) => {
+      if (!cart) {
+        createCartMutation.mutate(void 0, {
+          onSuccess: () => {
+            addItemMutation.mutate(variant.id);
+          }
+        });
+      } else {
+        addItemMutation.mutate(variant.id);
+      }
+    },
+    [cart, createCartMutation, addItemMutation]
+  );
   const isAddingItem = addItemMutation.isPending || createCartMutation.isPending;
   const value = reactExports.useMemo(
     () => ({
@@ -5362,7 +5368,7 @@ function CartProvider({ children }) {
       updateCartItem,
       addCartItem
     }),
-    [cart, isLoading, isAddingItem]
+    [cart, isLoading, isAddingItem, addCartItem, updateCartItem]
   );
   return /* @__PURE__ */ jsxRuntimeExports.jsx(CartContext.Provider, { value, children });
 }
@@ -5490,7 +5496,7 @@ function Footer() {
         }
       ) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-neutral-200 border-t py-6 text-sm dark:border-neutral-700", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-neutral-200 border-t py-6 text-sm dark:border-neutral-700", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0 dark:border-neutral-700", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "© ",
         /* @__PURE__ */ jsxRuntimeExports.jsx(CopyrightYear, {}),
@@ -5500,7 +5506,7 @@ function Footer() {
         " ",
         "All rights reserved."
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("hr", { className: "mx-4 hidden h-4 w-[1px] border-neutral-400 border-l md:inline-block" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("hr", { className: "mx-4 hidden h-4 w-px border-neutral-400 border-l md:inline-block" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://github.com/vercel/commerce", children: "View the source" }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "md:ml-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://vercel.com", className: "text-black dark:text-white", children: "Created by ▲ Vercel" }) })
     ] }) })
@@ -5729,7 +5735,7 @@ function H$2(n2) {
   return G$2.version.split(".")[0] >= "19" ? n2.props.ref : n2.ref;
 }
 function b$1(n2) {
-  return n2 === reactExports.Fragment || n2 === /* @__PURE__ */ Symbol.for("react.fragment");
+  return n2 === reactExports.Fragment || n2 === Symbol.for("react.fragment");
 }
 function D$2(n2) {
   return b$1(n2.type);
@@ -5763,7 +5769,7 @@ function u$6(e2) {
 function l$2(e2) {
   return n$4(e2) && e2.nodeName === "INPUT";
 }
-let u$5 = /* @__PURE__ */ Symbol();
+let u$5 = Symbol();
 function T$3(t2, n2 = true) {
   return Object.assign(t2, { [u$5]: n2 });
 }
@@ -7007,1252 +7013,26 @@ function XMarkIcon({
   }));
 }
 const ForwardRef = /* @__PURE__ */ reactExports.forwardRef(XMarkIcon);
-const domains = {
-  "images.ctfassets.net": "contentful",
-  "cdn.builder.io": "builder.io",
-  "images.prismic.io": "imgix",
-  "www.datocms-assets.com": "imgix",
-  "cdn.sanity.io": "imgix",
-  "images.unsplash.com": "imgix",
-  "cdn.shopify.com": "shopify",
-  "s7d1.scene7.com": "scene7",
-  "ip.keycdn.com": "keycdn",
-  "assets.caisy.io": "bunny",
-  "images.contentstack.io": "contentstack",
-  "ucarecdn.com": "uploadcare",
-  "imagedelivery.net": "cloudflare_images"
+var nestedKeys = /* @__PURE__ */ new Set(["style"]);
+var isNewReact = "use" in React;
+var fixedMap = {
+  srcset: "srcSet",
+  fetchpriority: isNewReact ? "fetchPriority" : "fetchpriority"
 };
-const subdomains = {
-  "imgix.net": "imgix",
-  "files.wordpress.com": "wordpress",
-  "b-cdn.net": "bunny",
-  "storyblok.com": "storyblok",
-  "kc-usercontent.com": "kontent.ai",
-  "cloudinary.com": "cloudinary",
-  "kxcdn.com": "keycdn",
-  "imgeng.in": "imageengine",
-  "imagekit.io": "imagekit",
-  "cloudimg.io": "cloudimage",
-  "ucarecdn.com": "uploadcare",
-  "supabase.co": "supabase",
-  "graphassets.com": "hygraph"
-};
-const paths = {
-  "/cdn-cgi/image/": "cloudflare",
-  "/cdn-cgi/imagedelivery/": "cloudflare_images",
-  "/_next/image": "nextjs",
-  "/_next/static": "nextjs",
-  "/_vercel/image": "vercel",
-  "/is/image": "scene7",
-  "/_ipx/": "ipx",
-  "/_image": "astro",
-  "/.netlify/images": "netlify",
-  "/storage/v1/object/public/": "supabase",
-  "/storage/v1/render/image/public/": "supabase"
-};
-const roundIfNumeric = (value) => {
-  if (!value) {
-    return value;
+var camelize = (key) => {
+  if (key.startsWith("data-") || key.startsWith("aria-")) {
+    return key;
   }
-  const num = Number(value);
-  return isNaN(num) ? value : Math.round(num);
+  return fixedMap[key] || key.replace(/-./g, (suffix) => suffix[1].toUpperCase());
 };
-const setParamIfDefined = (url, key, value, deleteExisting, roundValue) => {
-  if (value) {
-    if (roundValue) {
-      value = roundIfNumeric(value);
-    }
-    url.searchParams.set(key, value.toString());
-  } else if (deleteExisting) {
-    url.searchParams.delete(key);
-  }
-};
-const setParamIfUndefined = (url, key, value) => {
-  if (!url.searchParams.has(key)) {
-    url.searchParams.set(key, value.toString());
-  }
-};
-const getNumericParam = (url, key) => {
-  const value = Number(url.searchParams.get(key));
-  return isNaN(value) ? void 0 : value;
-};
-const toRelativeUrl = (url) => {
-  const { pathname, search } = url;
-  return `${pathname}${search}`;
-};
-const toCanonicalUrlString = (url) => {
-  return url.hostname === "n" ? toRelativeUrl(url) : url.toString();
-};
-const toUrl = (url, base) => {
-  return typeof url === "string" ? new URL(url, base ?? "http://n/") : url;
-};
-const cdnDomains = new Map(Object.entries(domains));
-const cdnSubdomains = Object.entries(subdomains);
-function getImageCdnForUrl(url) {
-  return getImageCdnForUrlByDomain(url) || getImageCdnForUrlByPath(url);
+function camelizeProps(props) {
+  return Object.fromEntries(
+    Object.entries(props).map(([k2, v2]) => [
+      camelize(k2),
+      nestedKeys.has(k2) && v2 && typeof v2 !== "string" ? camelizeProps(v2) : v2
+    ])
+  );
 }
-function getImageCdnForUrlByDomain(url) {
-  if (typeof url === "string" && !url.startsWith("https://")) {
-    return false;
-  }
-  const { hostname } = toUrl(url);
-  if (cdnDomains.has(hostname)) {
-    return cdnDomains.get(hostname);
-  }
-  for (const [subdomain, cdn] of cdnSubdomains) {
-    if (hostname.endsWith(`.${subdomain}`)) {
-      return cdn;
-    }
-  }
-  return false;
-}
-function getImageCdnForUrlByPath(url) {
-  const { pathname } = toUrl(url);
-  for (const [prefix, cdn] of Object.entries(paths)) {
-    if (pathname.startsWith(prefix)) {
-      return cdn;
-    }
-  }
-  return false;
-}
-const transform$p = ({ url: originalUrl, width, height, format }) => {
-  const url = toUrl(originalUrl);
-  if (width && width > 4e3) {
-    if (height) {
-      height = Math.round(height * 4e3 / width);
-    }
-    width = 4e3;
-  }
-  if (height && height > 4e3) {
-    if (width) {
-      width = Math.round(width * 4e3 / height);
-    }
-    height = 4e3;
-  }
-  setParamIfDefined(url, "w", width, true, true);
-  setParamIfDefined(url, "h", height, true, true);
-  setParamIfDefined(url, "fm", format);
-  setParamIfUndefined(url, "fit", "fill");
-  return url;
-};
-const transform$o = ({ url: originalUrl, width, height, format }) => {
-  const url = toUrl(originalUrl);
-  setParamIfDefined(url, "width", width, true, true);
-  setParamIfDefined(url, "height", height, true, true);
-  setParamIfDefined(url, "format", format);
-  if (width && height) {
-    setParamIfUndefined(url, "fit", "cover");
-    setParamIfUndefined(url, "sharp", "true");
-  }
-  return url;
-};
-const transform$n = ({ url: originalUrl, width, height, format }) => {
-  const url = toUrl(originalUrl);
-  setParamIfDefined(url, "w", width, true, true);
-  setParamIfDefined(url, "h", height, true, true);
-  setParamIfUndefined(url, "fit", "min");
-  if (format) {
-    url.searchParams.set("fm", format);
-    const fm = url.searchParams.get("auto");
-    if (fm === "format") {
-      url.searchParams.delete("auto");
-    } else if (fm?.includes("format")) {
-      url.searchParams.set("auto", fm.split(",").filter((s2) => s2 !== "format").join(","));
-    }
-  } else {
-    url.searchParams.delete("fm");
-    if (!url.searchParams.get("auto")?.includes("format")) {
-      url.searchParams.append("auto", "format");
-    }
-  }
-  return url;
-};
-const shopifyRegex = /(.+?)(?:_(?:(pico|icon|thumb|small|compact|medium|large|grande|original|master)|(\d*)x(\d*)))?(?:_crop_([a-z]+))?(\.[a-zA-Z]+)(\.png|\.jpg|\.webp|\.avif)?$/;
-const parse$9 = (imageUrl) => {
-  const url = toUrl(imageUrl);
-  const match = url.pathname.match(shopifyRegex);
-  if (!match) {
-    throw new Error("Invalid Shopify URL");
-  }
-  const [, path, size, width, height, crop, extension, format] = match;
-  url.pathname = `${path}${extension}`;
-  const widthString = width ? width : url.searchParams.get("width");
-  const heightString = height ? height : url.searchParams.get("height");
-  url.searchParams.delete("width");
-  url.searchParams.delete("height");
-  return {
-    base: url.toString(),
-    width: Number(widthString) || void 0,
-    height: Number(heightString) || void 0,
-    format: format ? format.slice(1) : void 0,
-    params: { crop, size },
-    cdn: "shopify"
-  };
-};
-const generate$a = ({ base, width, height, format, params }) => {
-  const url = toUrl(base);
-  setParamIfDefined(url, "width", width, true, true);
-  setParamIfDefined(url, "height", height, true, true);
-  setParamIfDefined(url, "crop", params?.crop);
-  setParamIfDefined(url, "format", format);
-  return url;
-};
-const transform$m = ({ url: originalUrl, width, height }) => {
-  const parsed = parse$9(originalUrl);
-  if (!parsed) {
-    return;
-  }
-  const props = {
-    ...parsed,
-    width,
-    height
-  };
-  return generate$a(props);
-};
-const transform$l = ({ url: originalUrl, width, height }) => {
-  const url = toUrl(originalUrl);
-  setParamIfDefined(url, "w", width, true, true);
-  setParamIfDefined(url, "h", height, true, true);
-  setParamIfUndefined(url, "crop", "1");
-  return url;
-};
-const transform$k = ({ url: originalUrl, width, height }) => {
-  const url = toUrl(originalUrl);
-  setParamIfDefined(url, "w", width, true, true);
-  setParamIfDefined(url, "h", height, true, true);
-  setParamIfDefined(url, "q", getNumericParam(url, "q"), true);
-  return url;
-};
-const cloudinaryRegex = /https?:\/\/(?<host>[^\/]+)\/(?<cloudName>[^\/]+)\/(?<assetType>image|video|raw)\/(?<deliveryType>upload|fetch|private|authenticated|sprite|facebook|twitter|youtube|vimeo)\/?(?<signature>s\-\-[a-zA-Z0-9]+\-\-)?\/?(?<transformations>(?:[^_\/]+_[^,\/]+,?)*)?\/(?:(?<version>v\d+)\/)?(?<idAndFormat>[^\s]+)$/g;
-const parseTransforms$2 = (transformations) => {
-  return transformations ? Object.fromEntries(transformations.split(",").map((t2) => t2.split("_"))) : {};
-};
-const formatUrl$3 = ({ host, cloudName, assetType, deliveryType, signature, transformations = {}, version, id, format }) => {
-  if (format) {
-    transformations.f = format;
-  }
-  const transformString = Object.entries(transformations).map(([key, value]) => `${key}_${value}`).join(",");
-  const pathSegments = [
-    host,
-    cloudName,
-    assetType,
-    deliveryType,
-    signature,
-    transformString,
-    version,
-    id
-  ].filter(Boolean).join("/");
-  return `https://${pathSegments}`;
-};
-const parse$8 = (imageUrl) => {
-  const url = toUrl(imageUrl);
-  const matches = [...url.toString().matchAll(cloudinaryRegex)];
-  if (!matches.length) {
-    throw new Error("Invalid Cloudinary URL");
-  }
-  const group = matches[0].groups || {};
-  const { transformations: transformString = "", idAndFormat, ...baseParams } = group;
-  delete group.idAndFormat;
-  const lastDotIndex = idAndFormat.lastIndexOf(".");
-  const id = lastDotIndex < 0 ? idAndFormat : idAndFormat.slice(0, lastDotIndex);
-  const originalFormat = lastDotIndex < 0 ? void 0 : idAndFormat.slice(lastDotIndex + 1);
-  const { w: w2, h: h2, f: f2, ...transformations } = parseTransforms$2(transformString);
-  const format = f2 && f2 !== "auto" ? f2 : originalFormat;
-  const base = formatUrl$3({ ...baseParams, id, transformations });
-  return {
-    base,
-    width: Number(w2) || void 0,
-    height: Number(h2) || void 0,
-    format,
-    cdn: "cloudinary",
-    params: {
-      ...group,
-      id: group.deliveryType === "fetch" ? idAndFormat : id,
-      format,
-      transformations
-    }
-  };
-};
-const generate$9 = ({ base, width, height, format, params }) => {
-  const parsed = parse$8(base.toString());
-  const props = {
-    transformations: {},
-    ...parsed.params,
-    ...params,
-    format: format || "auto"
-  };
-  if (width) {
-    props.transformations.w = roundIfNumeric(width).toString();
-  }
-  if (height) {
-    props.transformations.h = roundIfNumeric(height).toString();
-  }
-  props.transformations.c ||= "lfill";
-  return formatUrl$3(props);
-};
-const transform$j = ({ url: originalUrl, width, height, format = "auto" }) => {
-  const parsed = parse$8(originalUrl);
-  if (!parsed) {
-    throw new Error("Invalid Cloudinary URL");
-  }
-  if (parsed.params?.assetType !== "image") {
-    throw new Error("Cloudinary transformer only supports images");
-  }
-  if (parsed.params?.signature) {
-    throw new Error("Cloudinary transformer does not support signed URLs");
-  }
-  const props = {
-    ...parsed,
-    width,
-    height,
-    format
-  };
-  return generate$9(props);
-};
-const cloudflareRegex = /https?:\/\/(?<host>[^\/]+)\/cdn-cgi\/image\/(?<transformations>[^\/]+)?\/(?<path>.*)$/g;
-const parseTransforms$1 = (transformations) => Object.fromEntries(transformations.split(",").map((t2) => t2.split("=")));
-const formatUrl$2 = ({ host, transformations = {}, path }) => {
-  const transformString = Object.entries(transformations).map(([key, value]) => `${key}=${value}`).join(",");
-  const pathSegments = [
-    host,
-    "cdn-cgi",
-    "image",
-    transformString,
-    path
-  ].join("/");
-  return `https://${pathSegments}`;
-};
-const parse$7 = (imageUrl) => {
-  const url = toUrl(imageUrl);
-  const matches = [...url.toString().matchAll(cloudflareRegex)];
-  if (!matches.length) {
-    throw new Error("Invalid Cloudflare URL");
-  }
-  const group = matches[0].groups || {};
-  const { transformations: transformString, ...baseParams } = group;
-  const { width, height, f: f2, ...transformations } = parseTransforms$1(transformString);
-  formatUrl$2({ ...baseParams, transformations });
-  return {
-    base: url.toString(),
-    width: Number(width) || void 0,
-    height: Number(height) || void 0,
-    format: f2,
-    cdn: "cloudflare",
-    params: { ...group, transformations }
-  };
-};
-const generate$8 = ({ base, width, height, format, params }) => {
-  const parsed = parse$7(base.toString());
-  const props = {
-    transformations: {},
-    ...parsed.params,
-    ...params
-  };
-  if (width) {
-    props.transformations.width = width?.toString();
-  }
-  if (height) {
-    props.transformations.height = height?.toString();
-  }
-  if (format) {
-    props.transformations.f = format === "jpg" ? "jpeg" : format;
-  }
-  props.transformations.fit ||= "cover";
-  return new URL(formatUrl$2(props));
-};
-const transform$i = ({ url: originalUrl, width, height, format = "auto" }) => {
-  const parsed = parse$7(originalUrl);
-  if (!parsed) {
-    throw new Error("Invalid Cloudflare URL");
-  }
-  const props = {
-    ...parsed,
-    width,
-    height,
-    format
-  };
-  return generate$8(props);
-};
-const transform$h = ({ url: originalUrl, width, height }) => {
-  const url = toUrl(originalUrl);
-  setParamIfDefined(url, "width", width, true, true);
-  if (width && height) {
-    setParamIfUndefined(url, "aspect_ratio", `${width}:${height}`);
-  }
-  return url;
-};
-const storyBlokAssets = /(?<id>\/f\/\d+\/\d+x\d+\/\w+\/[^\/]+)\/?(?<modifiers>m\/?(?<crop>\d+x\d+:\d+x\d+)?\/?(?<resize>(?<flipx>\-)?(?<width>\d+)x(?<flipy>\-)?(?<height>\d+))?\/?(filters\:(?<filters>[^\/]+))?)?$/g;
-const storyBlokImg2 = /^(?<modifiers>\/(?<crop>\d+x\d+:\d+x\d+)?\/?(?<resize>(?<flipx>\-)?(?<width>\d+)x(?<flipy>\-)?(?<height>\d+))?\/?(filters\:(?<filters>[^\/]+))?\/?)?(?<id>\/f\/.+)$/g;
-const splitFilters = (filters) => {
-  if (!filters) {
-    return {};
-  }
-  return Object.fromEntries(filters.split(":").map((filter) => {
-    if (!filter)
-      return [];
-    const [key, value] = filter.split("(");
-    return [key, value.replace(")", "")];
-  }));
-};
-const generateFilters = (filters) => {
-  if (!filters) {
-    return void 0;
-  }
-  const filterItems = Object.entries(filters).map(([key, value]) => `${key}(${value ?? ""})`);
-  if (filterItems.length === 0) {
-    return void 0;
-  }
-  return `filters:${filterItems.join(":")}`;
-};
-const parse$6 = (imageUrl) => {
-  const url = toUrl(imageUrl);
-  const regex = url.hostname === "img2.storyblok.com" ? storyBlokImg2 : storyBlokAssets;
-  const [matches] = url.pathname.matchAll(regex);
-  if (!matches || !matches.groups) {
-    throw new Error("Invalid Storyblok URL");
-  }
-  const { id, crop, width, height, filters, flipx, flipy } = matches.groups;
-  const { format, ...filterMap } = splitFilters(filters);
-  if (url.hostname === "img2.storyblok.com") {
-    url.hostname = "a.storyblok.com";
-  }
-  return {
-    base: url.origin + id,
-    width: Number(width) || void 0,
-    height: Number(height) || void 0,
-    format,
-    params: {
-      crop,
-      filters: filterMap,
-      flipx,
-      flipy
-    },
-    cdn: "storyblok"
-  };
-};
-const generate$7 = ({ base, width = 0, height = 0, format, params = {} }) => {
-  const { crop, filters, flipx = "", flipy = "" } = params;
-  const size = `${flipx}${width}x${flipy}${height}`;
-  return new URL([base, "m", crop, size, generateFilters(filters), format].filter(Boolean).join("/"));
-};
-const transform$g = ({ url: originalUrl, width, height, format }) => {
-  const parsed = parse$6(originalUrl);
-  if (!parsed) {
-    return;
-  }
-  if (format) {
-    if (!parsed.params) {
-      parsed.params = { filters: {} };
-    }
-    if (!parsed.params.filters) {
-      parsed.params.filters = {};
-    }
-    parsed.params.filters.format = format;
-  }
-  return generate$7({
-    ...parsed,
-    width,
-    height
-  });
-};
-const transform$f = ({ url: originalUrl, width, height, format }) => {
-  const url = toUrl(originalUrl);
-  setParamIfDefined(url, "w", width, true, true);
-  setParamIfDefined(url, "h", height, true, true);
-  setParamIfDefined(url, "fm", format, true);
-  if (width && height) {
-    setParamIfUndefined(url, "fit", "crop");
-  }
-  return url;
-};
-const delegateUrl = (url) => {
-  const parsed = toUrl(url);
-  const source = parsed.searchParams.get("url");
-  if (!source || !source.startsWith("http")) {
-    return false;
-  }
-  const cdn = getImageCdnForUrlByDomain(source);
-  if (!cdn) {
-    return false;
-  }
-  return {
-    cdn,
-    url: source
-  };
-};
-const generate$6 = ({ base, width, params: { quality = 75, root = "_vercel" } = {} }) => {
-  const url = new URL("http://n");
-  url.pathname = `/${root}/image`;
-  url.searchParams.set("url", base.toString());
-  setParamIfDefined(url, "w", width, false, true);
-  setParamIfUndefined(url, "q", quality);
-  return toRelativeUrl(url);
-};
-const transform$e = ({ url, width, cdn }) => {
-  const parsedUrl = toUrl(url);
-  const isNextImage = parsedUrl.pathname.startsWith("/_next/image") || parsedUrl.pathname.startsWith("/_vercel/image");
-  const src = isNextImage ? parsedUrl.searchParams.get("url") : url.toString();
-  if (!src) {
-    return void 0;
-  }
-  setParamIfDefined(parsedUrl, "w", width, true, true);
-  if (isNextImage) {
-    return toCanonicalUrlString(parsedUrl);
-  }
-  return generate$6({
-    base: src,
-    width,
-    params: { root: cdn === "nextjs" ? "_next" : "_vercel" }
-  });
-};
-const transform$d = (params) => transform$e({ ...params, cdn: "nextjs" });
-const transform$c = ({ url: originalUrl, width, height, format }) => {
-  const url = toUrl(originalUrl);
-  setParamIfDefined(url, "wid", width, true, true);
-  setParamIfDefined(url, "hei", height, true, true);
-  setParamIfDefined(url, "fmt", format, true);
-  setParamIfDefined(url, "qlt", getNumericParam(url, "qlt"), true);
-  setParamIfDefined(url, "scl", getNumericParam(url, "scl"), true);
-  setParamIfUndefined(url, "fit", "crop");
-  if (!width && !height) {
-    setParamIfUndefined(url, "scl", 1);
-  }
-  return url;
-};
-const transform$b = ({ url: originalUrl, width, height, format }) => {
-  const url = toUrl(originalUrl);
-  setParamIfDefined(url, "width", width, true, true);
-  setParamIfDefined(url, "height", height, true, true);
-  setParamIfDefined(url, "format", format, true);
-  setParamIfDefined(url, "quality", getNumericParam(url, "quality"), true);
-  setParamIfUndefined(url, "enlarge", 0);
-  return url;
-};
-const transform$a = ({ url: originalUrl, width, height, format }) => {
-  const url = toUrl(originalUrl);
-  setParamIfDefined(url, "width", width, true, true);
-  setParamIfDefined(url, "height", height, true, true);
-  setParamIfDefined(url, "format", format);
-  setParamIfDefined(url, "quality", getNumericParam(url, "quality"), true);
-  return url;
-};
-const OBJECT_TO_DIRECTIVES_MAP = {
-  width: "w",
-  height: "h",
-  autoWidthWithFallback: "w_auto",
-  auto_width_fallback: "w_auto",
-  scaleToScreenWidth: "pc",
-  scale_to_screen_width: "pc",
-  crop: "cr",
-  outputFormat: "f",
-  format: "f",
-  fit: "m",
-  fitMethod: "m",
-  compression: "cmpr",
-  sharpness: "s",
-  rotate: "r",
-  inline: "in",
-  keepMeta: "meta",
-  keep_meta: "meta",
-  noOptimization: "pass",
-  no_optimization: "pass",
-  force_download: "dl",
-  max_device_pixel_ratio: "maxdpr",
-  maxDevicePixelRatio: "maxdpr"
-};
-function getDirective(key) {
-  let keyArray = Object.keys(OBJECT_TO_DIRECTIVES_MAP);
-  let directive = keyArray.find((k2) => OBJECT_TO_DIRECTIVES_MAP[k2] === key) || "";
-  return directive;
-}
-function getParameterArray(url) {
-  let url_string = url.toString();
-  let paramArray = [];
-  if (url_string) {
-    let splitURL = url_string.split("imgeng=");
-    if (splitURL.length > 1) {
-      paramArray = splitURL[1].split("/");
-    }
-  }
-  return paramArray;
-}
-function getBaseUrl(url) {
-  let url_string = url.toString();
-  let baseUrl = "";
-  if (url_string) {
-    let splitURL = url_string.split("imgeng=");
-    if (splitURL.length > 1) {
-      baseUrl = splitURL[0].slice(0, -1);
-    } else {
-      baseUrl = url_string;
-    }
-  }
-  return baseUrl;
-}
-const transform$9 = ({ url: originalUrl, width, height, format }) => {
-  const url = toUrl(originalUrl);
-  const src = getBaseUrl(url);
-  let directives = {};
-  const param = url.toString() === src ? [] : getParameterArray(url);
-  if (param.length) {
-    directives = getDirectives(param);
-  }
-  if (width) {
-    directives["width"] = width;
-  }
-  if (height) {
-    directives["height"] = height;
-  }
-  if (format) {
-    directives["format"] = format;
-  }
-  if (!directives.hasOwnProperty("fit")) {
-    directives = { ...directives, "fit": "cropbox" };
-  }
-  let directives_string = build_IE_directives(directives);
-  let query_string = build_IE_query_string(directives_string);
-  let query_prefix = query_string === "" ? "" : src.includes("?") ? "&" : "?";
-  return `${src}${query_prefix}${query_string}`;
-};
-function build_IE_directives(directives) {
-  return Object.entries(directives).reduce((acc, [k2, v2]) => {
-    return acc + maybe_create_directive(k2, v2);
-  }, "");
-}
-function build_IE_query_string(directives_string) {
-  if (directives_string && directives_string !== "") {
-    return `imgeng=${directives_string}`;
-  }
-  return "";
-}
-function maybe_create_directive(directive, value) {
-  let translated_directive = OBJECT_TO_DIRECTIVES_MAP[directive];
-  if (translated_directive && (value || value === 0)) {
-    return `/${translated_directive}_${value}`;
-  }
-  return "";
-}
-function getDirectives(paramArray) {
-  let directives = {};
-  paramArray.forEach((para) => {
-    let keyValue = para.split("_");
-    if (keyValue.length > 1) {
-      let key = keyValue[0];
-      let value = keyValue[1];
-      let directiveKey = getDirective(key);
-      if (directiveKey) {
-        directives[directiveKey] = value;
-      }
-    }
-  });
-  return directives;
-}
-const transform$8 = ({ url: originalUrl, width, height, format }) => {
-  const url = toUrl(originalUrl);
-  setParamIfDefined(url, "width", width, true, true);
-  setParamIfDefined(url, "height", height, true, true);
-  setParamIfDefined(url, "format", format);
-  if (!url.searchParams.has("format")) {
-    setParamIfUndefined(url, "auto", "webp");
-  }
-  if (width && height) {
-    setParamIfUndefined(url, "fit", "crop");
-  }
-  return url;
-};
-const cloudflareImagesRegex = /https?:\/\/(?<host>[^\/]+)\/cdn-cgi\/imagedelivery\/(?<accountHash>[^\/]+)\/(?<imageId>[^\/]+)\/*(?<transformations>[^\/]+)*$/g;
-const imagedeliveryRegex = /https?:\/\/(?<host>imagedelivery.net)\/(?<accountHash>[^\/]+)\/(?<imageId>[^\/]+)\/*(?<transformations>[^\/]+)*$/g;
-const parseTransforms = (transformations) => Object.fromEntries(transformations?.split(",")?.map((t2) => t2.split("=")) ?? []);
-const formatUrl$1 = ({ host, accountHash, transformations = {}, imageId }) => {
-  const transformString = Object.entries(transformations).filter(([key, value]) => Boolean(key) && value !== void 0).map(([key, value]) => `${key}=${value}`).join(",");
-  const pathSegments = [
-    ...host === "imagedelivery.net" ? [host] : [host, "cdn-cgi", "imagedelivery"],
-    accountHash,
-    imageId,
-    transformString
-  ].join("/");
-  return `https://${pathSegments}`;
-};
-const parse$5 = (imageUrl) => {
-  const url = toUrl(imageUrl);
-  const matches = [
-    ...url.toString().matchAll(cloudflareImagesRegex),
-    ...url.toString().matchAll(imagedeliveryRegex)
-  ];
-  if (!matches.length) {
-    throw new Error("Invalid Cloudflare Images URL");
-  }
-  const group = matches[0].groups || {};
-  const { transformations: transformString, ...baseParams } = group;
-  const { w: w2, h: h2, f: f2, ...transformations } = parseTransforms(transformString);
-  return {
-    base: url.toString(),
-    width: Number(w2) || void 0,
-    height: Number(h2) || void 0,
-    format: f2,
-    cdn: "cloudflare_images",
-    params: { ...baseParams, transformations }
-  };
-};
-const generate$5 = ({ base, width, height, format, params }) => {
-  const parsed = parse$5(base.toString());
-  const props = {
-    transformations: {},
-    ...parsed.params,
-    ...params
-  };
-  if (width) {
-    props.transformations.w = width?.toString();
-  }
-  if (height) {
-    props.transformations.h = height?.toString();
-  }
-  if (format) {
-    props.transformations.f = format;
-  }
-  props.transformations.fit ||= "cover";
-  return new URL(formatUrl$1(props));
-};
-const transform$7 = ({ url: originalUrl, width, height, format = "auto" }) => {
-  const parsed = parse$5(originalUrl);
-  if (!parsed) {
-    throw new Error("Invalid Cloudflare Images URL");
-  }
-  const props = {
-    ...parsed,
-    width,
-    height,
-    format
-  };
-  return generate$5(props);
-};
-const parse$4 = (imageUrl) => {
-  const url = toUrl(imageUrl);
-  const [modifiers, ...id] = url.pathname.split("/").slice(1);
-  const params = Object.fromEntries(modifiers.split(",").map((modifier) => {
-    const [key, value] = modifier.split("_");
-    return [key, value];
-  }));
-  if (params.s) {
-    const [width, height] = params.s.split("x");
-    params.w ||= width;
-    params.h ||= height;
-  }
-  return {
-    base: id.join("/"),
-    width: Number(params.w) || void 0,
-    height: Number(params.h) || void 0,
-    quality: Number(params.q) || void 0,
-    format: params.f || "auto",
-    params,
-    cdn: "ipx"
-  };
-};
-const generate$4 = ({ base: id, width, height, format, params }) => {
-  const modifiers = params?.modifiers ?? {};
-  if (width && height) {
-    modifiers.s = `${width}x${height}`;
-  } else if (width) {
-    modifiers.w = `${width}`;
-  } else if (height) {
-    modifiers.h = `${height}`;
-  }
-  if (format) {
-    modifiers.f = format;
-  }
-  const base = params?.base.endsWith("/") ? params?.base : `${params?.base}/`;
-  const modifiersString = Object.entries(modifiers).map(([key, value]) => `${key}_${value}`).join(",");
-  const stringId = id.toString();
-  const image = stringId.startsWith("/") ? stringId.slice(1) : stringId;
-  return `${base}${modifiersString}/${image}`;
-};
-const transform$6 = (options) => {
-  const url = String(options.url);
-  const parsedUrl = toUrl(url);
-  const defaultBase = parsedUrl.pathname.startsWith("/_ipx") && parsedUrl.hostname !== "n" ? `${parsedUrl.origin}/_ipx` : "/_ipx";
-  const base = options.cdnOptions?.ipx?.base ?? defaultBase;
-  const isIpxUrl = base && base !== "/" && url.startsWith(base);
-  if (isIpxUrl) {
-    const parsed = parse$4(url.replace(base, ""));
-    return generate$4({
-      ...parsed,
-      ...options,
-      params: {
-        ...options.cdnOptions?.ipx,
-        base
-      }
-    });
-  }
-  return generate$4({
-    ...options,
-    base: url,
-    params: {
-      ...options.cdnOptions?.ipx,
-      base
-    }
-  });
-};
-const transform$5 = ({ url: originalUrl, width, height, format, cdnOptions }) => {
-  const parsedUrl = toUrl(originalUrl);
-  const href = toCanonicalUrlString(new URL(parsedUrl.pathname, parsedUrl.origin));
-  const url = { searchParams: new URLSearchParams() };
-  setParamIfDefined(url, "href", href, true, true);
-  setParamIfDefined(url, "w", width, true, true);
-  setParamIfDefined(url, "h", height, true, true);
-  setParamIfDefined(url, "f", format);
-  setParamIfUndefined(url, "fit", "cover");
-  const endpoint = cdnOptions?.astro?.endpoint ?? "/_image";
-  return `${endpoint}?${url.searchParams.toString()}`;
-};
-const skippedParams = /* @__PURE__ */ new Set([
-  "w",
-  "h",
-  "q",
-  "fm",
-  "url",
-  "width",
-  "height",
-  "quality"
-]);
-const parse$3 = (url) => {
-  const parsed = toUrl(url);
-  const width = Number(parsed.searchParams.get("w") ?? parsed.searchParams.get("width")) ?? void 0;
-  const height = Number(parsed.searchParams.get("h") ?? parsed.searchParams.get("height")) ?? void 0;
-  const quality = Number(parsed.searchParams.get("q") ?? parsed.searchParams.get("quality")) || void 0;
-  const format = parsed.searchParams.get("fm") || void 0;
-  const base = parsed.searchParams.get("url") || "";
-  const params = {
-    quality
-  };
-  parsed.searchParams.forEach((value, key) => {
-    if (skippedParams.has(key)) {
-      return;
-    }
-    params[key] = value;
-  });
-  parsed.search = "";
-  return {
-    base,
-    width,
-    height,
-    format,
-    params,
-    cdn: "netlify"
-  };
-};
-const generate$3 = ({ base, width, height, format, params: { site, quality, ...params } = {} }) => {
-  const url = toUrl("/.netlify/images", site);
-  Object.entries(params).forEach(([key, value]) => setParamIfDefined(url, key, value));
-  setParamIfDefined(url, "q", quality, true, true);
-  setParamIfDefined(url, "w", width, true, true);
-  setParamIfDefined(url, "h", height, true, true);
-  setParamIfDefined(url, "fm", format);
-  setParamIfUndefined(url, "fit", "cover");
-  url.searchParams.set("url", base.toString());
-  return toCanonicalUrlString(url);
-};
-const transform$4 = (options) => {
-  const url = toUrl(options.url);
-  if (url.pathname.startsWith("/.netlify/images")) {
-    const { params, base, format } = parse$3(url);
-    return generate$3({
-      base,
-      format,
-      ...options,
-      params: {
-        ...params,
-        // If hostname is "n", we're dealing with a relative URL, so we don't need to set the site param
-        site: url.hostname === "n" ? void 0 : url.origin
-      }
-    });
-  }
-  return generate$3({
-    ...options,
-    base: options.url,
-    params: {
-      site: options.cdnOptions?.netlify?.site
-    }
-  });
-};
-const getTransformParams = (url) => {
-  const transforms = url.searchParams.get("tr") || "";
-  return transforms.split(",").reduce((acc, transform2) => {
-    const [key, value] = transform2.split("-");
-    acc[key] = value;
-    return acc;
-  }, {});
-};
-const transform$3 = ({ url: originalUrl, width, height, format }) => {
-  const url = toUrl(originalUrl);
-  const transformParams = getTransformParams(url);
-  transformParams.w = width ? Math.round(width) : width;
-  transformParams.h = height ? Math.round(height) : height;
-  if (!transformParams.f) {
-    transformParams.f = "auto";
-  }
-  if (format) {
-    transformParams.f = format;
-  }
-  const tr = Object.keys(transformParams).map((key) => {
-    const value = transformParams[key];
-    if (value) {
-      return `${key}-${value}`;
-    }
-  }).filter((x2) => x2).join(",");
-  url.searchParams.set("tr", tr);
-  return url;
-};
-const uploadcareRegex = /^https?:\/\/(?<host>[^\/]+)\/(?<uuid>[^\/]+)/g;
-function extractFilename(cdnUrl) {
-  const url = new URL(cdnUrl);
-  const noOrigin = url.pathname + url.search + url.hash;
-  const urlFilenameIdx = noOrigin.lastIndexOf("http");
-  const plainFilenameIdx = noOrigin.lastIndexOf("/");
-  let filename = "";
-  if (urlFilenameIdx >= 0) {
-    filename = noOrigin.slice(urlFilenameIdx);
-  } else if (plainFilenameIdx >= 0) {
-    filename = noOrigin.slice(plainFilenameIdx + 1);
-  }
-  return filename;
-}
-function isFileUrl(filename) {
-  return filename.startsWith("http");
-}
-function splitFileUrl(fileUrl) {
-  const url = new URL(fileUrl);
-  return {
-    pathname: url.origin + url.pathname || "",
-    search: url.search || "",
-    hash: url.hash || ""
-  };
-}
-function trimFilename(cdnUrl) {
-  const url = new URL(cdnUrl);
-  const filename = extractFilename(cdnUrl);
-  const filenamePathPart = isFileUrl(filename) ? splitFileUrl(filename).pathname : filename;
-  url.pathname = url.pathname.replace(filenamePathPart, "");
-  url.search = "";
-  url.hash = "";
-  return url.toString();
-}
-const normalizeCdnOperation = (operation) => {
-  if (typeof operation !== "string" || !operation) {
-    return "";
-  }
-  let str = operation.trim();
-  if (str.startsWith("-/")) {
-    str = str.slice(2);
-  } else if (str.startsWith("/")) {
-    str = str.slice(1);
-  }
-  if (str.endsWith("/")) {
-    str = str.slice(0, str.length - 1);
-  }
-  return str;
-};
-function extractOperations(cdnUrl) {
-  const withoutFilename = trimFilename(cdnUrl);
-  const url = new URL(withoutFilename);
-  const operationsMarker = url.pathname.indexOf("/-/");
-  if (operationsMarker === -1) {
-    return [];
-  }
-  const operationsStr = url.pathname.substring(operationsMarker);
-  return operationsStr.split("/-/").filter(Boolean).map((operation) => normalizeCdnOperation(operation));
-}
-const parseOperations = (operations) => {
-  return operations.length ? operations.reduce((acc, operation) => {
-    const [key, value] = operation.split("/");
-    return {
-      ...acc,
-      [key]: value
-    };
-  }, {}) : {};
-};
-const formatUrl = ({ host, uuid, operations = {}, filename }) => {
-  const operationString = Object.entries(operations).map(([key, value]) => `${key}/${value}`).join("/-/");
-  const pathSegments = [
-    host,
-    uuid,
-    operationString ? `-/${operationString}` : "",
-    filename
-  ].join("/");
-  return `https://${pathSegments}`;
-};
-const parse$2 = (imageUrl) => {
-  const url = toUrl(imageUrl);
-  const matchers = [...url.toString().matchAll(uploadcareRegex)];
-  if (!matchers.length) {
-    throw new Error("Invalid Uploadcare URL");
-  }
-  const group = matchers[0].groups || {};
-  const { ...baseParams } = group;
-  const filename = extractFilename(url.toString());
-  const { format: f2, ...operations } = parseOperations(extractOperations(url.toString()));
-  const format = f2 && f2 !== "auto" ? f2 : "auto";
-  const base = formatUrl({
-    ...baseParams,
-    filename: filename || void 0,
-    operations: {
-      ...operations,
-      format
-    }
-  });
-  return {
-    base,
-    cdn: "uploadcare",
-    params: {
-      ...group,
-      filename: filename || void 0,
-      operations: {
-        ...operations,
-        format
-      }
-    }
-  };
-};
-const generate$2 = ({ base, width, height, params }) => {
-  const baseUrl = base.toString();
-  const parsed = parse$2(baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`);
-  const props = {
-    operations: {},
-    ...parsed.params,
-    ...params
-  };
-  if (width && height) {
-    props.operations = {
-      ...props.operations,
-      resize: `${width}x${height}`
-    };
-  } else {
-    if (width) {
-      props.operations = {
-        ...props.operations,
-        resize: `${width}x`
-      };
-    }
-    if (height) {
-      props.operations = {
-        ...props.operations,
-        resize: `x${height}`
-      };
-    }
-  }
-  return formatUrl(props);
-};
-const transform$2 = ({ url: originalUrl, width, height }) => {
-  const parsed = parse$2(originalUrl);
-  if (!parsed) {
-    throw new Error("Invalid Uploadcare URL");
-  }
-  const props = {
-    ...parsed,
-    width,
-    height
-  };
-  return generate$2(props);
-};
-const ALLOWED_FORMATS = ["origin"];
-const STORAGE_URL_PREFIX = "/storage/v1/object/public/";
-const RENDER_URL_PREFIX = "/storage/v1/render/image/public/";
-const isRenderUrl = (url) => url.pathname.startsWith(RENDER_URL_PREFIX);
-const parse$1 = (imageUrl) => {
-  const url = toUrl(imageUrl);
-  const isRender = isRenderUrl(url);
-  if (!isRender) {
-    return {
-      cdn: "supabase",
-      base: url.origin + url.pathname
-    };
-  }
-  const imagePath = url.pathname.replace(RENDER_URL_PREFIX, "");
-  const quality = url.searchParams.has("quality") ? Number(url.searchParams.get("quality")) : void 0;
-  const width = url.searchParams.has("width") ? Number(url.searchParams.get("width")) : void 0;
-  const height = url.searchParams.has("height") ? Number(url.searchParams.get("height")) : void 0;
-  const format = url.searchParams.has("format") ? url.searchParams.get("format") : void 0;
-  const resize = url.searchParams.has("resize") ? url.searchParams.get("resize") : void 0;
-  return {
-    cdn: "supabase",
-    base: url.origin + STORAGE_URL_PREFIX + imagePath,
-    width,
-    height,
-    format,
-    params: {
-      quality,
-      resize
-    }
-  };
-};
-const generate$1 = ({ base, width, height, format, params }) => {
-  const parsed = parse$1(base.toString());
-  base = parsed.base;
-  width = width || parsed.width;
-  height = height || parsed.height;
-  format = format || parsed.format;
-  params = { ...parsed.params, ...params };
-  const searchParams = new URLSearchParams();
-  if (width)
-    searchParams.set("width", roundIfNumeric(width).toString());
-  if (height)
-    searchParams.set("height", roundIfNumeric(height).toString());
-  if (format && ALLOWED_FORMATS.includes(format)) {
-    searchParams.set("format", format);
-  }
-  if (params?.quality) {
-    searchParams.set("quality", roundIfNumeric(params.quality).toString());
-  }
-  if (params?.resize)
-    searchParams.set("resize", params.resize);
-  if (searchParams.toString() === "")
-    return base;
-  return parsed.base.replace(STORAGE_URL_PREFIX, RENDER_URL_PREFIX) + "?" + searchParams.toString();
-};
-const transform$1 = ({ url, width, height, format, cdnOptions }) => {
-  const parsed = parse$1(url);
-  return generate$1({
-    base: parsed.base,
-    width: width || parsed.width,
-    height: height || parsed.height,
-    format: format || parsed.format,
-    params: cdnOptions?.supabase || parsed.params
-  });
-};
-const hygraphRegex = /https:\/\/(?<region>[a-z0-9-]+)\.graphassets\.com\/(?<envId>[a-z0-9]+)(?:\/(?<transformations>.*?))?\/(?<handle>[a-z0-9]+)$/;
-const parse = (url) => {
-  const base = url.toString();
-  const matches = base.match(hygraphRegex);
-  if (!matches?.length) {
-    throw new Error("Invalid Hygraph URL");
-  }
-  const group = matches.groups || {};
-  const { transformations: unparsedTransformations, ...params } = group;
-  const transformations = parseTransformations(unparsedTransformations || "");
-  return {
-    base,
-    width: Number(transformations.resize?.width) || void 0,
-    height: Number(transformations.resize?.height) || void 0,
-    format: transformations.auto_image ? "auto" : transformations.output?.format?.toString() || void 0,
-    params: { transformations, ...params },
-    cdn: "hygraph"
-  };
-};
-const generate = ({ base, width, height, format, params }) => {
-  const parsed = parse(base.toString());
-  const props = {
-    transformations: {},
-    ...parsed.params,
-    ...params
-  };
-  if (width || height) {
-    props.transformations.resize ||= {};
-  }
-  if (width && height) {
-    props.transformations.resize.fit ||= "crop";
-  }
-  if (width) {
-    props.transformations.resize.width = width;
-  }
-  if (height) {
-    props.transformations.resize.height = height;
-  }
-  if (format === "auto") {
-    props.transformations.auto_image = {};
-  } else if (format) {
-    props.transformations.output ||= {};
-    props.transformations.output.format = format;
-  }
-  const url = new URL(base);
-  url.pathname = `/${props.envId}/${formatTransformations(props.transformations)}/${props.handle}`;
-  return url.toString();
-};
-const transform = ({ url: originalUrl, width, height, format = "auto" }) => {
-  const parsed = parse(originalUrl);
-  if (!parsed) {
-    throw new Error("Invalid Hygraph URL");
-  }
-  const props = {
-    ...parsed,
-    width,
-    height,
-    format
-  };
-  return generate(props);
-};
-const parseTransformations = (transformations) => {
-  if (!transformations) {
-    return {};
-  }
-  return transformations.split("/").reduce((result, part) => {
-    const [operation, params] = part.split("=");
-    if (params) {
-      result[operation] = params.split(",").reduce((obj, param) => {
-        const [key, value] = param.split(":");
-        obj[key] = isNaN(Number(value)) ? value : Number(value);
-        return obj;
-      }, {});
-    } else {
-      result[operation] = {};
-    }
-    return result;
-  }, {});
-};
-const formatTransformations = (transformations) => {
-  return Object.entries(transformations).filter(([key, value]) => Boolean(key) && value !== void 0).map(([key, value]) => Object.keys(value).length === 0 ? key : `${key}=${Object.entries(value).map(([key2, value2]) => `${key2}:${value2}`).join(",")}`).join("/");
-};
-const delegators = {
-  vercel: delegateUrl,
-  nextjs: delegateUrl
-};
-function getDelegatedCdn(url, cdn) {
-  if (!(cdn in delegators)) {
-    return false;
-  }
-  const maybeDelegate = delegators[cdn];
-  if (!maybeDelegate) {
-    return false;
-  }
-  return maybeDelegate(url);
-}
-function getCanonicalCdnForUrl(url, defaultCdn) {
-  const cdn = getImageCdnForUrl(url) || defaultCdn;
-  if (!cdn) {
-    return false;
-  }
-  const maybeDelegated = getDelegatedCdn(url, cdn);
-  if (maybeDelegated) {
-    return maybeDelegated;
-  }
-  return { cdn, url };
-}
-const getTransformer = (cdn) => ({
-  imgix: transform$n,
-  contentful: transform$p,
-  "builder.io": transform$o,
-  shopify: transform$m,
-  wordpress: transform$l,
-  cloudimage: transform$k,
-  cloudinary: transform$j,
-  bunny: transform$h,
-  storyblok: transform$g,
-  cloudflare: transform$i,
-  vercel: transform$e,
-  nextjs: transform$d,
-  scene7: transform$c,
-  "kontent.ai": transform$f,
-  keycdn: transform$b,
-  directus: transform$a,
-  imageengine: transform$9,
-  contentstack: transform$8,
-  "cloudflare_images": transform$7,
-  ipx: transform$6,
-  astro: transform$5,
-  netlify: transform$4,
-  imagekit: transform$3,
-  uploadcare: transform$2,
-  supabase: transform$1,
-  hygraph: transform
-})[cdn];
 var getSizes = (width, layout) => {
   if (!width || !layout) {
     return void 0;
@@ -8382,18 +7162,8 @@ var getSrcSetEntries = ({
   height,
   aspectRatio,
   breakpoints,
-  cdn,
-  transformer,
-  format,
-  cdnOptions
+  format
 }) => {
-  const canonical = getCanonicalCdnForUrl(src, cdn);
-  if (canonical && !transformer) {
-    transformer = getTransformer(canonical.cdn);
-  }
-  if (!transformer) {
-    return [];
-  }
   breakpoints ||= getBreakpoints({ width, layout });
   return breakpoints.sort((a3, b2) => a3 - b2).map((bp) => {
     let transformedHeight;
@@ -8401,25 +7171,24 @@ var getSrcSetEntries = ({
       transformedHeight = Math.round(bp / aspectRatio);
     }
     return {
-      url: canonical ? canonical.url : src,
+      url: src,
       width: bp,
       height: transformedHeight,
-      format,
-      cdnOptions
+      format
     };
   });
 };
 var getSrcSet = (options) => {
-  let { src, cdn, transformer } = options;
-  const canonical = getCanonicalCdnForUrl(src, cdn);
-  if (canonical && !transformer) {
-    transformer = getTransformer(canonical.cdn);
-  }
+  let { src, transformer, operations } = options;
   if (!transformer) {
     return "";
   }
-  return getSrcSetEntries({ ...options, transformer }).map((transform2) => {
-    const url = transformer(transform2);
+  return getSrcSetEntries(options).map(({ url: _2, ...transform2 }) => {
+    const url = transformer(
+      src,
+      { ...operations, ...transform2 },
+      options.options
+    );
     return `${url?.toString()} ${transform2.width}w`;
   }).join(",\n");
 };
@@ -8463,10 +7232,9 @@ function transformSharedProps({
     ...props
   };
 }
-function transformProps(props) {
+function transformBaseImageProps(props) {
   let {
     src,
-    cdn,
     transformer,
     background,
     layout,
@@ -8476,23 +7244,20 @@ function transformProps(props) {
     height,
     aspectRatio,
     unstyled,
-    cdnOptions,
+    operations,
+    options,
     ...transformedProps
   } = transformSharedProps(props);
-  const canonical = src ? getCanonicalCdnForUrl(src, cdn) : void 0;
-  let url = src;
-  if (canonical) {
-    url = canonical.url;
-    transformer ||= getTransformer(canonical.cdn);
-  }
   if (transformer && background === "auto") {
     const lowResHeight = aspectRatio ? Math.round(LOW_RES_WIDTH / aspectRatio) : void 0;
-    const lowResImage = transformer({
-      url,
-      width: LOW_RES_WIDTH,
-      height: lowResHeight,
-      cdnOptions
-    });
+    const lowResImage = transformer(
+      src,
+      {
+        width: LOW_RES_WIDTH,
+        height: lowResHeight
+      },
+      options
+    );
     if (lowResImage) {
       background = lowResImage.toString();
     }
@@ -8514,19 +7279,23 @@ function transformProps(props) {
   }
   if (transformer) {
     transformedProps.srcset = getSrcSet({
-      src: url,
+      src,
       width,
       height,
       aspectRatio,
       layout,
       breakpoints,
       transformer,
-      cdn,
-      cdnOptions
+      operations,
+      options
     });
-    const transformed = transformer({ url, width, height, cdnOptions });
+    const transformed = transformer(
+      src,
+      { ...operations, width, height },
+      options
+    );
     if (transformed) {
-      url = transformed;
+      src = transformed;
     }
     if (layout === "fullWidth" || layout === "constrained") {
       width = void 0;
@@ -8535,7 +7304,7 @@ function transformProps(props) {
   }
   return {
     ...transformedProps,
-    src: url?.toString(),
+    src: src?.toString(),
     width,
     height
   };
@@ -8555,10 +7324,13 @@ function normalizeImageType(type) {
     mimeType: `image/${type === "jpg" ? "jpeg" : type}`
   };
 }
-function transformSourceProps({ media, type, ...props }) {
+function transformBaseSourceProps({
+  media,
+  type,
+  ...props
+}) {
   let {
     src,
-    cdn,
     transformer,
     layout,
     breakpoints,
@@ -8568,35 +7340,34 @@ function transformSourceProps({ media, type, ...props }) {
     sizes,
     loading,
     decoding,
-    cdnOptions,
+    operations,
+    options,
     ...rest
   } = transformSharedProps(props);
-  const canonical = src ? getCanonicalCdnForUrl(src, cdn) : void 0;
-  let url = src;
-  if (canonical) {
-    url = canonical.url;
-    transformer ||= getTransformer(canonical.cdn);
-  }
   if (!transformer) {
     return {};
   }
   const { format, mimeType } = normalizeImageType(type);
   sizes ||= getSizes(width, layout);
   const srcset = getSrcSet({
-    src: url,
+    src,
     width,
     height,
     aspectRatio,
     layout,
     breakpoints,
     transformer,
-    cdn,
     format,
-    cdnOptions
+    operations,
+    options
   });
-  const transformed = transformer({ url, width, height, cdnOptions });
+  const transformed = transformer(
+    src,
+    { ...operations, width, height },
+    options
+  );
   if (transformed) {
-    url = transformed;
+    src = transformed;
   }
   const returnObject = {
     ...rest,
@@ -8604,38 +7375,1474 @@ function transformSourceProps({ media, type, ...props }) {
     srcset
   };
   if (media) {
-    {
-      returnObject.media = media;
-    }
+    returnObject.media = media;
   }
   if (mimeType) {
     returnObject.type = mimeType;
   }
   return returnObject;
 }
-var nestedKeys = /* @__PURE__ */ new Set(["style"]);
-var isNewReact = "use" in React;
-var fixedMap = {
-  srcset: "srcSet",
-  fetchpriority: isNewReact ? "fetchPriority" : "fetchpriority"
+const domains = {
+  "images.ctfassets.net": "contentful",
+  "cdn.builder.io": "builder.io",
+  "images.prismic.io": "imgix",
+  "www.datocms-assets.com": "imgix",
+  "cdn.sanity.io": "imgix",
+  "images.unsplash.com": "imgix",
+  "cdn.shopify.com": "shopify",
+  "s7d1.scene7.com": "scene7",
+  "ip.keycdn.com": "keycdn",
+  "assets.caisy.io": "bunny",
+  "images.contentstack.io": "contentstack",
+  "ucarecdn.com": "uploadcare",
+  "imagedelivery.net": "cloudflare_images",
+  "wsrv.nl": "wsrv"
 };
-var camelize = (key) => {
-  if (key.startsWith("data-") || key.startsWith("aria-")) {
-    return key;
+const subdomains = {
+  "imgix.net": "imgix",
+  "wp.com": "wordpress",
+  "files.wordpress.com": "wordpress",
+  "b-cdn.net": "bunny",
+  "storyblok.com": "storyblok",
+  "kc-usercontent.com": "kontent.ai",
+  "cloudinary.com": "cloudinary",
+  "kxcdn.com": "keycdn",
+  "imgeng.in": "imageengine",
+  "imagekit.io": "imagekit",
+  "cloudimg.io": "cloudimage",
+  "ucarecdn.com": "uploadcare",
+  "supabase.co": "supabase",
+  "graphassets.com": "hygraph"
+};
+const paths = {
+  "/cdn-cgi/image/": "cloudflare",
+  "/cdn-cgi/imagedelivery/": "cloudflare_images",
+  "/_next/image": "nextjs",
+  "/_vercel/image": "vercel",
+  "/is/image": "scene7",
+  "/_ipx/": "ipx",
+  "/_image": "astro",
+  "/.netlify/images": "netlify",
+  "/storage/v1/object/public/": "supabase",
+  "/storage/v1/render/image/public/": "supabase",
+  "/v1/storage/buckets/": "appwrite"
+};
+function roundIfNumeric(value) {
+  if (!value) {
+    return value;
   }
-  return fixedMap[key] || key.replace(/-./g, (suffix) => suffix[1].toUpperCase());
+  const num = Number(value);
+  if (isNaN(num)) {
+    return value;
+  }
+  return Math.round(num);
+}
+const toRelativeUrl = (url) => {
+  const { pathname, search } = url;
+  return `${pathname}${search}`;
 };
-function camelizeProps(props) {
-  return Object.fromEntries(
-    Object.entries(props).map(([k2, v2]) => [
-      camelize(k2),
-      nestedKeys.has(k2) && v2 && typeof v2 !== "string" ? camelizeProps(v2) : v2
-    ])
-  );
+const toCanonicalUrlString = (url) => {
+  return url.hostname === "n" ? toRelativeUrl(url) : url.toString();
+};
+const toUrl = (url, base) => {
+  return typeof url === "string" ? new URL(url, "http://n/") : url;
+};
+const escapeChar = (text) => text === " " ? "+" : "%" + text.charCodeAt(0).toString(16).toUpperCase().padStart(2, "0");
+const stripLeadingSlash = (str) => str?.startsWith("/") ? str.slice(1) : str;
+const stripTrailingSlash = (str) => str?.endsWith("/") ? str.slice(0, -1) : str;
+const addTrailingSlash = (str) => str?.endsWith("/") ? str : `${str}/`;
+const createFormatter = (kvSeparator, paramSeparator) => {
+  const encodedValueJoiner = escapeChar(kvSeparator);
+  const encodedOperationJoiner = escapeChar(paramSeparator);
+  function escape(value) {
+    return encodeURIComponent(value).replaceAll(kvSeparator, encodedValueJoiner).replaceAll(paramSeparator, encodedOperationJoiner);
+  }
+  function format(key, value) {
+    return `${escape(key)}${kvSeparator}${escape(String(value))}`;
+  }
+  return (operations) => {
+    const ops = Array.isArray(operations) ? operations : Object.entries(operations);
+    return ops.flatMap(([key, value]) => {
+      if (value === void 0 || value === null) {
+        return [];
+      }
+      if (Array.isArray(value)) {
+        return value.map((v2) => format(key, v2));
+      }
+      return format(key, value);
+    }).join(paramSeparator);
+  };
+};
+const createParser = (kvSeparator, paramSeparator) => {
+  if (kvSeparator === "=" && paramSeparator === "&") {
+    return queryParser;
+  }
+  return (url) => {
+    const urlString = url.toString();
+    return Object.fromEntries(urlString.split(paramSeparator).map((pair) => {
+      const [key, value] = pair.split(kvSeparator);
+      return [decodeURI(key), decodeURI(value)];
+    }));
+  };
+};
+function clampDimensions(operations, maxWidth = 4e3, maxHeight = 4e3) {
+  let { width, height } = operations;
+  width = Number(width) || void 0;
+  height = Number(height) || void 0;
+  if (width && width > maxWidth) {
+    if (height) {
+      height = Math.round(height * maxWidth / width);
+    }
+    width = maxWidth;
+  }
+  if (height && height > maxHeight) {
+    if (width) {
+      width = Math.round(width * maxHeight / height);
+    }
+    height = maxHeight;
+  }
+  return { width, height };
+}
+function extractFromURL(url) {
+  const parsedUrl = toUrl(url);
+  const operations = Object.fromEntries(parsedUrl.searchParams.entries());
+  for (const key in ["width", "height", "quality"]) {
+    const value = operations[key];
+    if (value) {
+      const newVal = Number(value);
+      if (!isNaN(newVal)) {
+        operations[key] = newVal;
+      }
+    }
+  }
+  parsedUrl.search = "";
+  return {
+    operations,
+    src: toCanonicalUrlString(parsedUrl)
+  };
+}
+function normaliseOperations({ keyMap = {}, formatMap = {}, defaults = {} }, operations) {
+  if (operations.format && operations.format in formatMap) {
+    operations.format = formatMap[operations.format];
+  }
+  if (operations.width) {
+    operations.width = roundIfNumeric(operations.width);
+  }
+  if (operations.height) {
+    operations.height = roundIfNumeric(operations.height);
+  }
+  for (const k2 in keyMap) {
+    if (!Object.prototype.hasOwnProperty.call(keyMap, k2)) {
+      continue;
+    }
+    const key = k2;
+    if (keyMap[key] === false) {
+      delete operations[key];
+      continue;
+    }
+    if (keyMap[key] && operations[key]) {
+      operations[keyMap[key]] = operations[key];
+      delete operations[key];
+    }
+  }
+  for (const k2 in defaults) {
+    if (!Object.prototype.hasOwnProperty.call(defaults, k2)) {
+      continue;
+    }
+    const key = k2;
+    const value = defaults[key];
+    if (!operations[key] && value !== void 0) {
+      if (keyMap[key] === false) {
+        continue;
+      }
+      const resolvedKey = keyMap[key] ?? key;
+      if (resolvedKey in operations) {
+        continue;
+      }
+      operations[resolvedKey] = value;
+    }
+  }
+  return operations;
+}
+const invertMap = (map) => Object.fromEntries(Object.entries(map).map(([k2, v2]) => [v2, k2]));
+function denormaliseOperations({ keyMap = {}, formatMap = {}, defaults = {} }, operations) {
+  const invertedKeyMap = invertMap(keyMap);
+  const invertedFormatMap = invertMap(formatMap);
+  const ops = normaliseOperations({
+    keyMap: invertedKeyMap,
+    formatMap: invertedFormatMap,
+    defaults
+  }, operations);
+  if (ops.width) {
+    ops.width = roundIfNumeric(ops.width);
+  }
+  if (ops.height) {
+    ops.height = roundIfNumeric(ops.height);
+  }
+  const q = Number(ops.quality);
+  if (!isNaN(q)) {
+    ops.quality = q;
+  }
+  return ops;
+}
+const queryParser = (url) => {
+  const parsedUrl = toUrl(url);
+  return Object.fromEntries(parsedUrl.searchParams.entries());
+};
+function createOperationsGenerator({ kvSeparator = "=", paramSeparator = "&", ...options } = {}) {
+  const formatter = createFormatter(kvSeparator, paramSeparator);
+  return (operations) => {
+    const normalisedOperations = normaliseOperations(options, operations);
+    return formatter(normalisedOperations);
+  };
+}
+function createOperationsParser({ kvSeparator = "=", paramSeparator = "&", defaults: _2, ...options } = {}) {
+  const parser = createParser(kvSeparator, paramSeparator);
+  return (url) => {
+    const operations = url ? parser(url) : {};
+    return denormaliseOperations(options, operations);
+  };
+}
+function createOperationsHandlers(config) {
+  const operationsGenerator2 = createOperationsGenerator(config);
+  const operationsParser2 = createOperationsParser(config);
+  return { operationsGenerator: operationsGenerator2, operationsParser: operationsParser2 };
+}
+function paramToBoolean(value) {
+  if (value === void 0 || value === null) {
+    return void 0;
+  }
+  try {
+    return Boolean(JSON.parse(value?.toString()));
+  } catch {
+    return Boolean(value);
+  }
+}
+const removeUndefined = (obj) => Object.fromEntries(Object.entries(obj).filter(([, value]) => value !== void 0));
+function createExtractAndGenerate(extract2, generate2) {
+  return ((src, operations, options) => {
+    const base = extract2(src, options);
+    if (!base) {
+      return generate2(src, operations, options);
+    }
+    return generate2(base.src, {
+      ...base.operations,
+      ...removeUndefined(operations)
+    }, {
+      // deno-lint-ignore no-explicit-any
+      ...base.options,
+      ...options
+    });
+  });
+}
+const cdnDomains = new Map(Object.entries(domains));
+const cdnSubdomains = Object.entries(subdomains);
+const cdnPaths = Object.entries(paths);
+function getProviderForUrl(url) {
+  return getProviderForUrlByDomain(url) || getProviderForUrlByPath(url);
+}
+function getProviderForUrlByDomain(url) {
+  if (typeof url === "string" && !url.startsWith("https://")) {
+    return false;
+  }
+  const { hostname } = toUrl(url);
+  const cdn = cdnDomains.get(hostname);
+  if (cdn) {
+    return cdn;
+  }
+  return cdnSubdomains.find(([subdomain]) => hostname.endsWith(subdomain))?.[1] || false;
+}
+function getProviderForUrlByPath(url) {
+  const { pathname } = toUrl(url);
+  return cdnPaths.find(([path]) => pathname.startsWith(path))?.[1] || false;
+}
+const VIEW_URL_SUFFIX = "/view?";
+const PREVIEW_URL_SUFFIX = "/preview?";
+const { operationsGenerator: operationsGenerator$o, operationsParser: operationsParser$j } = createOperationsHandlers({
+  keyMap: {
+    format: "output"
+  },
+  kvSeparator: "=",
+  paramSeparator: "&"
+});
+const generate$q = (src, modifiers) => {
+  const url = toUrl(src.toString().replace(VIEW_URL_SUFFIX, PREVIEW_URL_SUFFIX));
+  const projectParam = url.searchParams.get("project") ?? "";
+  const operations = operationsGenerator$o(modifiers);
+  url.search = operations;
+  url.searchParams.append("project", projectParam);
+  return toCanonicalUrlString(url);
+};
+const extract$q = (url) => {
+  if (getProviderForUrlByPath(url) !== "appwrite") {
+    return null;
+  }
+  const parsedUrl = toUrl(url);
+  const operations = operationsParser$j(parsedUrl);
+  delete operations.project;
+  const projectParam = parsedUrl.searchParams.get("project") ?? "";
+  parsedUrl.search = "";
+  parsedUrl.searchParams.append("project", projectParam);
+  const sourceUrl = parsedUrl.href;
+  return {
+    src: sourceUrl,
+    operations
+  };
+};
+const transform$r = createExtractAndGenerate(extract$q, generate$q);
+const DEFAULT_ENDPOINT = "/_image";
+const { operationsParser: operationsParser$i, operationsGenerator: operationsGenerator$n } = createOperationsHandlers({
+  keyMap: {
+    format: "f",
+    width: "w",
+    height: "h",
+    quality: "q"
+  },
+  defaults: {
+    fit: "cover"
+  }
+});
+const generate$p = (src, modifiers, options) => {
+  const url = toUrl(`${stripTrailingSlash(options?.baseUrl ?? "")}${options?.endpoint ?? DEFAULT_ENDPOINT}`);
+  const operations = operationsGenerator$n(modifiers);
+  url.search = operations;
+  url.searchParams.set("href", src.toString());
+  return toCanonicalUrlString(url);
+};
+const extract$p = (url) => {
+  const parsedUrl = toUrl(url);
+  const src = parsedUrl.searchParams.get("href");
+  if (!src) {
+    return null;
+  }
+  parsedUrl.searchParams.delete("href");
+  const operations = operationsParser$i(parsedUrl);
+  return {
+    src,
+    operations,
+    options: { baseUrl: parsedUrl.origin }
+  };
+};
+const transform$q = (src, operations, options = {}) => {
+  const url = toUrl(src);
+  if (url.pathname !== (options?.endpoint ?? DEFAULT_ENDPOINT)) {
+    return generate$p(src, operations, options);
+  }
+  const base = extract$p(src);
+  if (!base) {
+    return generate$p(src, operations, options);
+  }
+  options.baseUrl ??= base.options.baseUrl;
+  return generate$p(base.src, {
+    ...base.operations,
+    ...operations
+  }, options);
+};
+const operationsGenerator$m = createOperationsGenerator({
+  defaults: {
+    fit: "cover",
+    format: "webp",
+    sharp: true
+  }
+});
+const extract$o = extractFromURL;
+const generate$o = (src, modifiers) => {
+  const operations = operationsGenerator$m(modifiers);
+  const url = toUrl(src);
+  url.search = operations;
+  return toCanonicalUrlString(url);
+};
+const transform$p = createExtractAndGenerate(extract$o, generate$o);
+const operationsGenerator$l = createOperationsGenerator({
+  keyMap: {
+    format: "output"
+  }
+});
+const extract$n = extractFromURL;
+const generate$n = (src, modifiers) => {
+  const operations = operationsGenerator$l(modifiers);
+  const url = toUrl(src);
+  url.search = operations;
+  return toCanonicalUrlString(url);
+};
+const extractAndGenerate$1 = createExtractAndGenerate(extract$n, generate$n);
+const transform$o = (src, operations) => {
+  const { width, height } = operations;
+  if (width && height) {
+    operations.aspect_ratio ??= `${Math.round(Number(width))}:${Math.round(Number(height))}`;
+  }
+  return extractAndGenerate$1(src, operations);
+};
+const { operationsGenerator: operationsGenerator$k, operationsParser: operationsParser$h } = createOperationsHandlers({
+  keyMap: {
+    "format": "f"
+  },
+  defaults: {
+    format: "auto",
+    fit: "cover"
+  },
+  formatMap: {
+    jpg: "jpeg"
+  },
+  kvSeparator: "=",
+  paramSeparator: ","
+});
+const generate$m = (src, operations, options) => {
+  const modifiers = operationsGenerator$k(operations);
+  const url = toUrl(options?.domain ? `https://${options.domain}` : "/");
+  url.pathname = `/cdn-cgi/image/${modifiers}/${stripLeadingSlash(src.toString())}`;
+  return toCanonicalUrlString(url);
+};
+const extract$m = (url, options) => {
+  if (getProviderForUrlByPath(url) !== "cloudflare") {
+    return null;
+  }
+  const parsedUrl = toUrl(url);
+  const [, , , modifiers, ...src] = parsedUrl.pathname.split("/");
+  const operations = operationsParser$h(modifiers);
+  return {
+    src: toCanonicalUrlString(toUrl(src.join("/"))),
+    operations,
+    options: {
+      domain: options?.domain ?? (parsedUrl.hostname === "n" ? void 0 : parsedUrl.hostname)
+    }
+  };
+};
+const transform$n = createExtractAndGenerate(extract$m, generate$m);
+const cloudflareImagesRegex = /https?:\/\/(?<host>[^\/]+)\/cdn-cgi\/imagedelivery\/(?<accountHash>[^\/]+)\/(?<imageId>[^\/]+)\/*(?<transformations>[^\/]+)*$/g;
+const imagedeliveryRegex = /https?:\/\/(?<host>imagedelivery.net)\/(?<accountHash>[^\/]+)\/(?<imageId>[^\/]+)\/*(?<transformations>[^\/]+)*$/g;
+const { operationsGenerator: operationsGenerator$j, operationsParser: operationsParser$g } = createOperationsHandlers({
+  keyMap: {
+    width: "w",
+    height: "h",
+    format: "f"
+  },
+  defaults: {
+    fit: "cover"
+  },
+  kvSeparator: "=",
+  paramSeparator: ","
+});
+function formatUrl(options, transformations) {
+  const { host, accountHash, imageId } = options;
+  if (!host || !accountHash || !imageId) {
+    throw new Error("Missing required Cloudflare Images options");
+  }
+  const pathSegments = [
+    "https:/",
+    ...host === "imagedelivery.net" ? [host] : [host, "cdn-cgi", "imagedelivery"],
+    accountHash,
+    imageId,
+    transformations
+  ].filter(Boolean);
+  return pathSegments.join("/");
+}
+const generate$l = (_src, operations, options = {}) => {
+  const transformations = operationsGenerator$j(operations);
+  const url = formatUrl(options, transformations);
+  return toCanonicalUrlString(toUrl(url));
+};
+const extract$l = (url) => {
+  const parsedUrl = toUrl(url);
+  const matches = [
+    ...parsedUrl.toString().matchAll(cloudflareImagesRegex),
+    ...parsedUrl.toString().matchAll(imagedeliveryRegex)
+  ];
+  if (!matches[0]?.groups) {
+    return null;
+  }
+  const { host, accountHash, imageId, transformations } = matches[0].groups;
+  const operations = operationsParser$g(transformations || "");
+  const options = { host, accountHash, imageId };
+  return {
+    src: formatUrl(options),
+    operations,
+    options
+  };
+};
+const transform$m = (src, operations, options = {}) => {
+  const extracted = extract$l(src);
+  if (!extracted) {
+    throw new Error("Invalid Cloudflare Images URL");
+  }
+  const newOperations = { ...extracted.operations, ...operations };
+  return generate$l(extracted.src, newOperations, {
+    ...extracted.options,
+    ...options
+  });
+};
+const { operationsGenerator: operationsGenerator$i, operationsParser: operationsParser$f } = createOperationsHandlers({
+  keyMap: {
+    format: "force_format",
+    width: "w",
+    height: "h",
+    quality: "q"
+  },
+  defaults: {
+    org_if_sml: 1
+  }
+});
+const generate$k = (src, modifiers = {}, { token } = {}) => {
+  if (!token) {
+    throw new Error("Token is required for Cloudimage URLs" + src);
+  }
+  let srcString = src.toString();
+  srcString = srcString.replace(/^https?:\/\//, "");
+  if (srcString.includes("?")) {
+    modifiers.ci_url_encoded = 1;
+    srcString = encodeURIComponent(srcString);
+  }
+  const operations = operationsGenerator$i(modifiers);
+  const url = new URL(`https://${token}.cloudimg.io/`);
+  url.pathname = srcString;
+  url.search = operations;
+  return url.toString();
+};
+const extract$k = (src, options = {}) => {
+  const url = toUrl(src);
+  if (getProviderForUrl(url) !== "cloudimage") {
+    return null;
+  }
+  const operations = operationsParser$f(url);
+  let originalSrc = url.pathname;
+  if (operations.ci_url_encoded) {
+    originalSrc = decodeURIComponent(originalSrc);
+    delete operations.ci_url_encoded;
+  }
+  options.token ??= url.hostname.replace(".cloudimg.io", "");
+  return {
+    src: `${url.protocol}/${originalSrc}`,
+    operations,
+    options
+  };
+};
+const transform$l = createExtractAndGenerate(extract$k, generate$k);
+const publicRegex = /https?:\/\/(?<host>res\.cloudinary\.com)\/(?<cloudName>[a-zA-Z0-9-]+)\/(?<assetType>image|video|raw)\/(?<deliveryType>upload|fetch|private|authenticated|sprite|facebook|twitter|youtube|vimeo)\/?(?<signature>s\-\-[a-zA-Z0-9]+\-\-)?\/?(?<transformations>(?:[^_\/]+_[^,\/]+,?)*)?\/(?:(?<version>v\d+)\/)?(?<id>(?:[^\s\/]+\/)*[^\s\/]+(?:\.[a-zA-Z0-9]+)?)$/;
+const privateRegex = /https?:\/\/(?<host>(?<cloudName>[a-zA-Z0-9-]+)-res\.cloudinary\.com|[a-zA-Z0-9.-]+)\/(?<assetType>image|video|raw)\/(?<deliveryType>upload|fetch|private|authenticated|sprite|facebook|twitter|youtube|vimeo)\/?(?<signature>s\-\-[a-zA-Z0-9]+\-\-)?\/?(?<transformations>(?:[^_\/]+_[^,\/]+,?)*)?\/(?:(?<version>v\d+)\/)?(?<id>(?:[^\s\/]+\/)*[^\s\/]+(?:\.[a-zA-Z0-9]+)?)$/;
+const { operationsGenerator: operationsGenerator$h, operationsParser: operationsParser$e } = createOperationsHandlers({
+  keyMap: {
+    width: "w",
+    height: "h",
+    format: "f",
+    quality: "q"
+  },
+  defaults: {
+    format: "auto",
+    c: "lfill"
+  },
+  kvSeparator: "_",
+  paramSeparator: ","
+});
+function formatCloudinaryUrl({ host, cloudName, assetType, deliveryType, signature, transformations, version, id }) {
+  const isPublic = host === "res.cloudinary.com";
+  return [
+    "https:/",
+    host,
+    isPublic ? cloudName : void 0,
+    assetType,
+    deliveryType,
+    signature,
+    transformations,
+    version,
+    id
+  ].filter(Boolean).join("/");
+}
+function parseCloudinaryUrl(url) {
+  let matches = url.toString().match(publicRegex);
+  if (!matches?.length) {
+    matches = url.toString().match(privateRegex);
+  }
+  if (!matches?.length) {
+    return null;
+  }
+  return matches.groups || {};
+}
+const transform$k = (src, operations) => {
+  const group = parseCloudinaryUrl(src.toString());
+  if (!group) {
+    return src.toString();
+  }
+  const existing = operationsParser$e(group.transformations || "");
+  group.transformations = operationsGenerator$h({
+    ...existing,
+    ...operations
+  });
+  return formatCloudinaryUrl(group);
+};
+const operationsGenerator$g = createOperationsGenerator({
+  keyMap: {
+    format: "fm",
+    width: "w",
+    height: "h",
+    quality: "q"
+  },
+  defaults: {
+    fit: "fill"
+  }
+});
+const generate$j = (src, modifiers) => {
+  const operations = operationsGenerator$g(modifiers);
+  const url = new URL(src);
+  url.search = operations;
+  return toCanonicalUrlString(url);
+};
+const extract$j = extractFromURL;
+const extractAndGenerate = createExtractAndGenerate(extract$j, generate$j);
+const transform$j = (src, operations) => {
+  const { width, height } = clampDimensions(operations, 4e3, 4e3);
+  return extractAndGenerate(src, {
+    ...operations,
+    width,
+    height
+  });
+};
+const operationsGenerator$f = createOperationsGenerator({
+  defaults: {
+    auto: "webp",
+    disable: "upscale"
+  }
+});
+const generate$i = (src, operations, { baseURL = "https://images.contentstack.io/" } = {}) => {
+  if (operations.width && operations.height) {
+    operations.fit ??= "crop";
+  }
+  const modifiers = operationsGenerator$f(operations);
+  const url = toUrl(src);
+  if (url.hostname === "n") {
+    url.protocol = "https:";
+    url.hostname = new URL(baseURL).hostname;
+  }
+  url.search = modifiers;
+  return toCanonicalUrlString(url);
+};
+const extract$i = (url) => {
+  const { src, operations } = extractFromURL(url) ?? {};
+  if (!operations || !src) {
+    return null;
+  }
+  const { origin } = toUrl(url);
+  return {
+    src,
+    operations,
+    options: {
+      baseURL: origin
+    }
+  };
+};
+const transform$i = createExtractAndGenerate(extract$i, generate$i);
+const operationsGenerator$e = createOperationsGenerator({
+  defaults: {
+    withoutEnlargement: true,
+    fit: "cover"
+  }
+});
+const generate$h = (src, operations) => {
+  if (Array.isArray(operations.transforms)) {
+    operations.transforms = JSON.stringify(operations.transforms);
+  }
+  const modifiers = operationsGenerator$e(operations);
+  const url = toUrl(src);
+  url.search = modifiers;
+  return toCanonicalUrlString(url);
+};
+const extract$h = (url) => {
+  const base = extractFromURL(url);
+  if (base?.operations?.transforms && typeof base.operations.transforms === "string") {
+    try {
+      base.operations.transforms = JSON.parse(base.operations.transforms);
+    } catch {
+      return null;
+    }
+  }
+  return base;
+};
+const transform$h = createExtractAndGenerate(extract$h, generate$h);
+const hygraphRegex = /https:\/\/(?<region>[a-z0-9-]+)\.graphassets\.com\/(?<envId>[a-zA-Z0-9]+)(?:\/(?<transformations>.*?))?\/(?<handle>[a-zA-Z0-9]+)$/;
+createOperationsHandlers({
+  keyMap: {
+    width: "width",
+    height: "height",
+    format: "format"
+  },
+  defaults: {
+    format: "auto",
+    fit: "crop"
+  }
+});
+const extract$g = (url) => {
+  const parsedUrl = toUrl(url);
+  const matches = parsedUrl.toString().match(hygraphRegex);
+  if (!matches?.groups) {
+    return null;
+  }
+  const { region, envId, handle, transformations } = matches.groups;
+  const operations = {};
+  if (transformations) {
+    const parts = transformations.split("/");
+    parts.forEach((part) => {
+      const [operation, params] = part.split("=");
+      if (operation === "resize" && params) {
+        params.split(",").forEach((param) => {
+          const [key, value] = param.split(":");
+          if (key === "width" || key === "height") {
+            operations[key] = Number(value);
+          } else if (key === "fit") {
+            operations.fit = value;
+          }
+        });
+      } else if (operation === "output" && params) {
+        params.split(",").forEach((param) => {
+          const [key, value] = param.split(":");
+          if (key === "format") {
+            operations.format = value;
+          }
+        });
+      } else if (operation === "auto_image") {
+        operations.format = "auto";
+      }
+    });
+  }
+  return {
+    src: `https://${region}.graphassets.com/${envId}/${handle}`,
+    operations,
+    options: {
+      region,
+      envId,
+      handle
+    }
+  };
+};
+const generate$g = (src, operations, options = {}) => {
+  const extracted = extract$g(src);
+  if (!extracted) {
+    throw new Error("Invalid Hygraph URL");
+  }
+  const { region, envId, handle } = {
+    ...extracted.options,
+    ...options
+  };
+  const transforms = [];
+  if (operations.width || operations.height) {
+    const resize = [];
+    if (operations.width && operations.height) {
+      resize.push("fit:crop");
+    } else if (operations.fit) {
+      resize.push(`fit:${operations.fit}`);
+    }
+    if (operations.width)
+      resize.push(`width:${operations.width}`);
+    if (operations.height)
+      resize.push(`height:${operations.height}`);
+    if (resize.length)
+      transforms.push(`resize=${resize.join(",")}`);
+  }
+  if (operations.format === "auto" || !operations.format && !extracted.operations.format) {
+    transforms.push("auto_image");
+  } else if (operations.format) {
+    transforms.push(`output=format:${operations.format}`);
+  }
+  const baseUrl = `https://${region}.graphassets.com/${envId}`;
+  const transformPart = transforms.length > 0 ? "/" + transforms.join("/") : "";
+  const finalUrl = toUrl(`${baseUrl}${transformPart}/${handle}`);
+  return toCanonicalUrlString(finalUrl);
+};
+const transform$g = createExtractAndGenerate(extract$g, generate$g);
+const { operationsGenerator: operationsGenerator$d, operationsParser: operationsParser$d } = createOperationsHandlers({
+  keyMap: {
+    width: "w",
+    height: "h",
+    format: "f"
+  },
+  defaults: {
+    m: "cropbox"
+  },
+  kvSeparator: "_",
+  paramSeparator: "/"
+});
+const generate$f = (src, operations) => {
+  const modifiers = operationsGenerator$d(operations);
+  const url = toUrl(src);
+  url.searchParams.set("imgeng", modifiers);
+  return toCanonicalUrlString(url);
+};
+const extract$f = (url) => {
+  const parsedUrl = toUrl(url);
+  const imgeng = parsedUrl.searchParams.get("imgeng");
+  if (!imgeng) {
+    return null;
+  }
+  const operations = operationsParser$d(imgeng);
+  parsedUrl.searchParams.delete("imgeng");
+  return {
+    src: toCanonicalUrlString(parsedUrl),
+    operations
+  };
+};
+const transform$f = createExtractAndGenerate(extract$f, generate$f);
+const { operationsGenerator: operationsGenerator$c, operationsParser: operationsParser$c } = createOperationsHandlers({
+  keyMap: {
+    width: "w",
+    height: "h",
+    format: "f",
+    quality: "q"
+  },
+  defaults: {
+    c: "maintain_ratio",
+    fo: "auto"
+  },
+  kvSeparator: "-",
+  paramSeparator: ","
+});
+const generate$e = (src, operations) => {
+  const modifiers = operationsGenerator$c(operations);
+  const url = toUrl(src);
+  url.searchParams.set("tr", modifiers);
+  return toCanonicalUrlString(url);
+};
+const extract$e = (url) => {
+  const parsedUrl = toUrl(url);
+  let trPart = null;
+  let path = parsedUrl.pathname;
+  if (parsedUrl.searchParams.has("tr")) {
+    trPart = parsedUrl.searchParams.get("tr");
+    parsedUrl.searchParams.delete("tr");
+  } else {
+    const pathParts = parsedUrl.pathname.split("/");
+    const trIndex = pathParts.findIndex((part) => part.startsWith("tr:"));
+    if (trIndex !== -1) {
+      trPart = pathParts[trIndex].slice(3);
+      path = pathParts.slice(0, trIndex).concat(pathParts.slice(trIndex + 1)).join("/");
+    }
+  }
+  if (!trPart) {
+    return null;
+  }
+  parsedUrl.pathname = path;
+  const operations = operationsParser$c(trPart);
+  return {
+    src: toCanonicalUrlString(parsedUrl),
+    operations
+  };
+};
+const transform$e = createExtractAndGenerate(extract$e, generate$e);
+const { operationsGenerator: operationsGenerator$b, operationsParser: operationsParser$b } = createOperationsHandlers({
+  keyMap: {
+    format: "fm",
+    width: "w",
+    height: "h",
+    quality: "q"
+  },
+  defaults: {
+    fit: "min",
+    auto: "format"
+  }
+});
+const extract$d = (url) => {
+  const src = toUrl(url);
+  const operations = operationsParser$b(url);
+  src.search = "";
+  return { src: toCanonicalUrlString(src), operations };
+};
+const generate$d = (src, operations) => {
+  const modifiers = operationsGenerator$b(operations);
+  const url = toUrl(src);
+  url.search = modifiers;
+  if (url.searchParams.has("fm") && url.searchParams.get("auto") === "format") {
+    url.searchParams.delete("auto");
+  }
+  return toCanonicalUrlString(url);
+};
+const transform$d = createExtractAndGenerate(extract$d, generate$d);
+const { operationsGenerator: operationsGenerator$a, operationsParser: operationsParser$a } = createOperationsHandlers({
+  keyMap: {
+    width: "w",
+    height: "h",
+    quality: "q",
+    format: "f"
+  },
+  defaults: {
+    f: "auto"
+  },
+  kvSeparator: "_",
+  paramSeparator: ","
+});
+const generate$c = (src, operations, options) => {
+  if (operations.width && operations.height) {
+    operations.s = `${operations.width}x${operations.height}`;
+    delete operations.width;
+    delete operations.height;
+  }
+  const modifiers = operationsGenerator$a(operations);
+  const baseURL = options?.baseURL ?? "/_ipx";
+  const url = toUrl(baseURL);
+  url.pathname = `${stripTrailingSlash(url.pathname)}/${modifiers}/${stripLeadingSlash(src.toString())}`;
+  return toCanonicalUrlString(url);
+};
+const extract$c = (url) => {
+  const parsedUrl = toUrl(url);
+  const [, baseUrlPart, modifiers, ...srcParts] = parsedUrl.pathname.split("/");
+  if (!modifiers || !srcParts.length) {
+    return null;
+  }
+  const operations = operationsParser$a(modifiers);
+  if (operations.s) {
+    const [width, height] = operations.s.split("x").map(Number);
+    operations.width = width;
+    operations.height = height;
+    delete operations.s;
+  }
+  return {
+    src: "/" + srcParts.join("/"),
+    operations,
+    options: {
+      baseURL: `${parsedUrl.origin}/${baseUrlPart}`
+    }
+  };
+};
+const transform$c = (src, operations, options) => {
+  const url = toUrl(src);
+  const baseURL = options?.baseURL;
+  if (baseURL && url.toString().startsWith(baseURL) || url.pathname.startsWith("/_ipx")) {
+    const extracted = extract$c(src);
+    if (extracted) {
+      return generate$c(extracted.src, { ...extracted.operations, ...operations }, { baseURL: extracted.options.baseURL });
+    }
+  }
+  return generate$c(src, operations, { baseURL });
+};
+const BOOLEAN_PARAMS = [
+  "enlarge",
+  "flip",
+  "flop",
+  "negate",
+  "normalize",
+  "grayscale",
+  "removealpha",
+  "olrepeat",
+  "progressive",
+  "adaptive",
+  "lossless",
+  "nearlossless",
+  "metadata"
+];
+const { operationsGenerator: operationsGenerator$9, operationsParser: operationsParser$9 } = createOperationsHandlers({
+  defaults: {
+    fit: "cover"
+  },
+  formatMap: {
+    jpg: "jpeg"
+  }
+});
+const generate$b = (src, operations) => {
+  const url = toUrl(src);
+  for (const key of BOOLEAN_PARAMS) {
+    if (operations[key] !== void 0) {
+      operations[key] = operations[key] ? 1 : 0;
+    }
+  }
+  url.search = operationsGenerator$9(operations);
+  return toCanonicalUrlString(url);
+};
+const extract$b = (url) => {
+  const parsedUrl = toUrl(url);
+  const operations = operationsParser$9(parsedUrl);
+  for (const key of BOOLEAN_PARAMS) {
+    if (operations[key] !== void 0) {
+      operations[key] = paramToBoolean(operations[key]);
+    }
+  }
+  parsedUrl.search = "";
+  return {
+    src: toCanonicalUrlString(parsedUrl),
+    operations
+  };
+};
+const transform$b = createExtractAndGenerate(extract$b, generate$b);
+const { operationsGenerator: operationsGenerator$8, operationsParser: operationsParser$8 } = createOperationsHandlers({
+  formatMap: {
+    jpg: "jpeg"
+  },
+  keyMap: {
+    format: "fm",
+    width: "w",
+    height: "h",
+    quality: "q"
+  }
+});
+const generate$a = (src, operations) => {
+  const url = toUrl(src);
+  if (operations.lossless !== void 0) {
+    operations.lossless = operations.lossless ? 1 : 0;
+  }
+  if (operations.width && operations.height) {
+    operations.fit = "crop";
+  }
+  url.search = operationsGenerator$8(operations);
+  return toCanonicalUrlString(url);
+};
+const extract$a = (url) => {
+  const parsedUrl = toUrl(url);
+  const operations = operationsParser$8(parsedUrl);
+  if (operations.lossless !== void 0) {
+    operations.lossless = paramToBoolean(operations.lossless);
+  }
+  parsedUrl.search = "";
+  return {
+    src: toCanonicalUrlString(parsedUrl),
+    operations
+  };
+};
+const transform$a = createExtractAndGenerate(extract$a, generate$a);
+const { operationsGenerator: operationsGenerator$7, operationsParser: operationsParser$7 } = createOperationsHandlers({
+  defaults: {
+    fit: "cover"
+  },
+  keyMap: {
+    format: "fm",
+    width: "w",
+    height: "h",
+    quality: "q"
+  }
+});
+const generate$9 = (src, operations, options = {}) => {
+  const url = toUrl(`${options.baseUrl || ""}/.netlify/images`);
+  url.search = operationsGenerator$7(operations);
+  url.searchParams.set("url", src.toString());
+  return toCanonicalUrlString(url);
+};
+const extract$9 = (url) => {
+  if (getProviderForUrlByPath(url) !== "netlify") {
+    return null;
+  }
+  const parsedUrl = toUrl(url);
+  const operations = operationsParser$7(parsedUrl);
+  delete operations.url;
+  const sourceUrl = parsedUrl.searchParams.get("url") || "";
+  parsedUrl.search = "";
+  return {
+    src: sourceUrl,
+    operations,
+    options: {
+      baseUrl: parsedUrl.hostname === "n" ? void 0 : parsedUrl.origin
+    }
+  };
+};
+const transform$9 = createExtractAndGenerate(extract$9, generate$9);
+const { operationsGenerator: operationsGenerator$6, operationsParser: operationsParser$6 } = createOperationsHandlers({
+  keyMap: {
+    width: "w",
+    quality: "q",
+    height: false,
+    format: false
+  },
+  defaults: {
+    q: 75
+  }
+});
+const generate$8 = (src, operations, options = {}) => {
+  const url = toUrl(`${options.baseUrl || ""}/${options.prefix || "_vercel"}/image`);
+  url.search = operationsGenerator$6(operations);
+  url.searchParams.append("url", src.toString());
+  return toCanonicalUrlString(url);
+};
+const extract$8 = (url, options = {}) => {
+  if (!["vercel", "nextjs"].includes(getProviderForUrlByPath(url) || "")) {
+    return null;
+  }
+  const parsedUrl = toUrl(url);
+  const sourceUrl = parsedUrl.searchParams.get("url") || "";
+  parsedUrl.searchParams.delete("url");
+  const operations = operationsParser$6(parsedUrl);
+  parsedUrl.search = "";
+  return {
+    src: sourceUrl,
+    operations,
+    options: {
+      baseUrl: options.baseUrl ?? parsedUrl.origin
+    }
+  };
+};
+const transform$8 = createExtractAndGenerate(extract$8, generate$8);
+const generate$7 = (src, operations, options = {}) => generate$8(src, operations, { ...options, prefix: "_next" });
+const extract$7 = (url, options) => extract$8(url, options);
+const transform$7 = createExtractAndGenerate(extract$7, generate$7);
+const { operationsGenerator: operationsGenerator$5, operationsParser: operationsParser$5 } = createOperationsHandlers({
+  keyMap: {
+    width: "wid",
+    height: "hei",
+    quality: "qlt",
+    format: "fmt"
+  },
+  defaults: {
+    fit: "crop,0"
+  }
+});
+const BASE = "https://s7d1.scene7.com/is/image/";
+const generate$6 = (src, operations) => {
+  const url = new URL(src, BASE);
+  url.search = operationsGenerator$5(operations);
+  return toCanonicalUrlString(url);
+};
+const extract$6 = (url) => {
+  if (getProviderForUrl(url) !== "scene7") {
+    return null;
+  }
+  const parsedUrl = new URL(url, BASE);
+  const operations = operationsParser$5(parsedUrl);
+  parsedUrl.search = "";
+  return {
+    src: parsedUrl.toString(),
+    operations
+  };
+};
+const transform$6 = createExtractAndGenerate(extract$6, generate$6);
+const shopifyRegex = /(.+?)(?:_(?:(pico|icon|thumb|small|compact|medium|large|grande|original|master)|(\d*)x(\d*)))?(?:_crop_([a-z]+))?(\.[a-zA-Z]+)(\.png|\.jpg|\.webp|\.avif)?$/;
+const { operationsGenerator: operationsGenerator$4, operationsParser: operationsParser$4 } = createOperationsHandlers({
+  keyMap: {
+    format: false
+  }
+});
+const generate$5 = (src, operations) => {
+  const url = toUrl(src);
+  const basePath = url.pathname.replace(shopifyRegex, "$1$6");
+  url.pathname = basePath;
+  url.search = operationsGenerator$4(operations);
+  return toCanonicalUrlString(url);
+};
+const extract$5 = (url) => {
+  const parsedUrl = toUrl(url);
+  const match = shopifyRegex.exec(parsedUrl.pathname);
+  const operations = operationsParser$4(parsedUrl);
+  if (match) {
+    const [, , , width, height, crop] = match;
+    if (width && height && !operations.width && !operations.height) {
+      operations.width = parseInt(width, 10);
+      operations.height = parseInt(height, 10);
+    }
+    if (crop) {
+      operations.crop ??= crop;
+    }
+  }
+  const basePath = parsedUrl.pathname.replace(shopifyRegex, "$1$6");
+  parsedUrl.pathname = basePath;
+  for (const key of ["width", "height", "crop", "pad_color", "format"]) {
+    parsedUrl.searchParams.delete(key);
+  }
+  return {
+    src: parsedUrl.toString(),
+    operations
+  };
+};
+const transform$5 = createExtractAndGenerate(extract$5, generate$5);
+const storyBlokAssets = /(?<id>\/f\/\d+\/\d+x\d+\/\w+\/[^\/]+)\/?(?<modifiers>m\/?(?<crop>\d+x\d+:\d+x\d+)?\/?(?<resize>(?<flipx>\-)?(?<width>\d+)x(?<flipy>\-)?(?<height>\d+))?\/?(filters\:(?<filters>[^\/]+))?)?$/;
+const storyBlokImg2 = /^(?<modifiers>\/(?<crop>\d+x\d+:\d+x\d+)?\/?(?<resize>(?<flipx>\-)?(?<width>\d+)x(?<flipy>\-)?(?<height>\d+))?\/?(filters\:(?<filters>[^\/]+))?\/?)?(?<id>\/f\/.+)$/;
+const filterSplitterRegex = /:(?![^(]*\))/;
+const splitFilters = (filters) => {
+  if (!filters) {
+    return {};
+  }
+  return Object.fromEntries(filters.split(filterSplitterRegex).map((filter) => {
+    if (!filter)
+      return [];
+    const [key, value] = filter.split("(");
+    return [key, value.replace(")", "")];
+  }));
+};
+const generateFilters = (filters) => {
+  if (!filters) {
+    return void 0;
+  }
+  const filterItems = Object.entries(filters).map(([key, value]) => `${key}(${value ?? ""})`);
+  if (filterItems.length === 0) {
+    return void 0;
+  }
+  return `filters:${filterItems.join(":")}`;
+};
+const extract$4 = (url) => {
+  const parsedUrl = toUrl(url);
+  const regex = parsedUrl.hostname === "img2.storyblok.com" ? storyBlokImg2 : storyBlokAssets;
+  const matches = regex.exec(parsedUrl.pathname);
+  if (!matches || !matches.groups) {
+    return null;
+  }
+  const { id, crop, width, height, filters, flipx, flipy } = matches.groups;
+  const { format, ...filterMap } = splitFilters(filters ?? "");
+  if (parsedUrl.hostname === "img2.storyblok.com") {
+    parsedUrl.hostname = "a.storyblok.com";
+  }
+  const operations = Object.fromEntries([
+    ["width", Number(width) || void 0],
+    ["height", Number(height) || void 0],
+    ["format", format],
+    ["crop", crop],
+    ["filters", filterMap],
+    ["flipx", flipx],
+    ["flipy", flipy]
+  ].filter(([_2, value]) => value !== void 0));
+  return {
+    src: `${parsedUrl.origin}${id}`,
+    operations
+  };
+};
+const generate$4 = (src, operations) => {
+  const url = toUrl(src);
+  const { width = 0, height = 0, format, crop, filters = {}, flipx = "", flipy = "" } = operations;
+  const size = `${flipx}${width}x${flipy}${height}`;
+  if (format) {
+    filters.format = format;
+  }
+  const parts = [
+    url.pathname,
+    "m",
+    crop,
+    size,
+    generateFilters(filters)
+  ].filter(Boolean);
+  url.pathname = parts.join("/");
+  return toCanonicalUrlString(url);
+};
+const transform$4 = createExtractAndGenerate(extract$4, generate$4);
+const STORAGE_URL_PREFIX = "/storage/v1/object/public/";
+const RENDER_URL_PREFIX = "/storage/v1/render/image/public/";
+const isRenderUrl = (url) => url.pathname.startsWith(RENDER_URL_PREFIX);
+const { operationsGenerator: operationsGenerator$3, operationsParser: operationsParser$3 } = createOperationsHandlers({});
+const generate$3 = (src, operations) => {
+  const url = toUrl(src);
+  const basePath = url.pathname.replace(RENDER_URL_PREFIX, STORAGE_URL_PREFIX);
+  url.pathname = basePath;
+  if (operations.format && operations.format !== "origin") {
+    delete operations.format;
+  }
+  url.search = operationsGenerator$3(operations);
+  return toCanonicalUrlString(url).replace(STORAGE_URL_PREFIX, RENDER_URL_PREFIX);
+};
+const extract$3 = (url) => {
+  const parsedUrl = toUrl(url);
+  const operations = operationsParser$3(parsedUrl);
+  const isRender = isRenderUrl(parsedUrl);
+  const imagePath = parsedUrl.pathname.replace(RENDER_URL_PREFIX, "").replace(STORAGE_URL_PREFIX, "");
+  if (!isRender) {
+    return {
+      src: toCanonicalUrlString(parsedUrl),
+      operations
+    };
+  }
+  return {
+    src: `${parsedUrl.origin}${STORAGE_URL_PREFIX}${imagePath}`,
+    operations
+  };
+};
+const transform$3 = createExtractAndGenerate(extract$3, generate$3);
+const uploadcareRegex = /^https?:\/\/(?<host>[^\/]+)\/(?<uuid>[^\/]+)(?:\/(?<filename>[^\/]+)?)?/;
+const { operationsGenerator: operationsGenerator$2, operationsParser: operationsParser$2 } = createOperationsHandlers({
+  keyMap: {
+    width: false,
+    height: false
+  },
+  defaults: {
+    format: "auto"
+  },
+  kvSeparator: "/",
+  paramSeparator: "/-/"
+});
+const extract$2 = (url) => {
+  const parsedUrl = toUrl(url);
+  const match = uploadcareRegex.exec(parsedUrl.toString());
+  if (!match || !match.groups) {
+    return null;
+  }
+  const { host, uuid } = match.groups;
+  const [, ...operationsString] = parsedUrl.pathname.split("/-/");
+  const operations = operationsParser$2(operationsString.join("/-/") || "");
+  if (operations.resize) {
+    const [width, height] = operations.resize.split("x");
+    if (width)
+      operations.width = parseInt(width);
+    if (height)
+      operations.height = parseInt(height);
+    delete operations.resize;
+  }
+  return {
+    src: `https://${host}/${uuid}/`,
+    operations,
+    options: { host }
+  };
+};
+const generate$2 = (src, operations, options = {}) => {
+  const url = toUrl(src);
+  const host = options.host || url.hostname;
+  const match = uploadcareRegex.exec(url.toString());
+  if (match?.groups) {
+    url.pathname = `/${match.groups.uuid}/`;
+  }
+  operations.resize = operations.resize || `${operations.width ?? ""}x${operations.height ?? ""}`;
+  delete operations.width;
+  delete operations.height;
+  const modifiers = addTrailingSlash(operationsGenerator$2(operations));
+  url.hostname = host;
+  url.pathname = stripTrailingSlash(url.pathname) + (modifiers ? `/-/${modifiers}` : "") + (match?.groups?.filename ?? "");
+  return toCanonicalUrlString(url);
+};
+const transform$2 = createExtractAndGenerate(extract$2, generate$2);
+const { operationsGenerator: operationsGenerator$1, operationsParser: operationsParser$1 } = createOperationsHandlers({
+  keyMap: {
+    width: "w",
+    height: "h"
+  },
+  defaults: {
+    crop: "1"
+  }
+});
+const generate$1 = (src, operations) => {
+  const url = toUrl(src);
+  const { crop } = operations;
+  if (typeof crop !== "undefined" && crop !== "0") {
+    operations.crop = crop ? "1" : "0";
+  }
+  url.search = operationsGenerator$1(operations);
+  return toCanonicalUrlString(url);
+};
+const extract$1 = (url) => {
+  const parsedUrl = toUrl(url);
+  const operations = operationsParser$1(parsedUrl);
+  if (operations.crop !== void 0) {
+    operations.crop = operations.crop === "1";
+  }
+  parsedUrl.search = "";
+  return {
+    src: toCanonicalUrlString(parsedUrl),
+    operations
+  };
+};
+const transform$1 = createExtractAndGenerate(extract$1, generate$1);
+const { operationsGenerator, operationsParser } = createOperationsHandlers({
+  keyMap: {
+    width: "w",
+    height: "h",
+    format: "output",
+    quality: "q"
+  },
+  defaults: {
+    fit: "cover"
+  }
+});
+const extract = (url) => {
+  const urlObj = toUrl(url);
+  const srcParam = urlObj.searchParams.get("url");
+  if (!srcParam) {
+    return null;
+  }
+  let src = srcParam;
+  if (!src.startsWith("http://") && !src.startsWith("https://")) {
+    src = "https://" + src;
+  }
+  urlObj.searchParams.delete("url");
+  const operations = operationsParser(urlObj);
+  return {
+    src,
+    operations
+  };
+};
+const generate = (src, operations) => {
+  const url = new URL("https://wsrv.nl/");
+  const srcUrl = typeof src === "string" ? src : src.toString();
+  const cleanSrc = srcUrl.replace(/^https?:\/\//, "");
+  url.searchParams.set("url", cleanSrc);
+  const params = operationsGenerator(operations);
+  const searchParams = new URLSearchParams(params);
+  for (const [key, value] of searchParams) {
+    if (key !== "url") {
+      url.searchParams.set(key, value);
+    }
+  }
+  return toCanonicalUrlString(url);
+};
+const transform = createExtractAndGenerate(extract, generate);
+const transformerMap = {
+  appwrite: transform$r,
+  astro: transform$q,
+  "builder.io": transform$p,
+  bunny: transform$o,
+  cloudflare: transform$n,
+  cloudflare_images: transform$m,
+  cloudimage: transform$l,
+  cloudinary: transform$k,
+  contentful: transform$j,
+  contentstack: transform$i,
+  directus: transform$h,
+  hygraph: transform$g,
+  imageengine: transform$f,
+  imagekit: transform$e,
+  imgix: transform$d,
+  ipx: transform$c,
+  keycdn: transform$b,
+  "kontent.ai": transform$a,
+  netlify: transform$9,
+  nextjs: transform$7,
+  scene7: transform$6,
+  shopify: transform$5,
+  storyblok: transform$4,
+  supabase: transform$3,
+  uploadcare: transform$2,
+  vercel: transform$8,
+  wordpress: transform$1,
+  wsrv: transform
+};
+function getTransformerForCdn(cdn) {
+  if (!cdn) {
+    return void 0;
+  }
+  return transformerMap[cdn];
+}
+function transformProps({
+  cdn,
+  fallback,
+  operations = {},
+  options,
+  ...props
+}) {
+  cdn ??= getProviderForUrl(props.src) || fallback;
+  if (!cdn) {
+    return props;
+  }
+  const transformer = getTransformerForCdn(cdn);
+  if (!transformer) {
+    return props;
+  }
+  return transformBaseImageProps({
+    ...props,
+    operations: operations?.[cdn],
+    options: options?.[cdn],
+    transformer
+  });
+}
+function transformSourceProps({
+  cdn,
+  fallback,
+  operations,
+  options,
+  ...props
+}) {
+  cdn ??= getProviderForUrl(props.src) || fallback;
+  if (!cdn) {
+    return props;
+  }
+  const transformer = getTransformerForCdn(cdn);
+  if (!transformer) {
+    return props;
+  }
+  return transformBaseSourceProps({
+    ...props,
+    operations: operations?.[cdn],
+    options: options?.[cdn],
+    transformer
+  });
 }
 var Image = reactExports.forwardRef(
   function Image2(props, ref) {
-    const camelizedProps = camelizeProps(transformProps(props));
+    const camelizedProps = camelizeProps(
+      transformProps(props)
+    );
     return /* @__PURE__ */ jsxRuntimeExports.jsx("img", { ...camelizedProps, ref });
   }
 );
@@ -8690,8 +8897,8 @@ function DeleteItemButton({
       type: "button",
       onClick: handleClick,
       "aria-label": "Remove cart item",
-      className: "flex h-[24px] w-[24px] items-center justify-center rounded-full bg-neutral-500",
-      children: /* @__PURE__ */ jsxRuntimeExports.jsx(ForwardRef, { className: "mx-[1px] h-4 w-4 text-white dark:text-black" })
+      className: "flex size-6 items-center justify-center rounded-full bg-neutral-500",
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(ForwardRef, { className: "mx-px size-4 text-white dark:text-black" })
     }
   );
 }
@@ -8710,12 +8917,12 @@ function EditItemQuantityButton({
       onClick: handleClick,
       "aria-label": type === "plus" ? "Increase item quantity" : "Reduce item quantity",
       className: clsx(
-        "ease flex h-full min-w-[36px] max-w-[36px] flex-none items-center justify-center rounded-full p-2 transition-all duration-200 hover:border-neutral-800 hover:opacity-80",
+        "ease flex h-full min-w-9 max-w-9 flex-none items-center justify-center rounded-full p-2 transition-all duration-200 hover:border-neutral-800 hover:opacity-80",
         {
           "ml-auto": type === "minus"
         }
       ),
-      children: type === "plus" ? /* @__PURE__ */ jsxRuntimeExports.jsx(ForwardRef$2, { className: "h-4 w-4 dark:text-neutral-500" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(ForwardRef$3, { className: "h-4 w-4 dark:text-neutral-500" })
+      children: type === "plus" ? /* @__PURE__ */ jsxRuntimeExports.jsx(ForwardRef$2, { className: "size-4 dark:text-neutral-500" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(ForwardRef$3, { className: "size-4 dark:text-neutral-500" })
     }
   );
 }
@@ -8733,7 +8940,7 @@ function OpenCart({
         )
       }
     ),
-    quantity ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "-mt-2 -mr-2 absolute top-0 right-0 h-4 w-4 rounded-sm bg-blue-600 font-medium text-[11px] text-white", children: quantity }) : null
+    quantity ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-0 right-0 -mt-2 -mr-2 h-4 w-4 rounded-sm bg-blue-600 font-medium text-[11px] text-white", children: quantity }) : null
   ] });
 }
 function CartModal() {
@@ -8767,6 +8974,7 @@ function CartModal() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "button",
       {
+        type: "button",
         "aria-label": "Open cart",
         onClick: openCart,
         className: "cursor-pointer",
@@ -8800,7 +9008,15 @@ function CartModal() {
           children: /* @__PURE__ */ jsxRuntimeExports.jsxs(ht.Panel, { className: "fixed top-0 right-0 bottom-0 flex h-full w-full flex-col border-neutral-200 border-l bg-white/80 p-6 text-black backdrop-blur-xl md:w-[390px] dark:border-neutral-700 dark:bg-black/80 dark:text-white", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-lg", children: "My Cart" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("button", { "aria-label": "Close cart", onClick: closeCart, children: /* @__PURE__ */ jsxRuntimeExports.jsx(CloseCart, {}) })
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "button",
+                {
+                  type: "button",
+                  "aria-label": "Close cart",
+                  onClick: closeCart,
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx(CloseCart, {})
+                }
+              )
             ] }),
             !cart || cart.lines.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-20 flex w-full flex-col items-center justify-center overflow-hidden", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(ForwardRef$1, { className: "h-16" }),
@@ -8827,19 +9043,19 @@ function CartModal() {
                   "li",
                   {
                     className: "flex w-full flex-col border-neutral-300 border-b dark:border-neutral-700",
-                    children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex w-full flex-row justify-between px-1 py-4", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "-mt-2 -ml-1 absolute z-40", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex w-full justify-between px-1 py-4", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute z-40 -mt-2 -ml-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                         DeleteItemButton,
                         {
                           item,
                           optimisticUpdate: updateCartItem
                         }
                       ) }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-row", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative h-16 w-16 overflow-hidden rounded-md border border-neutral-300 bg-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative size-16 overflow-hidden rounded-md border border-neutral-300 bg-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                           Image,
                           {
-                            className: "h-full w-full object-cover",
+                            className: "size-full object-cover",
                             width: 64,
                             height: 64,
                             alt: item.merchandise.product.featuredImage?.altText || item.merchandise.product.title,
@@ -8851,7 +9067,7 @@ function CartModal() {
                           {
                             to: merchandiseUrl,
                             onClick: closeCart,
-                            className: "z-30 ml-2 flex flex-row space-x-4",
+                            className: "z-30 ml-2 flex space-x-4",
                             children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 flex-col text-base", children: [
                               /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "leading-tight", children: item.merchandise.product.title }),
                               item.merchandise.title !== DEFAULT_OPTION ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-neutral-500 text-sm dark:text-neutral-400", children: item.merchandise.title }) : null
@@ -8868,7 +9084,7 @@ function CartModal() {
                             currencyCode: item.cost.totalAmount.currencyCode
                           }
                         ),
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "ml-auto flex h-9 flex-row items-center rounded-full border border-neutral-200 dark:border-neutral-700", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "ml-auto flex h-9 items-center rounded-full border border-neutral-200 dark:border-neutral-700", children: [
                           /* @__PURE__ */ jsxRuntimeExports.jsx(
                             EditItemQuantityButton,
                             {
@@ -8905,11 +9121,11 @@ function CartModal() {
                     }
                   )
                 ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-3 flex items-center justify-between border-neutral-200 border-b pt-1 pb-1 dark:border-neutral-700", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-3 flex items-center justify-between border-neutral-200 border-b py-1 dark:border-neutral-700", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Shipping" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-right", children: "Calculated at checkout" })
                 ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-3 flex items-center justify-between border-neutral-200 border-b pt-1 pb-1 dark:border-neutral-700", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-3 flex items-center justify-between border-neutral-200 border-b py-1 dark:border-neutral-700", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Total" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     Price,
@@ -8924,6 +9140,7 @@ function CartModal() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "button",
                 {
+                  type: "button",
                   onClick: handleCheckout,
                   disabled: isCheckingOut,
                   className: "block w-full rounded-full bg-blue-600 p-3 text-center font-medium text-sm text-white opacity-90 hover:opacity-100 disabled:opacity-50",
@@ -8938,7 +9155,7 @@ function CartModal() {
   ] });
 }
 function CloseCart({ className }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative flex size-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
     ForwardRef,
     {
       className: clsx(
@@ -8968,7 +9185,7 @@ function Search() {
     "form",
     {
       onSubmit,
-      className: "relative w-full w-max-[550px] lg:w-80 xl:w-full",
+      className: "relative w-full max-w-[550px] lg:w-80 xl:w-full",
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "input",
@@ -8992,6 +9209,7 @@ function MobileMenu({ menu }) {
   const [isOpen, setIsOpen] = reactExports.useState(false);
   const openMobileMenu = () => setIsOpen(true);
   const closeMobileMenu = () => setIsOpen(false);
+  const prevPathRef = reactExports.useRef(location.pathname);
   reactExports.useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768) {
@@ -9002,15 +9220,19 @@ function MobileMenu({ menu }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   reactExports.useEffect(() => {
-    setIsOpen(false);
-  }, [location.pathname, location.search]);
+    if (prevPathRef.current !== location.pathname) {
+      setIsOpen(false);
+      prevPathRef.current = location.pathname;
+    }
+  }, [location.pathname]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "button",
       {
+        type: "button",
         onClick: openMobileMenu,
         "aria-label": "Open mobile menu",
-        className: "flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors md:hidden dark:border-neutral-700 dark:text-white",
+        className: "flex size-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors md:hidden dark:border-neutral-700 dark:text-white",
         children: /* @__PURE__ */ jsxRuntimeExports.jsx(ForwardRef$5, { className: "h-4" })
       }
     ),
@@ -9038,11 +9260,12 @@ function MobileMenu({ menu }) {
           leave: "transition-all ease-in-out duration-200",
           leaveFrom: "translate-x-0",
           leaveTo: "translate-x-[-100%]",
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx(ht.Panel, { className: "fixed top-0 right-0 bottom-0 left-0 flex h-full w-full flex-col bg-white pb-6 dark:bg-black", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4", children: [
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(ht.Panel, { className: "fixed inset-0 flex size-full flex-col bg-white pb-6 dark:bg-black", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "button",
               {
-                className: "mb-4 flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white",
+                type: "button",
+                className: "mb-4 flex size-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white",
                 onClick: closeMobileMenu,
                 "aria-label": "Close mobile menu",
                 children: /* @__PURE__ */ jsxRuntimeExports.jsx(ForwardRef, { className: "h-6" })
@@ -9099,7 +9322,7 @@ function Navbar() {
     ] })
   ] });
 }
-const appCss = "/assets/styles-DSNGJVwk.css";
+const appCss = "/assets/styles-BS5OX-xO.css";
 const SITE_NAME$1 = "Shopify Store";
 const Route$6 = createRootRouteWithContext()({
   head: () => ({
@@ -9145,11 +9368,11 @@ function RootDocument({ children }) {
 }
 function NotFound() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex min-h-screen flex-col items-center justify-center", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-4xl font-bold", children: "404" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-bold text-4xl", children: "404" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-neutral-600 dark:text-neutral-400", children: "Page not found" })
   ] });
 }
-const $$splitComponentImporter$5 = () => import("./search-D1pguE8h.js");
+const $$splitComponentImporter$5 = () => import("./search-DVA6rXJs.js");
 const Route$5 = createFileRoute("/search")({
   component: lazyRouteComponent($$splitComponentImporter$5, "component"),
   loader: async ({
@@ -9162,7 +9385,7 @@ const Route$5 = createFileRoute("/search")({
     });
   }
 });
-const $$splitComponentImporter$4 = () => import("./_page-wFd5QXR3.js");
+const $$splitComponentImporter$4 = () => import("./_page-PCdMOOpB.js");
 const Route$4 = createFileRoute("/$page")({
   component: lazyRouteComponent($$splitComponentImporter$4, "component"),
   loader: async ({
@@ -9211,7 +9434,7 @@ const Route$4 = createFileRoute("/$page")({
     };
   }
 });
-const $$splitComponentImporter$3 = () => import("./index-DFrFh8ZF.js");
+const $$splitComponentImporter$3 = () => import("./index-nXVF1EBE.js");
 const SITE_NAME = "Shopify Store";
 const Route$3 = createFileRoute("/")({
   component: lazyRouteComponent($$splitComponentImporter$3, "component"),
@@ -9238,10 +9461,10 @@ const Route$3 = createFileRoute("/")({
     });
   }
 });
-const $$splitComponentImporter$2 = () => import("./index-D2S68sLB.js");
-const searchParamsSchema$1 = objectType({
-  q: stringType().optional(),
-  sort: stringType().optional()
+const $$splitComponentImporter$2 = () => import("./index-DSlPaThF.js");
+const searchParamsSchema$1 = object({
+  q: string().optional(),
+  sort: string().optional()
 });
 const Route$2 = createFileRoute("/search/")({
   component: lazyRouteComponent($$splitComponentImporter$2, "component"),
@@ -9283,9 +9506,9 @@ const Route$2 = createFileRoute("/search/")({
     });
   }
 });
-const $$splitComponentImporter$1 = () => import("./_collection-94Oi12pF.js");
-const searchParamsSchema = objectType({
-  sort: stringType().optional()
+const $$splitComponentImporter$1 = () => import("./_collection-B_v0d0QZ.js");
+const searchParamsSchema = object({
+  sort: string().optional()
 });
 const Route$1 = createFileRoute("/search/$collection")({
   component: lazyRouteComponent($$splitComponentImporter$1, "component"),
@@ -9349,7 +9572,7 @@ const Route$1 = createFileRoute("/search/$collection")({
     };
   }
 });
-const $$splitComponentImporter = () => import("./_handle-Di9QFdZm.js");
+const $$splitComponentImporter = () => import("./_handle-BxwkMlc5.js");
 const Route2 = createFileRoute("/product/$handle")({
   component: lazyRouteComponent($$splitComponentImporter, "component"),
   loader: async ({

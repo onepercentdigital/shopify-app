@@ -26,7 +26,7 @@ export default function Search() {
   return (
     <form
       onSubmit={onSubmit}
-      className="relative w-full w-max-[550px] lg:w-80 xl:w-full"
+      className="relative w-full max-w-[550px] lg:w-80 xl:w-full"
     >
       <input
         type="text"
@@ -46,7 +46,7 @@ export default function Search() {
 
 export function SearchSkeleton() {
   return (
-    <form className="relative w-full w-max-[550px] lg:w-80 xl:w-full">
+    <form className="relative w-full max-w-[550px] lg:w-80 xl:w-full">
       <input
         placeholder="Search for products..."
         className="h-11 w-full rounded-lg border bg-white px-4 text-base text-black placeholder:text-neutral-500 md:text-sm dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400"

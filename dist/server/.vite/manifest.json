@@ -1,36 +1,36 @@
 {
   "/Users/austin/Developer/onepercentdigital/shopify-app/src/styles.css": {
-    "file": "assets/styles-DSNGJVwk.css",
+    "file": "assets/styles-BS5OX-xO.css",
     "src": "/Users/austin/Developer/onepercentdigital/shopify-app/src/styles.css"
   },
-  "_index-DrgtSF_4.js": {
-    "file": "assets/index-DrgtSF_4.js",
+  "_index-DFLDpE0d.js": {
+    "file": "assets/index-DFLDpE0d.js",
     "name": "index"
   },
-  "_product-grid-items-SbkREhi-.js": {
-    "file": "assets/product-grid-items-SbkREhi-.js",
+  "_product-grid-items-BxZRDNC5.js": {
+    "file": "assets/product-grid-items-BxZRDNC5.js",
     "name": "product-grid-items",
     "imports": [
-      "_worker-entry-Cv73MfJc.js",
-      "_router-C6qVLgSF.js",
-      "_tile-BrLrGYX_.js"
+      "_worker-entry-C8G20BGl.js",
+      "_router-EOe-sXrB.js",
+      "_tile-QsgnqOIg.js"
     ]
   },
-  "_prose-BIIxNP5b.js": {
-    "file": "assets/prose-BIIxNP5b.js",
+  "_prose-Bp4a9W_Q.js": {
+    "file": "assets/prose-Bp4a9W_Q.js",
     "name": "prose",
     "imports": [
-      "_worker-entry-Cv73MfJc.js",
-      "_router-C6qVLgSF.js"
+      "_worker-entry-C8G20BGl.js",
+      "_router-EOe-sXrB.js"
     ]
   },
-  "_router-C6qVLgSF.js": {
-    "file": "assets/router-C6qVLgSF.js",
+  "_router-EOe-sXrB.js": {
+    "file": "assets/router-EOe-sXrB.js",
     "name": "router",
     "isDynamicEntry": true,
     "imports": [
-      "_worker-entry-Cv73MfJc.js",
-      "_index-DrgtSF_4.js"
+      "_worker-entry-C8G20BGl.js",
+      "_index-DFLDpE0d.js"
     ],
     "dynamicImports": [
       "src/routes/search.tsx?tsr-split=component",
@@ -41,19 +41,19 @@
       "src/routes/product/$handle.tsx?tsr-split=component"
     ],
     "assets": [
-      "assets/styles-DSNGJVwk.css"
+      "assets/styles-BS5OX-xO.css"
     ]
   },
-  "_tile-BrLrGYX_.js": {
-    "file": "assets/tile-BrLrGYX_.js",
+  "_tile-QsgnqOIg.js": {
+    "file": "assets/tile-QsgnqOIg.js",
     "name": "tile",
     "imports": [
-      "_worker-entry-Cv73MfJc.js",
-      "_router-C6qVLgSF.js"
+      "_worker-entry-C8G20BGl.js",
+      "_router-EOe-sXrB.js"
     ]
   },
-  "_worker-entry-Cv73MfJc.js": {
-    "file": "assets/worker-entry-Cv73MfJc.js",
+  "_worker-entry-C8G20BGl.js": {
+    "file": "assets/worker-entry-C8G20BGl.js",
     "name": "worker-entry",
     "dynamicImports": [
       "tanstack-start-manifest:v",
@@ -64,7 +64,7 @@
       "src/lib/cart/server.ts?tss-serverfn-split",
       "src/lib/cart/server.ts?tss-serverfn-split",
       "src/lib/cart/server.ts?tss-serverfn-split",
-      "_router-C6qVLgSF.js",
+      "_router-EOe-sXrB.js",
       "node_modules/@tanstack/react-start/dist/plugin/default-entry/start.ts"
     ]
   },
@@ -75,91 +75,91 @@
     "isDynamicEntry": true
   },
   "src/lib/cart/server.ts?tss-serverfn-split": {
-    "file": "assets/server-CFUAqZTJ.js",
+    "file": "assets/server-BFqfwhmS.js",
     "name": "server",
     "src": "src/lib/cart/server.ts?tss-serverfn-split",
     "isDynamicEntry": true,
     "imports": [
-      "_worker-entry-Cv73MfJc.js",
-      "_index-DrgtSF_4.js"
+      "_worker-entry-C8G20BGl.js",
+      "_index-DFLDpE0d.js"
     ]
   },
   "src/routes/$page.tsx?tsr-split=component": {
-    "file": "assets/_page-wFd5QXR3.js",
+    "file": "assets/_page-PCdMOOpB.js",
     "name": "_page",
     "src": "src/routes/$page.tsx?tsr-split=component",
     "isDynamicEntry": true,
     "imports": [
-      "_worker-entry-Cv73MfJc.js",
-      "_router-C6qVLgSF.js",
-      "_prose-BIIxNP5b.js",
-      "_index-DrgtSF_4.js"
+      "_worker-entry-C8G20BGl.js",
+      "_router-EOe-sXrB.js",
+      "_prose-Bp4a9W_Q.js",
+      "_index-DFLDpE0d.js"
     ]
   },
   "src/routes/index.tsx?tsr-split=component": {
-    "file": "assets/index-DFrFh8ZF.js",
+    "file": "assets/index-nXVF1EBE.js",
     "name": "index",
     "src": "src/routes/index.tsx?tsr-split=component",
     "isDynamicEntry": true,
     "imports": [
-      "_worker-entry-Cv73MfJc.js",
-      "_router-C6qVLgSF.js",
-      "_tile-BrLrGYX_.js",
-      "_index-DrgtSF_4.js"
+      "_worker-entry-C8G20BGl.js",
+      "_router-EOe-sXrB.js",
+      "_tile-QsgnqOIg.js",
+      "_index-DFLDpE0d.js"
     ]
   },
   "src/routes/product/$handle.tsx?tsr-split=component": {
-    "file": "assets/_handle-Di9QFdZm.js",
+    "file": "assets/_handle-BxwkMlc5.js",
     "name": "_handle",
     "src": "src/routes/product/$handle.tsx?tsr-split=component",
     "isDynamicEntry": true,
     "imports": [
-      "_worker-entry-Cv73MfJc.js",
-      "_router-C6qVLgSF.js",
-      "_tile-BrLrGYX_.js",
-      "_prose-BIIxNP5b.js",
-      "_index-DrgtSF_4.js"
+      "_worker-entry-C8G20BGl.js",
+      "_router-EOe-sXrB.js",
+      "_tile-QsgnqOIg.js",
+      "_prose-Bp4a9W_Q.js",
+      "_index-DFLDpE0d.js"
     ]
   },
   "src/routes/search.tsx?tsr-split=component": {
-    "file": "assets/search-D1pguE8h.js",
+    "file": "assets/search-DVA6rXJs.js",
     "name": "search",
     "src": "src/routes/search.tsx?tsr-split=component",
     "isDynamicEntry": true,
     "imports": [
-      "_worker-entry-Cv73MfJc.js",
-      "_router-C6qVLgSF.js",
-      "_index-DrgtSF_4.js"
+      "_worker-entry-C8G20BGl.js",
+      "_router-EOe-sXrB.js",
+      "_index-DFLDpE0d.js"
     ]
   },
   "src/routes/search/$collection.tsx?tsr-split=component": {
-    "file": "assets/_collection-94Oi12pF.js",
+    "file": "assets/_collection-B_v0d0QZ.js",
     "name": "_collection",
     "src": "src/routes/search/$collection.tsx?tsr-split=component",
     "isDynamicEntry": true,
     "imports": [
-      "_worker-entry-Cv73MfJc.js",
-      "_router-C6qVLgSF.js",
-      "_product-grid-items-SbkREhi-.js",
-      "_index-DrgtSF_4.js",
-      "_tile-BrLrGYX_.js"
+      "_worker-entry-C8G20BGl.js",
+      "_router-EOe-sXrB.js",
+      "_product-grid-items-BxZRDNC5.js",
+      "_index-DFLDpE0d.js",
+      "_tile-QsgnqOIg.js"
     ]
   },
   "src/routes/search/index.tsx?tsr-split=component": {
-    "file": "assets/index-D2S68sLB.js",
+    "file": "assets/index-DSlPaThF.js",
     "name": "index",
     "src": "src/routes/search/index.tsx?tsr-split=component",
     "isDynamicEntry": true,
     "imports": [
-      "_worker-entry-Cv73MfJc.js",
-      "_router-C6qVLgSF.js",
-      "_product-grid-items-SbkREhi-.js",
-      "_index-DrgtSF_4.js",
-      "_tile-BrLrGYX_.js"
+      "_worker-entry-C8G20BGl.js",
+      "_router-EOe-sXrB.js",
+      "_product-grid-items-BxZRDNC5.js",
+      "_index-DFLDpE0d.js",
+      "_tile-QsgnqOIg.js"
     ]
   },
   "tanstack-start-manifest:v": {
-    "file": "assets/_tanstack-start-manifest_v-DHp3b12Z.js",
+    "file": "assets/_tanstack-start-manifest_v-CV028Xfe.js",
     "name": "_tanstack-start-manifest_v",
     "src": "tanstack-start-manifest:v",
     "isDynamicEntry": true
@@ -170,7 +170,7 @@
     "src": "virtual:cloudflare/worker-entry",
     "isEntry": true,
     "imports": [
-      "_worker-entry-Cv73MfJc.js"
+      "_worker-entry-C8G20BGl.js"
     ]
   }
 }
