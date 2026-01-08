@@ -2,7 +2,8 @@
 
 ## Important Rules
 
-**NEVER deploy directly to Cloudflare without asking first.** All deployments go through GitHub. Push changes to a branch and create a PR - Cloudflare will build and deploy automatically from the `main` branch.
+1. **NEVER deploy or commit without explicit permission.** Always ask before running `git commit`, `git push`, `bun run deploy`, or any deployment commands.
+2. **All deployments go through GitHub.** Push changes to a branch and create a PR - Cloudflare will build and deploy automatically from the `main` branch.
 
 ## Project Overview
 
@@ -75,7 +76,6 @@ shopify-app/
 │   │   │   └── index.ts          # Main API functions
 │   │   ├── cart/                 # Cart server functions
 │   │   ├── constants.ts          # App constants
-│   │   ├── env.ts                # Environment variable access (local + Cloudflare)
 │   │   ├── type-guards.ts        # Type guard utilities
 │   │   └── utils.ts              # Helper functions
 │   ├── integrations/
@@ -124,34 +124,34 @@ SITE_NAME=Your Site Name
 
 ### Environment Variable Access Pattern
 
-Environment variables are accessed via `src/lib/env.ts` which provides a unified `getEnv()` function that works in both environments:
-
-- **Local development:** Falls back to `import.meta.env` (loaded from `.env.local`)
-- **Cloudflare Workers:** Uses `require('cloudflare:workers')` to access Worker bindings
+Environment variables are accessed via `import.meta.env` which Vite bakes in at build time:
 
 ```typescript
-import { getEnv } from '@/lib/env';
-
-const env = getEnv();
-const domain = env.SHOPIFY_STORE_DOMAIN;
+const storeDomain = import.meta.env.SHOPIFY_STORE_DOMAIN || '';
+const key = import.meta.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || '';
 ```
 
-**Why this pattern?** Cloudflare Workers require using `cloudflare:workers` to access environment bindings at runtime, but this module doesn't exist locally. The `getEnv()` utility handles this with a try-catch fallback.
+- **Local development:** Variables loaded from `.env.local`
+- **Cloudflare CI builds:** Variables configured in Cloudflare Dashboard under Build settings
 
 ### Production Environment (Cloudflare)
 
-Secrets are configured in the Cloudflare Dashboard under Workers & Pages > shopify-app > Settings > Variables and Secrets. Current secrets:
+Variables must be configured in **two places** in the Cloudflare Dashboard:
+
+**1. Build-time variables** (Settings > Build > Variables and secrets):
+- `SHOPIFY_STORE_DOMAIN` - Required for Vite to bake into SSR bundle
+- `SHOPIFY_STOREFRONT_ACCESS_TOKEN` - Required for Vite to bake into SSR bundle
+
+**2. Runtime variables** (Settings > Variables and Secrets):
 - `SHOPIFY_STORE_DOMAIN` (Plaintext)
 - `SHOPIFY_STOREFRONT_ACCESS_TOKEN` (Secret)
 - `SHOPIFY_REVALIDATION_SECRET` (Secret)
 
-To add/update secrets via CLI:
+To add/update runtime secrets via CLI:
 ```bash
 wrangler secret put SHOPIFY_STOREFRONT_ACCESS_TOKEN
 wrangler secret put SHOPIFY_REVALIDATION_SECRET
 ```
-
-After updating types, regenerate with: `bun run cf-typegen`
 
 ## Key Architecture Patterns
 
