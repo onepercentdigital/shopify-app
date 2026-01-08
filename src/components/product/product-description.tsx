@@ -1,8 +1,8 @@
-import { AddToCart } from 'components/cart/add-to-cart';
-import Price from 'components/price';
-import Prose from 'components/prose';
-import type { Product } from 'lib/shopify/types';
 import { Suspense } from 'react';
+import { AddToCart } from '@/components/cart/add-to-cart';
+import Price from '@/components/price';
+import Prose from '@/components/prose';
+import type { Product } from '@/lib/shopify/types';
 import { VariantSelector } from './variant-selector';
 
 function AddToCartSkeleton() {

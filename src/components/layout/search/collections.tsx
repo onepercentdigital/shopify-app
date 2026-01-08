@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
-import { getCollections } from 'lib/shopify';
+import { getCollections } from '@/lib/shopify';
 import FilterList from './filter';
 
 function CollectionList() {

@@ -3,8 +3,8 @@
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { useLocation, useSearch } from '@tanstack/react-router';
 import clsx from 'clsx';
-import type { SortFilterItem } from 'lib/constants';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import type { SortFilterItem } from '@/lib/constants';
 import type { ListItem } from '.';
 import { FilterItem } from './item';
 
