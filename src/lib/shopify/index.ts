@@ -61,9 +61,7 @@ function getShopifyConfig() {
   const key = env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || '';
 
   if (!domain || !key) {
-    throw new Error(
-      `Missing Shopify configuration. SHOPIFY_STORE_DOMAIN=${!!storeDomain}, TOKEN=${!!key}`,
-    );
+    throw new Error('Missing required Shopify configuration');
   }
 
   return { domain, endpoint, key };
@@ -109,7 +107,7 @@ export async function shopifyFetch<T>({
       body = (await result.json()) as T & { errors?: unknown[] };
     } catch {
       throw new Error(
-        `Failed to parse Shopify response (status ${result.status}). API credentials may be invalid.`,
+        `Failed to parse Shopify response (status ${result.status}). Response was not valid JSON.`,
       );
     }
 

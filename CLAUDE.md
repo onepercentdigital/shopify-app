@@ -441,9 +441,10 @@ bun run build
 
 ### First-time Setup (Cloudflare Secrets)
 
+`SHOPIFY_STORE_DOMAIN` is set as a plaintext variable in `wrangler.jsonc`.
+
 Secrets must be set in Cloudflare Dashboard or via CLI:
 ```bash
-wrangler secret put SHOPIFY_STORE_DOMAIN
 wrangler secret put SHOPIFY_STOREFRONT_ACCESS_TOKEN
 wrangler secret put SHOPIFY_REVALIDATION_SECRET
 ```
