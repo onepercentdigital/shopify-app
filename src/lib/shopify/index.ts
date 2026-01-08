@@ -50,11 +50,21 @@ import type {
   ShopifyUpdateCartOperation,
 } from './types';
 
-const domain = import.meta.env.SHOPIFY_STORE_DOMAIN
-  ? ensureStartsWith(import.meta.env.SHOPIFY_STORE_DOMAIN, 'https://')
-  : '';
-const endpoint = `${domain}${SHOPIFY_GRAPHQL_API_ENDPOINT}`;
-const key = import.meta.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ?? '';
+// Helper to get Shopify config - reads from process.env at runtime
+// On Cloudflare Workers with nodejs_compat, process.env is populated from Worker bindings
+function getShopifyConfig() {
+  const storeDomain =
+    process.env.SHOPIFY_STORE_DOMAIN ||
+    import.meta.env.SHOPIFY_STORE_DOMAIN ||
+    '';
+  const domain = storeDomain ? ensureStartsWith(storeDomain, 'https://') : '';
+  const endpoint = `${domain}${SHOPIFY_GRAPHQL_API_ENDPOINT}`;
+  const key =
+    process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
+    import.meta.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
+    '';
+  return { domain, endpoint, key };
+}
 
 type ExtractVariables<T> = T extends { variables: object }
   ? T['variables']
@@ -69,6 +79,8 @@ export async function shopifyFetch<T>({
   query: string;
   variables?: ExtractVariables<T>;
 }): Promise<{ status: number; body: T } | never> {
+  const { endpoint, key } = getShopifyConfig();
+
   try {
     const result = await fetch(endpoint, {
       method: 'POST',
@@ -349,6 +361,8 @@ export async function getMenu(handle: string): Promise<Menu[]> {
       handle,
     },
   });
+
+  const { domain } = getShopifyConfig();
 
   return (
     res.body?.data?.menu?.items.map((item: { title: string; url: string }) => ({

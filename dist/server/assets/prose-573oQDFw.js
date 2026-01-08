@@ -1,5 +1,5 @@
-import { o as jsxRuntimeExports } from "./worker-entry-C8G20BGl.js";
-import { c as clsx } from "./router-EOe-sXrB.js";
+import { o as jsxRuntimeExports } from "./worker-entry-DIDafrh-.js";
+import { c as clsx } from "./router-D2qbkn3H.js";
 const Prose = ({ html, className }) => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     "div",

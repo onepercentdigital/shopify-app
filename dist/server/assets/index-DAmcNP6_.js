@@ -109,9 +109,9 @@ function floatSafeRemainder(val, step) {
   return valInt % stepInt / 10 ** decCount;
 }
 const EVALUATING = Symbol("evaluating");
-function defineLazy(object2, key2, getter) {
+function defineLazy(object2, key, getter) {
   let value = void 0;
-  Object.defineProperty(object2, key2, {
+  Object.defineProperty(object2, key, {
     get() {
       if (value === EVALUATING) {
         return void 0;
@@ -123,7 +123,7 @@ function defineLazy(object2, key2, getter) {
       return value;
     },
     set(v) {
-      Object.defineProperty(object2, key2, {
+      Object.defineProperty(object2, key, {
         value: v
         // configurable: true,
       });
@@ -241,13 +241,13 @@ function pick(schema, mask) {
   const def = mergeDefs(schema._zod.def, {
     get shape() {
       const newShape = {};
-      for (const key2 in mask) {
-        if (!(key2 in currDef.shape)) {
-          throw new Error(`Unrecognized key: "${key2}"`);
+      for (const key in mask) {
+        if (!(key in currDef.shape)) {
+          throw new Error(`Unrecognized key: "${key}"`);
         }
-        if (!mask[key2])
+        if (!mask[key])
           continue;
-        newShape[key2] = currDef.shape[key2];
+        newShape[key] = currDef.shape[key];
       }
       assignProp(this, "shape", newShape);
       return newShape;
@@ -266,13 +266,13 @@ function omit(schema, mask) {
   const def = mergeDefs(schema._zod.def, {
     get shape() {
       const newShape = { ...schema._zod.def.shape };
-      for (const key2 in mask) {
-        if (!(key2 in currDef.shape)) {
-          throw new Error(`Unrecognized key: "${key2}"`);
+      for (const key in mask) {
+        if (!(key in currDef.shape)) {
+          throw new Error(`Unrecognized key: "${key}"`);
         }
-        if (!mask[key2])
+        if (!mask[key])
           continue;
-        delete newShape[key2];
+        delete newShape[key];
       }
       assignProp(this, "shape", newShape);
       return newShape;
@@ -289,8 +289,8 @@ function extend(schema, shape) {
   const hasChecks = checks && checks.length > 0;
   if (hasChecks) {
     const existingShape = schema._zod.def.shape;
-    for (const key2 in shape) {
-      if (Object.getOwnPropertyDescriptor(existingShape, key2) !== void 0) {
+    for (const key in shape) {
+      if (Object.getOwnPropertyDescriptor(existingShape, key) !== void 0) {
         throw new Error("Cannot overwrite keys on object schemas containing refinements. Use `.safeExtend()` instead.");
       }
     }
@@ -344,23 +344,23 @@ function partial(Class, schema, mask) {
       const oldShape = schema._zod.def.shape;
       const shape = { ...oldShape };
       if (mask) {
-        for (const key2 in mask) {
-          if (!(key2 in oldShape)) {
-            throw new Error(`Unrecognized key: "${key2}"`);
+        for (const key in mask) {
+          if (!(key in oldShape)) {
+            throw new Error(`Unrecognized key: "${key}"`);
           }
-          if (!mask[key2])
+          if (!mask[key])
             continue;
-          shape[key2] = Class ? new Class({
+          shape[key] = Class ? new Class({
             type: "optional",
-            innerType: oldShape[key2]
-          }) : oldShape[key2];
+            innerType: oldShape[key]
+          }) : oldShape[key];
         }
       } else {
-        for (const key2 in oldShape) {
-          shape[key2] = Class ? new Class({
+        for (const key in oldShape) {
+          shape[key] = Class ? new Class({
             type: "optional",
-            innerType: oldShape[key2]
-          }) : oldShape[key2];
+            innerType: oldShape[key]
+          }) : oldShape[key];
         }
       }
       assignProp(this, "shape", shape);
@@ -376,22 +376,22 @@ function required(Class, schema, mask) {
       const oldShape = schema._zod.def.shape;
       const shape = { ...oldShape };
       if (mask) {
-        for (const key2 in mask) {
-          if (!(key2 in shape)) {
-            throw new Error(`Unrecognized key: "${key2}"`);
+        for (const key in mask) {
+          if (!(key in shape)) {
+            throw new Error(`Unrecognized key: "${key}"`);
           }
-          if (!mask[key2])
+          if (!mask[key])
             continue;
-          shape[key2] = new Class({
+          shape[key] = new Class({
             type: "nonoptional",
-            innerType: oldShape[key2]
+            innerType: oldShape[key]
           });
         }
       } else {
-        for (const key2 in oldShape) {
-          shape[key2] = new Class({
+        for (const key in oldShape) {
+          shape[key] = new Class({
             type: "nonoptional",
-            innerType: oldShape[key2]
+            innerType: oldShape[key]
           });
         }
       }
@@ -1557,19 +1557,19 @@ const $ZodArray = /* @__PURE__ */ $constructor("$ZodArray", (inst, def) => {
     return payload;
   };
 });
-function handlePropertyResult(result, final, key2, input, isOptionalOut) {
+function handlePropertyResult(result, final, key, input, isOptionalOut) {
   if (result.issues.length) {
-    if (isOptionalOut && !(key2 in input)) {
+    if (isOptionalOut && !(key in input)) {
       return;
     }
-    final.issues.push(...prefixIssues(key2, result.issues));
+    final.issues.push(...prefixIssues(key, result.issues));
   }
   if (result.value === void 0) {
-    if (key2 in input) {
-      final.value[key2] = void 0;
+    if (key in input) {
+      final.value[key] = void 0;
     }
   } else {
-    final.value[key2] = result.value;
+    final.value[key] = result.value;
   }
 }
 function normalizeDef(def) {
@@ -1594,18 +1594,18 @@ function handleCatchall(proms, input, payload, ctx, def, inst) {
   const _catchall = def.catchall._zod;
   const t = _catchall.def.type;
   const isOptionalOut = _catchall.optout === "optional";
-  for (const key2 in input) {
-    if (keySet.has(key2))
+  for (const key in input) {
+    if (keySet.has(key))
       continue;
     if (t === "never") {
-      unrecognized.push(key2);
+      unrecognized.push(key);
       continue;
     }
-    const r = _catchall.run({ value: input[key2], issues: [] }, ctx);
+    const r = _catchall.run({ value: input[key], issues: [] }, ctx);
     if (r instanceof Promise) {
-      proms.push(r.then((r2) => handlePropertyResult(r2, payload, key2, input, isOptionalOut)));
+      proms.push(r.then((r2) => handlePropertyResult(r2, payload, key, input, isOptionalOut)));
     } else {
-      handlePropertyResult(r, payload, key2, input, isOptionalOut);
+      handlePropertyResult(r, payload, key, input, isOptionalOut);
     }
   }
   if (unrecognized.length) {
@@ -1641,12 +1641,12 @@ const $ZodObject = /* @__PURE__ */ $constructor("$ZodObject", (inst, def) => {
   defineLazy(inst._zod, "propValues", () => {
     const shape = def.shape;
     const propValues = {};
-    for (const key2 in shape) {
-      const field = shape[key2]._zod;
+    for (const key in shape) {
+      const field = shape[key]._zod;
       if (field.values) {
-        propValues[key2] ?? (propValues[key2] = /* @__PURE__ */ new Set());
+        propValues[key] ?? (propValues[key] = /* @__PURE__ */ new Set());
         for (const v of field.values)
-          propValues[key2].add(v);
+          propValues[key].add(v);
       }
     }
     return propValues;
@@ -1669,14 +1669,14 @@ const $ZodObject = /* @__PURE__ */ $constructor("$ZodObject", (inst, def) => {
     payload.value = {};
     const proms = [];
     const shape = value.shape;
-    for (const key2 of value.keys) {
-      const el = shape[key2];
+    for (const key of value.keys) {
+      const el = shape[key];
       const isOptionalOut = el._zod.optout === "optional";
-      const r = el._zod.run({ value: input[key2], issues: [] }, ctx);
+      const r = el._zod.run({ value: input[key], issues: [] }, ctx);
       if (r instanceof Promise) {
-        proms.push(r.then((r2) => handlePropertyResult(r2, payload, key2, input, isOptionalOut)));
+        proms.push(r.then((r2) => handlePropertyResult(r2, payload, key, input, isOptionalOut)));
       } else {
-        handlePropertyResult(r, payload, key2, input, isOptionalOut);
+        handlePropertyResult(r, payload, key, input, isOptionalOut);
       }
     }
     if (!catchall) {
@@ -1692,23 +1692,23 @@ const $ZodObjectJIT = /* @__PURE__ */ $constructor("$ZodObjectJIT", (inst, def) 
   const generateFastpass = (shape) => {
     const doc = new Doc(["shape", "payload", "ctx"]);
     const normalized = _normalized.value;
-    const parseStr = (key2) => {
-      const k = esc(key2);
+    const parseStr = (key) => {
+      const k = esc(key);
       return `shape[${k}]._zod.run({ value: input[${k}], issues: [] }, ctx)`;
     };
     doc.write(`const input = payload.value;`);
     const ids = /* @__PURE__ */ Object.create(null);
     let counter = 0;
-    for (const key2 of normalized.keys) {
-      ids[key2] = `key_${counter++}`;
+    for (const key of normalized.keys) {
+      ids[key] = `key_${counter++}`;
     }
     doc.write(`const newResult = {};`);
-    for (const key2 of normalized.keys) {
-      const id = ids[key2];
-      const k = esc(key2);
-      const schema = shape[key2];
+    for (const key of normalized.keys) {
+      const id = ids[key];
+      const k = esc(key);
+      const schema = shape[key];
       const isOptionalOut = schema?._zod?.optout === "optional";
-      doc.write(`const ${id} = ${parseStr(key2)};`);
+      doc.write(`const ${id} = ${parseStr(key)};`);
       if (isOptionalOut) {
         doc.write(`
         if (${id}.issues.length) {
@@ -1874,17 +1874,17 @@ function mergeValues(a, b) {
   }
   if (isPlainObject(a) && isPlainObject(b)) {
     const bKeys = Object.keys(b);
-    const sharedKeys = Object.keys(a).filter((key2) => bKeys.indexOf(key2) !== -1);
+    const sharedKeys = Object.keys(a).filter((key) => bKeys.indexOf(key) !== -1);
     const newObj = { ...a, ...b };
-    for (const key2 of sharedKeys) {
-      const sharedValue = mergeValues(a[key2], b[key2]);
+    for (const key of sharedKeys) {
+      const sharedValue = mergeValues(a[key], b[key]);
       if (!sharedValue.valid) {
         return {
           valid: false,
-          mergeErrorPath: [key2, ...sharedValue.mergeErrorPath]
+          mergeErrorPath: [key, ...sharedValue.mergeErrorPath]
         };
       }
-      newObj[key2] = sharedValue.data;
+      newObj[key] = sharedValue.data;
     }
     return { valid: true, data: newObj };
   }
@@ -2797,7 +2797,7 @@ function initializeContext(params) {
     external: params?.external ?? void 0
   };
 }
-function process(schema, ctx, _params = { path: [], schemaPath: [] }) {
+function process$1(schema, ctx, _params = { path: [], schemaPath: [] }) {
   var _a2;
   const def = schema._zod.def;
   const seen = ctx.seen.get(schema);
@@ -2834,7 +2834,7 @@ function process(schema, ctx, _params = { path: [], schemaPath: [] }) {
     if (parent) {
       if (!result.ref)
         result.ref = parent;
-      process(parent, ctx, params);
+      process$1(parent, ctx, params);
       ctx.seen.get(parent).isParent = true;
     }
   }
@@ -2896,8 +2896,8 @@ function extractDefs(ctx, schema) {
     if (defId)
       seen.defId = defId;
     const schema2 = seen.schema;
-    for (const key2 in schema2) {
-      delete schema2[key2];
+    for (const key in schema2) {
+      delete schema2[key];
     }
     schema2.$ref = ref;
   };
@@ -2966,20 +2966,20 @@ function finalize(ctx, schema) {
       Object.assign(schema2, _cached);
       const isParentRef = zodSchema._zod.parent === ref;
       if (isParentRef) {
-        for (const key2 in schema2) {
-          if (key2 === "$ref" || key2 === "allOf")
+        for (const key in schema2) {
+          if (key === "$ref" || key === "allOf")
             continue;
-          if (!(key2 in _cached)) {
-            delete schema2[key2];
+          if (!(key in _cached)) {
+            delete schema2[key];
           }
         }
       }
       if (refSchema.$ref) {
-        for (const key2 in schema2) {
-          if (key2 === "$ref" || key2 === "allOf")
+        for (const key in schema2) {
+          if (key === "$ref" || key === "allOf")
             continue;
-          if (key2 in refSeen.def && JSON.stringify(schema2[key2]) === JSON.stringify(refSeen.def[key2])) {
-            delete schema2[key2];
+          if (key in refSeen.def && JSON.stringify(schema2[key]) === JSON.stringify(refSeen.def[key])) {
+            delete schema2[key];
           }
         }
       }
@@ -2991,11 +2991,11 @@ function finalize(ctx, schema) {
       if (parentSeen?.schema.$ref) {
         schema2.$ref = parentSeen.schema.$ref;
         if (parentSeen.def) {
-          for (const key2 in schema2) {
-            if (key2 === "$ref" || key2 === "allOf")
+          for (const key in schema2) {
+            if (key === "$ref" || key === "allOf")
               continue;
-            if (key2 in parentSeen.def && JSON.stringify(schema2[key2]) === JSON.stringify(parentSeen.def[key2])) {
-              delete schema2[key2];
+            if (key in parentSeen.def && JSON.stringify(schema2[key]) === JSON.stringify(parentSeen.def[key])) {
+              delete schema2[key];
             }
           }
         }
@@ -3088,8 +3088,8 @@ function isTransforming(_schema, _ctx) {
     return isTransforming(def.in, ctx) || isTransforming(def.out, ctx);
   }
   if (def.type === "object") {
-    for (const key2 in def.shape) {
-      if (isTransforming(def.shape[key2], ctx))
+    for (const key in def.shape) {
+      if (isTransforming(def.shape[key], ctx))
         return true;
     }
     return false;
@@ -3114,14 +3114,14 @@ function isTransforming(_schema, _ctx) {
 }
 const createToJSONSchemaMethod = (schema, processors = {}) => (params) => {
   const ctx = initializeContext({ ...params, processors });
-  process(schema, ctx);
+  process$1(schema, ctx);
   extractDefs(ctx, schema);
   return finalize(ctx, schema);
 };
 const createStandardJSONSchemaMethod = (schema, io, processors = {}) => (params) => {
   const { libraryOptions, target } = params ?? {};
   const ctx = initializeContext({ ...libraryOptions ?? {}, target, io, processors });
-  process(schema, ctx);
+  process$1(schema, ctx);
   extractDefs(ctx, schema);
   return finalize(ctx, schema);
 };
@@ -3242,7 +3242,7 @@ const arrayProcessor = (schema, ctx, _json, params) => {
   if (typeof maximum === "number")
     json.maxItems = maximum;
   json.type = "array";
-  json.items = process(def.element, ctx, { ...params, path: [...params.path, "items"] });
+  json.items = process$1(def.element, ctx, { ...params, path: [...params.path, "items"] });
 };
 const objectProcessor = (schema, ctx, _json, params) => {
   const json = _json;
@@ -3250,15 +3250,15 @@ const objectProcessor = (schema, ctx, _json, params) => {
   json.type = "object";
   json.properties = {};
   const shape = def.shape;
-  for (const key2 in shape) {
-    json.properties[key2] = process(shape[key2], ctx, {
+  for (const key in shape) {
+    json.properties[key] = process$1(shape[key], ctx, {
       ...params,
-      path: [...params.path, "properties", key2]
+      path: [...params.path, "properties", key]
     });
   }
   const allKeys = new Set(Object.keys(shape));
-  const requiredKeys = new Set([...allKeys].filter((key2) => {
-    const v = def.shape[key2]._zod;
+  const requiredKeys = new Set([...allKeys].filter((key) => {
+    const v = def.shape[key]._zod;
     if (ctx.io === "input") {
       return v.optin === void 0;
     } else {
@@ -3274,7 +3274,7 @@ const objectProcessor = (schema, ctx, _json, params) => {
     if (ctx.io === "output")
       json.additionalProperties = false;
   } else if (def.catchall) {
-    json.additionalProperties = process(def.catchall, ctx, {
+    json.additionalProperties = process$1(def.catchall, ctx, {
       ...params,
       path: [...params.path, "additionalProperties"]
     });
@@ -3283,7 +3283,7 @@ const objectProcessor = (schema, ctx, _json, params) => {
 const unionProcessor = (schema, ctx, json, params) => {
   const def = schema._zod.def;
   const isExclusive = def.inclusive === false;
-  const options = def.options.map((x, i) => process(x, ctx, {
+  const options = def.options.map((x, i) => process$1(x, ctx, {
     ...params,
     path: [...params.path, isExclusive ? "oneOf" : "anyOf", i]
   }));
@@ -3295,11 +3295,11 @@ const unionProcessor = (schema, ctx, json, params) => {
 };
 const intersectionProcessor = (schema, ctx, json, params) => {
   const def = schema._zod.def;
-  const a = process(def.left, ctx, {
+  const a = process$1(def.left, ctx, {
     ...params,
     path: [...params.path, "allOf", 0]
   });
-  const b = process(def.right, ctx, {
+  const b = process$1(def.right, ctx, {
     ...params,
     path: [...params.path, "allOf", 1]
   });
@@ -3312,7 +3312,7 @@ const intersectionProcessor = (schema, ctx, json, params) => {
 };
 const nullableProcessor = (schema, ctx, json, params) => {
   const def = schema._zod.def;
-  const inner = process(def.innerType, ctx, params);
+  const inner = process$1(def.innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   if (ctx.target === "openapi-3.0") {
     seen.ref = def.innerType;
@@ -3323,20 +3323,20 @@ const nullableProcessor = (schema, ctx, json, params) => {
 };
 const nonoptionalProcessor = (schema, ctx, _json, params) => {
   const def = schema._zod.def;
-  process(def.innerType, ctx, params);
+  process$1(def.innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = def.innerType;
 };
 const defaultProcessor = (schema, ctx, json, params) => {
   const def = schema._zod.def;
-  process(def.innerType, ctx, params);
+  process$1(def.innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = def.innerType;
   json.default = JSON.parse(JSON.stringify(def.defaultValue));
 };
 const prefaultProcessor = (schema, ctx, json, params) => {
   const def = schema._zod.def;
-  process(def.innerType, ctx, params);
+  process$1(def.innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = def.innerType;
   if (ctx.io === "input")
@@ -3344,7 +3344,7 @@ const prefaultProcessor = (schema, ctx, json, params) => {
 };
 const catchProcessor = (schema, ctx, json, params) => {
   const def = schema._zod.def;
-  process(def.innerType, ctx, params);
+  process$1(def.innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = def.innerType;
   let catchValue;
@@ -3358,20 +3358,20 @@ const catchProcessor = (schema, ctx, json, params) => {
 const pipeProcessor = (schema, ctx, _json, params) => {
   const def = schema._zod.def;
   const innerType = ctx.io === "input" ? def.in._zod.def.type === "transform" ? def.out : def.in : def.out;
-  process(innerType, ctx, params);
+  process$1(innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = innerType;
 };
 const readonlyProcessor = (schema, ctx, json, params) => {
   const def = schema._zod.def;
-  process(def.innerType, ctx, params);
+  process$1(def.innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = def.innerType;
   json.readOnly = true;
 };
 const optionalProcessor = (schema, ctx, _json, params) => {
   const def = schema._zod.def;
-  process(def.innerType, ctx, params);
+  process$1(def.innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = def.innerType;
 };
@@ -4412,14 +4412,19 @@ const getProductRecommendationsQuery = (
   ${productFragment}
 `
 );
-const domain = ensureStartsWith("one-percent-dev.myshopify.com", "https://");
-const endpoint = `${domain}${SHOPIFY_GRAPHQL_API_ENDPOINT}`;
-const key = "9ad0a0115d01b97f8e84a3db4c232348";
+function getShopifyConfig() {
+  const storeDomain = process.env.SHOPIFY_STORE_DOMAIN || "one-percent-dev.myshopify.com";
+  const domain = ensureStartsWith(storeDomain, "https://");
+  const endpoint = `${domain}${SHOPIFY_GRAPHQL_API_ENDPOINT}`;
+  const key = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || "9ad0a0115d01b97f8e84a3db4c232348";
+  return { domain, endpoint, key };
+}
 async function shopifyFetch({
   headers,
   query,
   variables
 }) {
+  const { endpoint, key } = getShopifyConfig();
   try {
     const result = await fetch(endpoint, {
       method: "POST",
@@ -4633,6 +4638,7 @@ async function getMenu(handle) {
       handle
     }
   });
+  const { domain } = getShopifyConfig();
   return res.body?.data?.menu?.items.map((item) => ({
     title: item.title,
     path: item.url.replace(domain, "").replace("/collections", "/search").replace("/pages", "")

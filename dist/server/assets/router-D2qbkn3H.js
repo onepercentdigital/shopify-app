@@ -1,5 +1,5 @@
-import { r as rootRouteId, i as invariant, t as trimPathLeft, j as joinPaths, a as reactExports, d as dummyMatchContext, m as matchContext, u as useRouterState, b as useRouter, g as getDefaultExportFromCjs, c as requireReactDom, e as useForwardedRef, f as useIntersectionObserver, h as functionalUpdate$1, k as exactPathTest, l as removeTrailingSlash, n as deepEqual, G as G$2, o as jsxRuntimeExports, w as warning, p as isModuleNotFoundError, R as RouterCore, q as isRedirect, T as TSS_SERVER_FUNCTION, s as getServerFnById, v as createServerFn, x as requireReact, y as React, O as Outlet, z as notFound } from "./worker-entry-C8G20BGl.js";
-import { o as object, s as string, n as number, g as getMenu, D as DEFAULT_OPTION, c as createUrl, a as getCollections, b as getPage, d as getCollectionProducts, e as sorting, f as defaultSort, h as getProducts, i as getCollection, H as HIDDEN_PRODUCT_TAG, j as getProduct, k as getProductRecommendations } from "./index-DFLDpE0d.js";
+import { r as rootRouteId, i as invariant, t as trimPathLeft, j as joinPaths, a as reactExports, d as dummyMatchContext, m as matchContext, u as useRouterState, b as useRouter, g as getDefaultExportFromCjs, c as requireReactDom, e as useForwardedRef, f as useIntersectionObserver, h as functionalUpdate$1, k as exactPathTest, l as removeTrailingSlash, n as deepEqual, G as G$2, o as jsxRuntimeExports, w as warning, p as isModuleNotFoundError, R as RouterCore, q as isRedirect, T as TSS_SERVER_FUNCTION, s as getServerFnById, v as createServerFn, x as requireReact, y as React, O as Outlet, z as notFound } from "./worker-entry-DIDafrh-.js";
+import { o as object, s as string, n as number, g as getMenu, D as DEFAULT_OPTION, c as createUrl, a as getCollections, b as getPage, d as getCollectionProducts, e as sorting, f as defaultSort, h as getProducts, i as getCollection, H as HIDDEN_PRODUCT_TAG, j as getProduct, k as getProductRecommendations } from "./index-DAmcNP6_.js";
 const preloadWarning = "Error preloading route! ☝️";
 class BaseRoute {
   constructor(options) {
@@ -9322,7 +9322,7 @@ function Navbar() {
     ] })
   ] });
 }
-const appCss = "/assets/styles-BS5OX-xO.css";
+const appCss = "/assets/styles-D9X8aJEj.css";
 const SITE_NAME$1 = "Shopify Store";
 const Route$6 = createRootRouteWithContext()({
   head: () => ({
@@ -9372,7 +9372,7 @@ function NotFound() {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-neutral-600 dark:text-neutral-400", children: "Page not found" })
   ] });
 }
-const $$splitComponentImporter$5 = () => import("./search-DVA6rXJs.js");
+const $$splitComponentImporter$5 = () => import("./search-DSBfD7Q5.js");
 const Route$5 = createFileRoute("/search")({
   component: lazyRouteComponent($$splitComponentImporter$5, "component"),
   loader: async ({
@@ -9385,7 +9385,7 @@ const Route$5 = createFileRoute("/search")({
     });
   }
 });
-const $$splitComponentImporter$4 = () => import("./_page-PCdMOOpB.js");
+const $$splitComponentImporter$4 = () => import("./_page-M263oQlh.js");
 const Route$4 = createFileRoute("/$page")({
   component: lazyRouteComponent($$splitComponentImporter$4, "component"),
   loader: async ({
@@ -9434,7 +9434,7 @@ const Route$4 = createFileRoute("/$page")({
     };
   }
 });
-const $$splitComponentImporter$3 = () => import("./index-nXVF1EBE.js");
+const $$splitComponentImporter$3 = () => import("./index-soQ7qIRk.js");
 const SITE_NAME = "Shopify Store";
 const Route$3 = createFileRoute("/")({
   component: lazyRouteComponent($$splitComponentImporter$3, "component"),
@@ -9461,7 +9461,7 @@ const Route$3 = createFileRoute("/")({
     });
   }
 });
-const $$splitComponentImporter$2 = () => import("./index-DSlPaThF.js");
+const $$splitComponentImporter$2 = () => import("./index-CVcq_-lV.js");
 const searchParamsSchema$1 = object({
   q: string().optional(),
   sort: string().optional()
@@ -9506,7 +9506,7 @@ const Route$2 = createFileRoute("/search/")({
     });
   }
 });
-const $$splitComponentImporter$1 = () => import("./_collection-B_v0d0QZ.js");
+const $$splitComponentImporter$1 = () => import("./_collection-DXiAy2ub.js");
 const searchParamsSchema = object({
   sort: string().optional()
 });
@@ -9572,7 +9572,7 @@ const Route$1 = createFileRoute("/search/$collection")({
     };
   }
 });
-const $$splitComponentImporter = () => import("./_handle-BxwkMlc5.js");
+const $$splitComponentImporter = () => import("./_handle-CUZJNnDj.js");
 const Route2 = createFileRoute("/product/$handle")({
   component: lazyRouteComponent($$splitComponentImporter, "component"),
   loader: async ({
