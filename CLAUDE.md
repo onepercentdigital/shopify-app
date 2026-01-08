@@ -1,5 +1,9 @@
 # TanStack Start Shopify Commerce Application
 
+## Important Rules
+
+**NEVER deploy directly to Cloudflare without asking first.** All deployments go through GitHub. Push changes to a branch and create a PR - Cloudflare will build and deploy automatically from the `main` branch.
+
 ## Project Overview
 
 A high-performance, server-rendered ecommerce application built with TanStack Start and deployed on Cloudflare Workers. Integrates with Shopify as a headless storefront using the Storefront API.
@@ -71,6 +75,7 @@ shopify-app/
 │   │   │   └── index.ts          # Main API functions
 │   │   ├── cart/                 # Cart server functions
 │   │   ├── constants.ts          # App constants
+│   │   ├── env.ts                # Environment variable access (local + Cloudflare)
 │   │   ├── type-guards.ts        # Type guard utilities
 │   │   └── utils.ts              # Helper functions
 │   ├── integrations/
@@ -117,13 +122,36 @@ SHOPIFY_REVALIDATION_SECRET=your-secret-key
 SITE_NAME=Your Site Name
 ```
 
-**Note:** Vite exposes env vars via `import.meta.env`. The `vite.config.ts` is configured to expose `SHOPIFY_*` prefixed variables.
+### Environment Variable Access Pattern
 
-For production deployment, set secrets via Wrangler:
+Environment variables are accessed via `src/lib/env.ts` which provides a unified `getEnv()` function that works in both environments:
+
+- **Local development:** Falls back to `import.meta.env` (loaded from `.env.local`)
+- **Cloudflare Workers:** Uses `require('cloudflare:workers')` to access Worker bindings
+
+```typescript
+import { getEnv } from '@/lib/env';
+
+const env = getEnv();
+const domain = env.SHOPIFY_STORE_DOMAIN;
+```
+
+**Why this pattern?** Cloudflare Workers require using `cloudflare:workers` to access environment bindings at runtime, but this module doesn't exist locally. The `getEnv()` utility handles this with a try-catch fallback.
+
+### Production Environment (Cloudflare)
+
+Secrets are configured in the Cloudflare Dashboard under Workers & Pages > shopify-app > Settings > Variables and Secrets. Current secrets:
+- `SHOPIFY_STORE_DOMAIN` (Plaintext)
+- `SHOPIFY_STOREFRONT_ACCESS_TOKEN` (Secret)
+- `SHOPIFY_REVALIDATION_SECRET` (Secret)
+
+To add/update secrets via CLI:
 ```bash
 wrangler secret put SHOPIFY_STOREFRONT_ACCESS_TOKEN
 wrangler secret put SHOPIFY_REVALIDATION_SECRET
 ```
+
+After updating types, regenerate with: `bun run cf-typegen`
 
 ## Key Architecture Patterns
 
@@ -399,14 +427,26 @@ bun run build
 # Outputs to dist/client and dist/server
 ```
 
-### Deploy to Cloudflare
+### Deploy to Cloudflare (via GitHub)
+
+**All deployments go through GitHub.** The repo is connected to Cloudflare Pages/Workers with automatic builds:
+
+1. Push changes to a feature branch
+2. Create a Pull Request to `main`
+3. Cloudflare automatically builds and deploys when merged to `main`
+
+**Production URL:** https://shopify-app.onepercentdigital.workers.dev
+
+**Do NOT run `bun run deploy` directly** - always go through GitHub for production deployments.
+
+### First-time Setup (Cloudflare Secrets)
+
+`SHOPIFY_STORE_DOMAIN` is set as a plaintext variable in `wrangler.jsonc`.
+
+Secrets must be set in Cloudflare Dashboard or via CLI:
 ```bash
-# First time: set secrets
 wrangler secret put SHOPIFY_STOREFRONT_ACCESS_TOKEN
 wrangler secret put SHOPIFY_REVALIDATION_SECRET
-
-# Deploy
-bun run deploy
 ```
 
 ## Troubleshooting

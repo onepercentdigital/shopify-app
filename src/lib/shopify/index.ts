@@ -2,6 +2,7 @@ import {
   HIDDEN_PRODUCT_TAG,
   SHOPIFY_GRAPHQL_API_ENDPOINT,
 } from '@/lib/constants';
+import { getEnv } from '@/lib/env';
 import { isShopifyError } from '@/lib/type-guards';
 import { ensureStartsWith } from '@/lib/utils';
 import {
@@ -50,19 +51,19 @@ import type {
   ShopifyUpdateCartOperation,
 } from './types';
 
-// Helper to get Shopify config - reads from process.env at runtime
-// On Cloudflare Workers with nodejs_compat, process.env is populated from Worker bindings
+// Helper to get Shopify config - uses getEnv() which works in both
+// local development and Cloudflare Workers production
 function getShopifyConfig() {
-  const storeDomain =
-    process.env.SHOPIFY_STORE_DOMAIN ||
-    import.meta.env.SHOPIFY_STORE_DOMAIN ||
-    '';
+  const env = getEnv();
+  const storeDomain = env.SHOPIFY_STORE_DOMAIN || '';
   const domain = storeDomain ? ensureStartsWith(storeDomain, 'https://') : '';
   const endpoint = `${domain}${SHOPIFY_GRAPHQL_API_ENDPOINT}`;
-  const key =
-    process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
-    import.meta.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
-    '';
+  const key = env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || '';
+
+  if (!domain || !key) {
+    throw new Error('Missing required Shopify configuration');
+  }
+
   return { domain, endpoint, key };
 }
 
@@ -95,7 +96,20 @@ export async function shopifyFetch<T>({
       }),
     });
 
-    const body = (await result.json()) as T & { errors?: unknown[] };
+    if (!result.ok) {
+      throw new Error(
+        `Shopify API error: ${result.status} ${result.statusText}`,
+      );
+    }
+
+    let body: T & { errors?: unknown[] };
+    try {
+      body = (await result.json()) as T & { errors?: unknown[] };
+    } catch {
+      throw new Error(
+        `Failed to parse Shopify response (status ${result.status}). Response was not valid JSON.`,
+      );
+    }
 
     if (body.errors) {
       throw body.errors[0];

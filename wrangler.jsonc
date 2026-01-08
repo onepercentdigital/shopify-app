@@ -6,5 +6,8 @@
   "main": "@tanstack/react-start/server-entry",
   "observability": {
     "enabled": true
+  },
+  "vars": {
+    "SHOPIFY_STORE_DOMAIN": "one-percent-dev.myshopify.com"
   }
 }
