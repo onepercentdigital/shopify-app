@@ -127,7 +127,7 @@ SITE_NAME=Your Site Name
 Environment variables are accessed via `src/lib/env.ts` which provides a unified `getEnv()` function that works in both environments:
 
 - **Local development:** Falls back to `import.meta.env` (loaded from `.env.local`)
-- **Cloudflare Workers:** Uses `import { env } from 'cloudflare:workers'` to access Worker bindings
+- **Cloudflare Workers:** Uses `require('cloudflare:workers')` to access Worker bindings
 
 ```typescript
 import { getEnv } from '@/lib/env';
