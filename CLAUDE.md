@@ -1,564 +1,448 @@
-# Next.js Shopify Commerce Application
+# TanStack Start Shopify Commerce Application
 
 ## Project Overview
 
-This is a high-performance, server-rendered Next.js 16 App Router ecommerce application that integrates with Shopify as a headless storefront. It's based on Vercel's Next.js Commerce template and demonstrates modern React patterns including Server Components, Server Actions, Suspense, and `useOptimistic`.
+A high-performance, server-rendered ecommerce application built with TanStack Start and deployed on Cloudflare Workers. Integrates with Shopify as a headless storefront using the Storefront API.
+
+Originally based on Vercel's Next.js Commerce template, migrated to TanStack Start for edge deployment on Cloudflare Workers.
 
 ## Tech Stack
 
 ### Core Framework
-- **Next.js 16.0.1** - App Router with Cache Components (Turbopack default)
-- **React 19.2.0** - Latest React with Server Components
+- **TanStack Start 1.146.0** - Full-stack React framework with SSR
+- **TanStack Router 1.146.0** - Type-safe file-based routing
+- **TanStack Query 5.90.16** - Data fetching, caching, and server state
+- **Vite 7.3.1** - Build tool and dev server
+- **React 19.2.3** - UI library
 - **TypeScript 5.9.3** - Type-safe development
-- **Bun** - Fast JavaScript runtime and package manager
+- **Bun 1.3.5** - JavaScript runtime and package manager
+
+### Deployment
+- **Cloudflare Workers** - Edge deployment via `@cloudflare/vite-plugin`
+- **Wrangler 4.58.0** - Cloudflare CLI for deployment
 
 ### Styling & UI
-- **Tailwind CSS 4.1.16** - Utility-first CSS framework
-- **@tailwindcss/typography 0.5.19** - Beautiful typographic defaults
-- **@tailwindcss/container-queries 0.1.1** - Container query support
+- **Tailwind CSS 4.1.18** - Utility-first CSS via `@tailwindcss/vite`
+- **@tailwindcss/typography** - Typographic defaults
+- **@tailwindcss/container-queries** - Container query support
 - **Geist Font 1.5.1** - Vercel's typeface
-- **clsx 2.1.1** - Utility for constructing className strings
+- **clsx** - Utility for constructing className strings
 
 ### UI Components
 - **@headlessui/react 2.2.9** - Unstyled, accessible UI components
-- **@heroicons/react 2.2.0** - Beautiful hand-crafted SVG icons
+- **@heroicons/react 2.2.0** - SVG icons
 - **Sonner 2.0.7** - Toast notifications
+- **@unpic/react 1.0.2** - Image optimization
 
 ### Development Tools
-- **Biome 2.3.2** - Fast formatter and linter (replaces ESLint + Prettier)
+- **Biome 2.3.11** - Fast formatter and linter
 
 ### Shopify Integration
 - **Shopify Storefront API** - GraphQL API for headless commerce
-- Custom Shopify integration layer in `lib/shopify/`
+- Custom integration layer in `src/lib/shopify/`
 
 ## Project Structure
 
 ```
-shopify-nextjs-app/
-├── app/                          # Next.js App Router pages
-│   ├── [page]/                   # Dynamic page routes
-│   ├── api/                      # API routes
-│   ├── product/                  # Product detail pages
-│   ├── search/                   # Search and collection pages
-│   ├── layout.tsx                # Root layout
-│   ├── page.tsx                  # Homepage
-│   ├── globals.css               # Global styles
-│   └── error.tsx                 # Error boundary
-├── components/                   # React components
-│   ├── cart/                     # Shopping cart components
-│   │   ├── actions.ts            # Server actions for cart operations
-│   │   ├── cart-context.tsx     # Client-side cart state
-│   │   └── modal.tsx            # Cart UI modal
-│   ├── grid/                     # Product grid layouts
-│   ├── icons/                    # Icon components
-│   ├── layout/                   # Layout components (navbar, footer, search)
-│   └── product/                  # Product-related components
-├── lib/                          # Utility functions and Shopify integration
-│   ├── shopify/                  # Shopify API integration
-│   │   ├── fragments/            # GraphQL fragments
-│   │   ├── mutations/            # GraphQL mutations
-│   │   ├── queries/              # GraphQL queries
-│   │   ├── types.ts              # TypeScript types
-│   │   └── index.ts              # Main Shopify API functions
-│   ├── constants.ts              # App constants
-│   └── utils.ts                  # Utility functions
-├── fonts/                        # Custom fonts
+shopify-app/
+├── src/
+│   ├── routes/                   # TanStack Router file-based routes
+│   │   ├── __root.tsx            # Root layout (navbar, footer, providers)
+│   │   ├── index.tsx             # Homepage
+│   │   ├── $page.tsx             # Dynamic CMS pages
+│   │   ├── search.tsx            # Search layout (sidebar, filters)
+│   │   ├── product/
+│   │   │   └── $handle.tsx       # Product detail page
+│   │   └── search/
+│   │       ├── index.tsx         # Search results
+│   │       └── $collection.tsx   # Collection pages
+│   ├── components/               # React components
+│   │   ├── cart/                 # Shopping cart (modal, add/remove buttons)
+│   │   ├── grid/                 # Product grid layouts
+│   │   ├── icons/                # Icon components
+│   │   ├── layout/               # Navbar, footer, search
+│   │   └── product/              # Gallery, variant selector, description
+│   ├── lib/                      # Utilities and integrations
+│   │   ├── shopify/              # Shopify API layer
+│   │   │   ├── fragments/        # GraphQL fragments
+│   │   │   ├── mutations/        # Cart mutations
+│   │   │   ├── queries/          # Product/collection queries
+│   │   │   ├── types.ts          # TypeScript types
+│   │   │   └── index.ts          # Main API functions
+│   │   ├── cart/                 # Cart server functions
+│   │   ├── constants.ts          # App constants
+│   │   ├── type-guards.ts        # Type guard utilities
+│   │   └── utils.ts              # Helper functions
+│   ├── integrations/
+│   │   └── tanstack-query/       # Query client provider
+│   ├── router.tsx                # Router configuration
+│   ├── routeTree.gen.ts          # Auto-generated route tree
+│   ├── styles.css                # Global styles (Tailwind imports)
+│   └── vite-env.d.ts             # Vite type definitions
+├── vite.config.ts                # Vite + plugins configuration
+├── wrangler.jsonc                # Cloudflare Workers config
 ├── tsconfig.json                 # TypeScript configuration
-├── biome.json                    # Biome configuration
-└── next.config.ts                # Next.js configuration
-```
-
-## Key Features
-
-### 1. Shopify Integration
-- Full GraphQL Storefront API integration
-- Cart management (create, add, update, remove)
-- Product catalog browsing
-- Collection filtering and sorting
-- Dynamic menu generation
-- Webhook support for cache revalidation
-
-### 2. Performance Optimizations
-- **Cache Components** - Stable Next.js 16 feature for Partial Prerendering
-- **React Server Components** - Reduces client-side JavaScript
-- **Inline CSS** - Faster initial page loads
-- **Image Optimization** - AVIF and WebP formats
-- **Cache Management** - Smart revalidation with stable cache APIs
-- **Turbopack** - Default bundler in Next.js 16 (2-5× faster builds)
-
-### 3. Shopping Experience
-- Real-time cart updates with `useOptimistic`
-- Product variant selection
-- Image galleries with zoom
-- Collection filtering and sorting
-- Mobile-responsive design
-- Toast notifications for user feedback
-
-### 4. Search & Discovery
-- Collection-based navigation
-- Product search functionality
-- Sorting options (relevance, trending, latest, price)
-- Filter dropdowns
-
-## Environment Variables
-
-Required environment variables (see `env.example`):
-
-```bash
-SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
-SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-storefront-access-token
-SHOPIFY_REVALIDATION_SECRET=your-secret-key
-COMPANY_NAME=Your Company Name
-SITE_NAME=Your Site Name
+├── biome.json                    # Biome linter/formatter config
+└── package.json                  # Dependencies and scripts
 ```
 
 ## Development Scripts
 
 ```bash
 # Development
-bun dev                    # Start dev server with Bun runtime
-bun start                  # Start production server
-bun run build              # Build for production
+bun dev              # Start Vite dev server on port 3000
+bun run build        # Build for production (vite build + tsc)
+bun run preview      # Preview production build locally
+
+# Deployment
+bun run deploy       # Build and deploy to Cloudflare Workers
+bun run cf-typegen   # Generate Cloudflare bindings types
 
 # Code Quality
-bun run check              # Check code with Biome
-bun run check:all          # Run both type checking and Biome checks
-bun run lint               # Lint code with Biome
-bun run lint-fix           # Fix code issues with Biome (safe fixes)
-bun run lint-fix-unsafe    # Fix code issues with Biome (including unsafe fixes)
-bun run format             # Format code with Biome
-bun run type               # TypeScript type checking
+bun run type         # TypeScript type checking
+bun run check        # Biome lint and format check
+bun run fix          # Auto-fix issues with Biome
+bun run fix-unsafe   # Auto-fix including unsafe fixes
+bun run check-all    # Run type + check together
 ```
+
+## Environment Variables
+
+Required environment variables in `.env.local`:
+
+```bash
+SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
+SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-storefront-access-token
+SHOPIFY_REVALIDATION_SECRET=your-secret-key
+SITE_NAME=Your Site Name
+```
+
+**Note:** Vite exposes env vars via `import.meta.env`. The `vite.config.ts` is configured to expose `SHOPIFY_*` prefixed variables.
+
+For production deployment, set secrets via Wrangler:
+```bash
+wrangler secret put SHOPIFY_STOREFRONT_ACCESS_TOKEN
+wrangler secret put SHOPIFY_REVALIDATION_SECRET
+```
+
+## Key Architecture Patterns
+
+### 1. Route Loaders with TanStack Query
+
+Data is prefetched in route loaders using `ensureQueryData`:
+
+```typescript
+export const Route = createFileRoute('/product/$handle')({
+  loader: async ({ params, context }) => {
+    const product = await context.queryClient.ensureQueryData({
+      queryKey: ['product', params.handle],
+      queryFn: () => getProduct(params.handle),
+      staleTime: 5 * 60 * 1000, // 5 minutes
+    });
+    if (!product) throw notFound();
+    return { product };
+  },
+  component: ProductPage,
+});
+```
+
+### 2. Cache Strategy (TanStack Query staleTime)
+
+| Data Type | staleTime | Rationale |
+|-----------|-----------|-----------|
+| Products | 5 minutes | Balance freshness with performance |
+| Collections | 5 minutes | Infrequently changing |
+| Cart | 0 (always fresh) | User-specific, must be current |
+
+```typescript
+// In components, use the same query keys
+const { data: product } = useQuery({
+  queryKey: ['product', handle],
+  queryFn: () => getProduct(handle),
+  staleTime: 5 * 60 * 1000,
+});
+```
+
+### 3. Server Functions for Mutations
+
+Cart operations use TanStack Start server functions:
+
+```typescript
+// src/lib/cart/actions.ts
+export const addItem = createServerFn({ method: 'POST' })
+  .validator(addItemSchema)
+  .handler(async ({ data }) => {
+    let cartId = getCartIdFromCookie();
+    if (!cartId) {
+      const cart = await createCart();
+      cartId = cart.id;
+      setCartCookie(cartId);
+    }
+    return addToCartWithId(cartId, [{ 
+      merchandiseId: data.merchandiseId, 
+      quantity: 1 
+    }]);
+  });
+```
+
+### 4. Cookie Handling in Cloudflare Workers
+
+Cookies are accessed via Web Standards API:
+
+```typescript
+import { getRequestHeader, setResponseHeader } from '@tanstack/react-start/server';
+
+// Reading cookies
+const cookieHeader = getRequestHeader('Cookie');
+const cartId = parseCookies(cookieHeader).cartId;
+
+// Setting cookies
+setResponseHeader('Set-Cookie', `cartId=${id}; Path=/; HttpOnly; SameSite=Lax`);
+```
+
+### 5. Image Optimization with @unpic/react
+
+```typescript
+import { Image } from '@unpic/react';
+
+<Image
+  src={product.featuredImage.url}
+  layout="constrained"
+  width={550}
+  height={550}
+  alt={product.featuredImage.altText}
+  priority={true}
+/>
+```
+
+Unpic automatically handles Shopify CDN image transforms via URL parameters.
 
 ## Shopify API Integration
 
-### Key Functions (`lib/shopify/index.ts`)
-
-**Cart Operations:**
-- `createCart()` - Create a new shopping cart
-- `getCart()` - Retrieve current cart (returns undefined if no cart exists)
-- `addToCart(lines)` - Add items to cart (requires cartId cookie)
-- `removeFromCart(lineIds)` - Remove items from cart (requires cartId cookie)
-- `updateCart(lines)` - Update cart item quantities (requires cartId cookie)
+### Key Functions (`src/lib/shopify/index.ts`)
 
 **Product Operations:**
-- `getProduct(handle)` - Get single product
-- `getProducts(query, reverse, sortKey)` - Get product list
-- `getProductRecommendations(productId)` - Get related products
+- `getProduct(handle)` - Get single product by handle
+- `getProducts({ query, reverse, sortKey })` - Search/list products
+- `getProductRecommendations(productId)` - Related products
 
 **Collection Operations:**
 - `getCollection(handle)` - Get single collection
 - `getCollections()` - Get all collections
-- `getCollectionProducts(collection, reverse, sortKey)` - Get products in collection
+- `getCollectionProducts({ collection, reverse, sortKey })` - Products in collection
+
+**Cart Operations (require cartId parameter):**
+- `createCart()` - Create new cart
+- `getCartById(cartId)` - Get cart by ID
+- `addToCartWithId(cartId, lines)` - Add items
+- `removeFromCartWithId(cartId, lineIds)` - Remove items
+- `updateCartWithId(cartId, lines)` - Update quantities
 
 **Content Operations:**
-- `getMenu(handle)` - Get navigation menu
-- `getPage(handle)` - Get page content
-- `getPages()` - Get all pages
+- `getMenu(handle)` - Navigation menu
+- `getPage(handle)` - CMS page content
+- `getPages()` - All pages
 
-**Cache Management:**
-- `revalidate(req)` - Webhook handler for cache invalidation
+### GraphQL Structure
 
-### Error Handling in Cart Operations
+```
+src/lib/shopify/
+├── fragments/
+│   ├── cart.ts          # Cart fields
+│   ├── image.ts         # Image fields
+│   ├── product.ts       # Product fields
+│   └── seo.ts           # SEO fields
+├── mutations/
+│   └── cart.ts          # Cart create/update/delete
+├── queries/
+│   ├── cart.ts          # Get cart
+│   ├── collection.ts    # Collection queries
+│   ├── menu.ts          # Navigation menu
+│   ├── page.ts          # CMS pages
+│   └── product.ts       # Product queries
+└── types.ts             # TypeScript interfaces
+```
 
-The cart functions (`addToCart`, `removeFromCart`, `updateCart`) throw errors if the cartId cookie is not found:
+## Configuration Files
+
+### vite.config.ts
 
 ```typescript
-const cartId = (await cookies()).get('cartId')?.value;
+import { cloudflare } from '@cloudflare/vite-plugin';
+import tailwindcss from '@tailwindcss/vite';
+import { tanstackStart } from '@tanstack/react-start/plugin/vite';
+import viteReact from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+import viteTsConfigPaths from 'vite-tsconfig-paths';
 
-if (!cartId) {
-  throw new Error('Cart ID not found in cookies');
+export default defineConfig({
+  envPrefix: ['VITE_', 'SHOPIFY_'],
+  plugins: [
+    cloudflare({ viteEnvironment: { name: 'ssr' } }),
+    viteTsConfigPaths(),
+    tailwindcss(),
+    tanstackStart(),
+    viteReact(),
+  ],
+});
+```
+
+### wrangler.jsonc
+
+```jsonc
+{
+  "name": "shopify-app",
+  "compatibility_date": "2025-01-08",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": ".output/server/index.js",
+  "assets": { "directory": ".output/client" },
+  "observability": { "enabled": true }
 }
 ```
 
-Server actions in `components/cart/actions.ts` handle these errors and return user-friendly error messages.
+### tsconfig.json Path Aliases
 
-### Cache Strategy
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "lib/*": ["./src/lib/*"],
+      "components/*": ["./src/components/*"]
+    }
+  }
+}
+```
 
-The app uses Next.js 16's stable caching APIs:
-- `'use cache'` directive for function-level caching
-- `cacheTag()` - Tag cache entries for targeted invalidation (stable in Next.js 16)
-- `cacheLife('days')` - Set cache duration (stable in Next.js 16)
-- Tags: `collections`, `products`, `cart`
+## Component Patterns
 
-## TypeScript Configuration
+### Client Components
 
-**Modern Configuration:**
-- Target: `ESNext`
-- Module: `Preserve` (optimized for Next.js 15)
-- Module Resolution: `bundler` (optimized for Bun + Next.js)
-- JSX: `preserve` (required by Next.js)
-- Strict mode enabled with additional safety checks:
-  - `noUncheckedIndexedAccess`
-  - `noImplicitOverride`
-  - `noFallthroughCasesInSwitch`
-  - `noUnusedLocals`
-  - `noUnusedParameters`
+Components that need interactivity use `'use client'` directive:
 
-**Note:** Generated Next.js files (`.next/types/validator.ts`) are excluded from strict unused variable checks.
+```typescript
+'use client';
 
-## Next.js Configuration
+import { useProduct, useUpdateURL } from '@/components/product/product-context';
 
-**Stable Features:**
-- `cacheComponents: true` - Cache Components (stable in Next.js 16, enables Partial Prerendering)
+export function VariantSelector({ options, variants }) {
+  const { state, updateOption } = useProduct();
+  const updateURL = useUpdateURL();
+  // ...
+}
+```
 
-**Experimental Features Enabled:**
-- `inlineCss: true` - Inline critical CSS
-- `useCache: true` - New caching system
+**Client components in this project:**
+- `cart/modal.tsx` - Cart modal with open/close state
+- `cart/add-to-cart.tsx` - Add to cart with mutations
+- `cart/delete-item-button.tsx` - Remove items
+- `cart/edit-item-quantity-button.tsx` - Update quantities
+- `product/gallery.tsx` - Image gallery with navigation
+- `product/variant-selector.tsx` - Option selection
+- `product/product-context.tsx` - Product state management
+- `layout/navbar/search.tsx` - Search input
+- `layout/navbar/mobile-menu.tsx` - Mobile navigation
+- `layout/search/filter/dropdown.tsx` - Sort dropdown
+- `layout/search/collections.tsx` - Collection list
+- `price.tsx` - Price formatting
 
-**Auto-enabled Features (via cacheComponents):**
-- `enablePrerenderSourceMaps: true` - Source maps for prerendered content
-- `rdcForNavigations: true` - Route-level dynamic content
+### Navigation with TanStack Router
 
-**Image Optimization:**
-- Formats: AVIF, WebP
-- Remote patterns configured for Shopify CDN
-- Default `minimumCacheTTL`: 4 hours (Next.js 16 default, up from 60s)
+```typescript
+import { Link, useNavigate, useSearch } from '@tanstack/react-router';
 
-**Bundler:**
-- Turbopack is the default bundler (Next.js 16+)
-- 2-5× faster production builds, up to 10× faster Fast Refresh
+// Link component
+<Link to="/product/$handle" params={{ handle: 'my-product' }}>
+  View Product
+</Link>
 
-## Code Style
+// Programmatic navigation
+const navigate = useNavigate();
+navigate({ to: '/search', search: { q: query } });
 
-The project uses **Biome** for both linting and formatting:
+// Reading search params
+const { q, sort } = Route.useSearch();
+```
 
-**Formatter Settings:**
-- Line width: 80 characters
-- Indent: 2 spaces
-- Style: space indentation
+## Code Style (Biome)
 
-**JavaScript/TypeScript Settings:**
-- Quote style: single quotes
-- Semicolons: always
-- Trailing commas: all
-- JSX quotes: double
-- Arrow parentheses: always
+**Formatting:**
+- 2 space indentation
+- 80 character line width
+- Single quotes
+- Semicolons always
+- Trailing commas
 
-**Linting Rules:**
+**Linting:**
 - Recommended rules enabled
+- Sorted Tailwind classes
 - Import type usage warnings
 - Accessibility checks
-- Sorted Tailwind classes (via `useSortedClasses`)
-- Security checks (dangerouslySetInnerHtml warnings)
 
 ## Git Workflow
 
 **Main Branch:** `main`
-**Current Branch:** `upgrade/nextjs16`
+**Current Branch:** `build/tanstack`
 
-**Recent Changes:**
-- **Next.js 16.0.1 Upgrade** - Migrated from 15.6.0-canary.57 to 16.0.1
-  - Removed `unstable_` prefix from cache APIs (`cacheLife`, `cacheTag`)
-  - Moved `cacheComponents` from experimental to stable configuration
-  - Turbopack is now the default bundler
-  - Verified all async request APIs compatibility
-  - Build performance improved with Turbopack (2-5× faster)
-- **Next.js 15.6 Upgrade** - Migrated from 15.4 to 15.6 canary
-  - Updated `experimental.ppr` to `experimental.cacheComponents`
-  - Added required Suspense boundaries for components using `use()` hook
-  - Fixed `new Date()` usage in Server and Client Components
-  - Updated `revalidateTag()` to use new two-argument API
-- **Suspense Boundary Improvements**
-  - Wrapped `CartModal` in Suspense in Navbar
-  - Wrapped `AddToCart` in Suspense in ProductDescription
-  - Wrapped `CopyrightYear` in Suspense in Footer
-  - Wrapped `Footer` component in Suspense in all layouts and pages
-  - Created `CartProviderWrapper` to enable proper static/dynamic separation in root layout
-- **Dynamic Data Access Fixes**
-  - Added `await headers()` in product pages (`/product/[handle]`)
-  - Added `await headers()` in search pages (`/search/[collection]`)
-  - Added `await headers()` in dynamic pages (`/[page]`)
-  - Ensures proper data access ordering before params/searchParams
-- **Cart Functionality Fixes**
-  - Added `revalidatePath('/', 'layout')` to cart server actions
-  - Ensures cart updates propagate correctly without page refresh
-  - Maintains optimistic UI updates with server state synchronization
-- **Component Architecture**
-  - Created `CopyrightYear` client component for dynamic year display
-  - Created `FormattedDate` client component for locale-dependent date formatting
-  - Converted `Price` component to client component to fix hydration mismatch
-  - Moved all locale-dependent formatting (Intl) to client components
-- TypeScript configuration modernized to ESNext with bundler resolution
-- Fixed non-null assertion errors in cart functions
-- Removed Safari lazy loading workaround (fixed in Safari 16.4+)
-- Search and item state fixes
-- Mobile menu improvements
-- Client-side navigation for search
-- Migration to Biome from ESLint/Prettier
-- Tailwind configuration fixes
+## Deployment
 
-## Hidden Features
-
-- Products tagged with `nextjs-frontend-hidden` are filtered out
-- Collections starting with `hidden-` are excluded from search
-- Automatic "All" collection for browsing all products
-
-## Important Notes & Gotchas
-
-### Next.js 16 Requirements
-
-**Minimum Versions:**
-- Node.js 20.9.0+ required (Node.js 18 no longer supported)
-- TypeScript 5.1.0+ required
-- Bun 1.0.0+ recommended
-
-**Turbopack as Default Bundler:**
-- Next.js 16 uses Turbopack by default (no `--turbo` flag needed)
-- To opt out and use Webpack: `bun run build -- --webpack`
-- No custom webpack config exists in this project, so Turbopack works seamlessly
-
-**Stable Cache APIs:**
-- `cacheLife()` and `cacheTag()` are now stable (no `unstable_` prefix)
-- `cacheComponents` is now a top-level config option (not experimental)
-
-**Suspense Boundaries for Dynamic Data:**
-With `cacheComponents` enabled, components that access dynamic data require proper Suspense boundaries:
-
-```typescript
-// ✅ Correct: Component using use() wrapped in Suspense
-<Suspense fallback={<LoadingSkeleton />}>
-  <ComponentUsingUseHook />
-</Suspense>
-
-// ❌ Wrong: Component using use() without Suspense
-<ComponentUsingUseHook />
+### Local Development
+```bash
+bun dev
+# Opens http://localhost:3000
 ```
 
-**Using `new Date()` in Components:**
-- In Server Components: Must access uncached data (like `headers()`, `cookies()`) BEFORE calling `new Date()`
-- In Client Components: Must be wrapped in Suspense boundary
-- Best practice: Move dynamic time logic to small, isolated Client Components
-
-```typescript
-// ✅ Correct: Client component with Suspense
-'use client';
-function DynamicDate() {
-  const year = new Date().getFullYear();
-  return <>{year}</>;
-}
-
-// In parent Server Component:
-<Suspense fallback="2025">
-  <DynamicDate />
-</Suspense>
+### Production Build
+```bash
+bun run build
+# Outputs to dist/client and dist/server
 ```
 
-**Cart Updates and Revalidation:**
-Cart server actions use both `revalidateTag()` and `revalidatePath()`:
-- `revalidateTag(TAGS.cart, 'max')` - For tagged cache entries
-- `revalidatePath('/', 'layout')` - Revalidates the layout to refresh cart data
+### Deploy to Cloudflare
+```bash
+# First time: set secrets
+wrangler secret put SHOPIFY_STOREFRONT_ACCESS_TOKEN
+wrangler secret put SHOPIFY_REVALIDATION_SECRET
 
-This ensures:
-1. Optimistic UI updates happen immediately
-2. Server state is persisted via server actions
-3. Layout refetches fresh cart data after mutations
-4. Cart displays correctly without manual page refresh
-
-**Locale-Dependent Formatting:**
-All locale-dependent formatting must be in Client Components to avoid hydration mismatches:
-- `Intl.NumberFormat` - Used in `Price` component (Client Component)
-- `Intl.DateTimeFormat` - Used in `FormattedDate` component (Client Component)
-- `new Date().getFullYear()` - Used in `CopyrightYear` component (Client Component)
-
-**Why Client Components for Intl:**
-- Server and client may have different locale settings
-- Causes hydration mismatch: server renders one format, client expects another
-- Moving to Client Component ensures consistent rendering
-- Small performance impact (~3-4KB) for correct behavior
-
-### Server Action Architecture
-
-Keep server action architecture **flat and simple**:
-
-✅ **Good Pattern:**
-```typescript
-export async function addItem() {
-  await addToCart([...]); // Single level of server API calls
-}
+# Deploy
+bun run deploy
 ```
-
-❌ **Avoid:**
-```typescript
-export async function addItem() {
-  await ensureCart();     // Nested server-only API calls
-  await addToCart([...]);  // Creates complex dependency chain
-}
-```
-
-**Why:** Deep nesting of server-only API calls (like `cookies()`) in Server Actions can cause module resolution errors.
-
-### Cart Provider Architecture
-
-**Problem**: Calling `getCart()` directly in the root layout makes it dynamic, which prevents static page generation during build.
-
-**Solution**: Use a wrapper pattern with Suspense to separate static shell from dynamic cart data:
-
-```typescript
-// components/cart/cart-provider-wrapper.tsx
-import { CartProvider } from 'components/cart/cart-context';
-import { getCart } from 'lib/shopify';
-
-export async function CartProviderWrapper({ children }) {
-  const cart = getCart();
-  return <CartProvider cartPromise={cart}>{children}</CartProvider>;
-}
-
-// app/layout.tsx
-export default function RootLayout({ children }) {
-  return (
-    <html>
-      <body>
-        <Suspense fallback={null}>
-          <CartProviderWrapper>
-            <Navbar />
-            <main>{children}</main>
-          </CartProviderWrapper>
-        </Suspense>
-      </body>
-    </html>
-  );
-}
-```
-
-**Key Benefits:**
-- ✅ Root layout is synchronous (not async)
-- ✅ Static pages can be prerendered during build
-- ✅ Cart data streams in via Suspense boundary
-- ✅ Enables Partial Prerendering (PPR) with `cacheComponents`
-- ✅ Build succeeds with `◐ (Partial Prerender)` status
-
-**Without this pattern**: Build fails with "Component accessed data without Suspense boundary" error on static routes like `/[page]`.
-
-### Cart Operation Flow
-1. **Optimistic Update**: Client immediately updates UI via `useOptimistic` hook
-2. **Server Action**: Executes cart mutation (add/remove/update)
-3. **Revalidation**: Calls `revalidateTag()` and `revalidatePath()` to refresh data
-4. **Layout Refresh**: Root layout refetches cart data via `getCart()`
-5. **State Sync**: Client reconciles optimistic state with server response
-
-**Important:** Cart data is fetched at the layout level, which makes the layout dynamic (uses `cookies()`). This is intentional and correct for e-commerce - each user needs their own cart. Product pages and other content remain statically generated.
-
-**Architecture Benefits:**
-- ✅ Product catalog pages are static (fast, CDN-cached)
-- ✅ Layout is dynamic for user-specific cart data
-- ✅ Optimistic updates provide instant feedback
-- ✅ Server actions ensure data persistence
-- ✅ Best of both worlds: static content + dynamic user data
 
 ## Troubleshooting
 
 ### Common Issues
 
-**Hydration Mismatch Errors:**
-- **Cause**: Using `Intl.NumberFormat` or `Intl.DateTimeFormat` in Server Components
-- **Solution**: Move all locale-dependent formatting to Client Components
-- **Files**: `components/price.tsx`, `components/formatted-date.tsx`, `components/layout/copyright-year.tsx`
+**"useProduct must be used within a ProductProvider"**
+- Ensure the component is rendered inside `<ProductProvider>` in the route
+- Check that imports use correct path aliases (`@/components/...`)
 
-**Suspense Boundary Errors:**
-- **Cause**: Component using `use()` hook not wrapped in Suspense
-- **Solution**: Wrap component in `<Suspense fallback={...}>`
-- **Files**: Components using cart context, product context
+**Dynamic import errors**
+- Clear Vite cache: `rm -rf node_modules/.vite`
+- Restart dev server
 
-**Cart Not Updating:**
-- **Cause**: Missing revalidation in server actions
-- **Solution**: Ensure both `revalidateTag(TAGS.cart, 'max')` and `revalidatePath('/', 'layout')` are called
-- **File**: `components/cart/actions.ts`
+**Environment variables not loading**
+- Ensure variables are in `.env.local`
+- Prefix must be `SHOPIFY_` or `VITE_` (configured in vite.config.ts)
+- Restart dev server after changes
 
-**Build Errors on Static Routes:**
-- **Cause**: Async Server Components accessed during static generation without Suspense
-- **Solution**: Wrap async components (like Footer) in Suspense boundaries
-- **Context**: Check layout files and page components
-
-**Turbopack Build Issues:**
-- **Cause**: Incompatible webpack-specific configuration
-- **Solution**: Use `--webpack` flag to opt out, or migrate to Turbopack-compatible setup
-- **Note**: This project has no custom webpack config, so Turbopack works seamlessly
+**Build errors with path aliases**
+- Verify tsconfig.json has correct `paths` configuration
+- Ensure `vite-tsconfig-paths` plugin is in vite.config.ts
 
 ### Development Tips
 
-1. **Check Build Output**: Run `bun run build` to see route prerendering status (○ static, ◐ partial prerender, ƒ dynamic)
-2. **Monitor Console**: Watch for warnings during development
-3. **Clear Cache**: Run `rm -rf .next` if seeing stale behavior
-4. **Verify Suspense**: Use React DevTools to check Suspense boundaries
-5. **Test Caching**: Remember dev mode disables caching - test cache behavior in production build
-
-## Testing Considerations
-
-**Essential Tests:**
-1. Cart operations (add, update, remove) with optimistic updates
-2. Cart persistence across page navigation
-3. Mobile responsiveness (use network URL for device testing)
-4. Image optimization (check AVIF/WebP formats)
-5. Search and filter functionality
-6. Empty cart state handling
-
-**Code Quality:**
-7. TypeScript validation: `bun run type`
-8. Biome checks: `bun run check:all`
-9. Production build: `bun run build` (verify Partial Prerender routes)
-10. Check console for warnings (none expected in Next.js 16)
-
-## Deployment
-
-Optimized for deployment on Vercel:
-- One-click deploy with environment variables
-- Automatic cache revalidation via webhooks
-- Edge-ready with React Server Components
-- Optimized for CDN delivery
-- Uses Bun runtime for faster builds
-- Turbopack default for production builds
-
-## Client Components Reference
-
-This project uses **19 Client Components** to handle interactive features and locale-dependent formatting:
-
-
-
-**Cart & Commerce (5 components):**
-1. `cart/modal.tsx` - Shopping cart modal with open/close state
-2. `cart/add-to-cart.tsx` - Add to cart button with form actions
-3. `cart/delete-item-button.tsx` - Remove item from cart
-4. `cart/edit-item-quantity-button.tsx` - Update item quantity
-5. `cart/cart-context.tsx` - Cart state management with `use()` hook
-
-**Navigation & Search (5 components):**
-6. `layout/navbar/search.tsx` - Search input with state
-7. `layout/navbar/mobile-menu.tsx` - Mobile navigation menu
-8. `layout/search/filter/item.tsx` - Filter checkbox item
-9. `layout/search/filter/dropdown.tsx` - Filter dropdown menu with clsx
-10. `layout/footer-menu.tsx` - Footer menu with state
-
-**Product Display (3 components):**
-11. `product/product-context.tsx` - Product state management
-12. `product/gallery.tsx` - Image gallery with navigation
-13. `product/variant-selector.tsx` - Product variant selection
-
-**Formatting & Display (3 components):**
-14. `price.tsx` - Price formatting with `Intl.NumberFormat`
-15. `formatted-date.tsx` - Date formatting with `Intl.DateTimeFormat`
-16. `layout/copyright-year.tsx` - Dynamic copyright year
-
-**App-Level (3 components):**
-17. `app/error.tsx` - Error boundary component
-18. `app/search/children-wrapper.tsx` - Search layout wrapper
-19. `welcome-toast.tsx` - Welcome toast notification
-
-**Why These Are Client Components:**
-- Use React hooks (`useState`, `useEffect`, `useRef`, etc.)
-- Handle browser events (`onClick`, `onChange`, `onKeyDown`, etc.)
-- Access browser APIs (`window`, `document`)
-- Use `use()` hook for promises (cart context, product context)
-- Perform locale-dependent formatting (`Intl.NumberFormat`, `Intl.DateTimeFormat`)
-- Require client-side interactivity (modals, forms, navigation)
+1. **Check route tree**: The `src/routeTree.gen.ts` is auto-generated - don't edit manually
+2. **Query debugging**: TanStack Query devtools are available at `/__debug`
+3. **Type errors**: Run `bun run type` to catch issues before build
+4. **Cache issues**: Query cache persists - hard refresh or clear in devtools
 
 ## Additional Resources
 
-- [Next.js Commerce GitHub](https://github.com/vercel/commerce)
-- [Shopify Storefront API Docs](https://shopify.dev/docs/api/storefront)
-- [Next.js 15 Documentation](https://nextjs.org/docs)
-- [Next.js 15.6 Upgrade Guide](https://nextjs.org/docs/messages/next-prerender-missing-suspense)
-- [React Hydration Mismatch Docs](https://react.dev/link/hydration-mismatch)
-- [Vercel Shopify Integration Guide](https://vercel.com/docs/integrations/ecommerce/shopify)
+- [TanStack Start Docs](https://tanstack.com/start)
+- [TanStack Router Docs](https://tanstack.com/router)
+- [TanStack Query Docs](https://tanstack.com/query)
+- [Cloudflare Workers Docs](https://developers.cloudflare.com/workers/)
+- [Shopify Storefront API](https://shopify.dev/docs/api/storefront)
 - [Biome Documentation](https://biomejs.dev/)
-- [Bun Documentation](https://bun.sh/docs)
+- [@unpic/react Docs](https://unpic.pics/img/react/)
